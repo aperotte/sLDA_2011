@@ -1,0 +1,103 @@
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[ICD(2008)]{ICD9NCBO}
+International classification of disease.
+\newblock \texttt{http://bioportal.bioontology.org/ontologies/35686}, May 2008.
+
+\bibitem[Blei and McAuliffe(2008)]{BleiMcAuliffe2008}
+D.~Blei and J.~McAuliffe.
+\newblock Supervised topic models.
+\newblock \emph{Advances in Neural Information Processing}, 20:\penalty0
+  121--128, 2008.
+
+\bibitem[Blei et~al.(2003)Blei, Ng, and Jordan]{Blei2003}
+David~M. Blei, Andrew~Y. Ng, and Michael~I. Jordan.
+\newblock Latent dirichlet allocation.
+\newblock \emph{J. Mach. Learn. Res.}, 3:\penalty0 993--1022, March 2003.
+\newblock ISSN 1532-4435.
+
+\bibitem[Blumenthal(2009)]{Blumenthal2009}
+D.~Blumenthal.
+\newblock Stimulating the adoption of health information technology.
+\newblock \emph{The New England Journal of Medicine}, 360\penalty0
+  (15):\penalty0 1477--1479, 2009.
+
+\bibitem[Brown¹ et~al.(2006)Brown¹, Cochrane, and Allegra]{Brown2006}
+P~Brown¹, DG~Cochrane, and JR~Allegra.
+\newblock The ngram cc classifier: A novel method of automatically creating cc
+  classifiers based on icd9 groupings.
+\newblock \emph{Advances in Disease Surveillance}, 1:\penalty0 30, 2006.
+
+\bibitem[Crammer et~al.(2007)Crammer, Dredze, Ganchev, Talukdar, and
+  Carroll]{Crammer2007}
+K~Crammer, M~Dredze, K~Ganchev, PP~Talukdar, and S~Carroll.
+\newblock Automatic code assignment to medical text.
+\newblock \emph{Proceedings of the Workshop on BioNLP 2007: Biological,
+  Translational, and Clinical Language Processing}, pages 129--136, 2007.
+
+\bibitem[Farkas and Szarvas(2008)]{Farkas2008}
+R~Farkas and G~Szarvas.
+\newblock Automatic construction of rule-based icd-9-cm coding systems.
+\newblock \emph{BMC bioinformatics}, 9\penalty0 (Suppl 3):\penalty0 S10, 2008.
+
+\bibitem[Freitas‐Junior et~al.(2006)Freitas‐Junior, Ribeiro‐Neto, Vale,
+  Laender, and Lima]{FreitasJunior2006}
+HR~Freitas‐Junior, B~Ribeiro‐Neto, RF~Vale, AHF Laender, and LRS Lima.
+\newblock Categorization‐driven cross‐language retrieval of medical
+  information.
+\newblock \emph{Journal of the American Society for Information Science and
+  Technology}, 57\penalty0 (4):\penalty0 501--510, 2006.
+
+\bibitem[Goldstein et~al.(2007)Goldstein, Arzumtsyan, and
+  Uzuner]{Goldstein2007}
+I~Goldstein, A~Arzumtsyan, and {\"O}~Uzuner.
+\newblock Three approaches to automatic assignment of icd-9-cm codes to
+  radiology reports.
+\newblock \emph{AMIA Annual Symposium Proceedings}, 2007:\penalty0 279, 2007.
+
+\bibitem[Griffiths and Steyvers(2004)]{Griffiths04}
+TL~Griffiths and M~Steyvers.
+\newblock Finding scientific topics.
+\newblock \emph{PNAS}, 101\penalty0 (suppl. 1):\penalty0 5228--5235, 2004.
+
+\bibitem[Lita et~al.(2008)Lita, Yu, Niculescu, and Bi]{Lita2008}
+LV~Lita, S~Yu, S~Niculescu, and J~Bi.
+\newblock Large scale diagnostic code classification for medical patient
+  records.
+\newblock 2008.
+
+\bibitem[Rao et~al.(2003)Rao, Sandilya, Niculescu, Germond, and Rao]{Rao2003}
+RB~Rao, S~Sandilya, RS~Niculescu, C~Germond, and H~Rao.
+\newblock Clinical and financial outcomes analysis with existing hospital
+  patient records.
+\newblock \emph{Proceedings of the ninth ACM SIGKDD international conference on
+  Knowledge discovery and data mining}, pages 416--425, 2003.
+
+\bibitem[Ribeiro‐Neto et~al.(2001)Ribeiro‐Neto, Laender, and
+  Lima]{RibeiroNeto2001}
+B~Ribeiro‐Neto, AHF Laender, and LRS~De Lima.
+\newblock An experimental study in automatically categorizing medical
+  documents.
+\newblock \emph{Journal of the American society for Information science and
+  Technology}, 52\penalty0 (5):\penalty0 391--401, 2001.
+
+\bibitem[Ruch et~al.(2008)Ruch, Gobeill, Tbahriti, and
+  Geissb{\"u}hler]{Ruch2008}
+P~Ruch, J~Gobeill, I~Tbahriti, and A~Geissb{\"u}hler.
+\newblock From episodes of care to diagnosis codes: automatic text
+  categorization for medico-economic encoding.
+\newblock \emph{AMIA Annual Symposium Proceedings}, 2008:\penalty0 636, 2008.
+
+\bibitem[Surjan(1999)]{Surjan1999}
+G.~Surjan.
+\newblock Questions on validity of international classification of
+  diseases-coded diagnoses.
+\newblock \emph{International journal of medical informatics}, 54\penalty0
+  (2):\penalty0 77--95, 1999.
+
+\end{thebibliography}
