@@ -50,111 +50,249 @@ Columbia University, New York, NY 10027, USA \\
 \maketitle
 
 \begin{abstract}
-Current medical record keeping technology relies heavily upon human capacity to effectively summarize and infer information from free-text physician notes.  We propose a novel method to suggest diagnostic code assignment for patient visits, based upon narrative medical notes.  We applied a supervised latent Dirichlet allocation model to a corpora of free-text medical notes from NewYork - Presbyterian Hospital to infer a set of specific ICD-9 codes for each patient note.  Evaluation of the predictions were conducted by comparison to a gold-standard set of ICD-9s assigned to a set of patient notes.
+Current medical record keeping technology relies heavily upon human
+capacity to effectively summarize and infer information from free-text
+physician notes. We propose a novel method to suggest diagnostic code
+assignment for patient visits, based upon narrative medical notes.
+We applied a supervised latent Dirichlet allocation model to a corpora
+of free-text medical notes from NewYork - Presbyterian Hospital to
+infer a set of specific ICD-9 codes for each patient note. Evaluation
+of the predictions were conducted by comparison to a gold-standard
+set of ICD-9s assigned to a set of patient notes. 
 \end{abstract}
 
-
 \section{Introduction}
-\label{sec:introduction}
-Despite the growing emphasis on meaningful use of technology in medicine, many aspects of medical record-keeping remain a manual process.  Diagnostic coding for billing and insurance purposes is often handled by professional medical coders who must explore a patient's extensive clinical record before assigning the proper codes.  So while electronic health records (EHRs) should be adopted by most medical institutions within the next several years, largely due to the provisions of HITECH under the American Recovery and Reinvestment Act \citep{Blumenthal2009}, there has been little movement forward in automating medical coding.  
 
-In this paper we describe the use of a topic model based on supervised latent Dirichlet allocation (sLDA) to identify topics within narrative discharge summaries and to automate the assignment of diagnostic codes, specifically International Classification of Disease 9th Revision, Clinical Modification (ICD-9-CM) codes.  There are a number of advantages to this approach.  First, manually coding diagnoses is a time-consuming and notoriously unreliable process.  Many diagnoses are omitted in the final record, and a high error rate is found even in the principal diagnoses \citep{Surjan1999}.
+\label{sec:introduction} Despite the growing emphasis on meaningful
+use of technology in medicine, many aspects of medical record-keeping
+remain a manual process. Diagnostic coding for billing and insurance
+purposes is often handled by professional medical coders who must
+explore a patient's extensive clinical record before assigning the
+proper codes. So while electronic health records (EHRs) should be
+adopted by most medical institutions within the next several years,
+largely due to the provisions of HITECH under the American Recovery
+and Reinvestment Act \citep{Blumenthal2009}, there has been little
+movement forward in automating medical coding.
 
-While there have been some attempts to automatically classify groups of patients as a potential preliminary step to ICD-9 code assignment \citep{Ruch2008, FreitasJunior2006, RibeiroNeto2001, Brown2006}, fully automatic assignment of ICD-9 codes to medical text became a more prevalent research topic only in the last few years. A subset of earlier work proposed various methods on small corpora, based on a few specific diseases \citep{Rao2003} but the most recent and promising work on the subject was inspired by the 2007 Medical NLP Challenge: “International Challenge: Classifying Clinical Free Text Using Natural Language Processing” (website). Most of the classification strategies included word matching and rule-based algorithms. \citep{Goldstein2007, Crammer2007, Farkas2008}.  The data set given to the participants consisted only of documents that were 1-2 lines each and all of the documents were radiology reports - clearly limiting the scope of potential ICD-9 codes which could be assigned. The only paper which has attempted to work with a document scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.  Lita proposed support vector machine and bayesian ridge regression methods to assign appropriate labels to the documents but did not utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
+In this paper we describe the use of a topic model based on supervised
+latent Dirichlet allocation (sLDA) to identify topics within narrative
+discharge summaries and to automate the assignment of diagnostic codes,
+specifically International Classification of Disease 9th Revision,
+Clinical Modification (ICD-9-CM) codes. There are a number of advantages
+to this approach. First, manually coding diagnoses is a time-consuming
+and notoriously unreliable process. Many diagnoses are omitted in
+the final record, and a high error rate is found even in the principal
+diagnoses \citep{Surjan1999}.
 
-An automated process would ideally produce a more complete and accurate diagnosis lists.  Also, this model will reveal information about the medical records themselves.  For example, we may gain an understanding of what a specific code actually means in terms of clinical narratives.  Similarly, viewing the distribution of topics over discharge summaries may reveal information about the latent structure of clinician documentation.  Lastly, the sLDA model would provide a novel approach to dealing with the problem of high dimensionality when representing narrative text in a vector space specifically by reducing dimensions from an entire vocabulary of potentially tens of thousands of words to a set of several dozen topics.  
+While there have been some attempts to automatically classify groups
+of patients as a potential preliminary step to ICD-9 code assignment
+\citep{Ruch2008,FreitasJunior2006,RibeiroNeto2001,Brown2006}, fully
+automatic assignment of ICD-9 codes to medical text became a more
+prevalent research topic only in the last few years. A subset of earlier
+work proposed various methods on small corpora, based on a few specific
+diseases \citep{Rao2003} but the most recent and promising work on
+the subject was inspired by the 2007 Medical NLP Challenge: \textquotedblleft{}International
+Challenge: Classifying Clinical Free Text Using Natural Language Processing\textquotedblright{}
+(website). Most of the classification strategies included word matching
+and rule-based algorithms. \citep{Goldstein2007,Crammer2007,Farkas2008}.
+The data set given to the participants consisted only of documents
+that were 1-2 lines each and all of the documents were radiology reports
+- clearly limiting the scope of potential ICD-9 codes which could
+be assigned. The only paper which has attempted to work with a document
+scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.
+Lita proposed support vector machine and bayesian ridge regression
+methods to assign appropriate labels to the documents but did not
+utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
+
+An automated process would ideally produce a more complete and accurate
+diagnosis lists. Also, this model will reveal information about the
+medical records themselves. For example, we may gain an understanding
+of what a specific code actually means in terms of clinical narratives.
+Similarly, viewing the distribution of topics over discharge summaries
+may reveal information about the latent structure of clinician documentation.
+Lastly, the sLDA model would provide a novel approach to dealing with
+the problem of high dimensionality when representing narrative text
+in a vector space specifically by reducing dimensions from an entire
+vocabulary of potentially tens of thousands of words to a set of several
+dozen topics.
+
+
+\section{Background}
+
+
+\subsection{Data}
+
+Our data set was gathered from the clinical data warehouse of NewYork
+- Presbyterian Hospital. The data consisted of free-text discharge
+summaries and their respective ICD-9 codes. A discharge summary is
+a clinical report prepared by a physician or other health professional
+at the conclusion of a hospital stay or series of treatments. The
+note outlines the patient\textquoteright{}s chief complaint, diagnostic
+findings, therapy administered, patient\textquoteright{}s response
+to the chosen therapy, the treatment plan and the recommendations
+upon discharge. The ICD-9 codes used to structure the discharge summary
+data are part of a controlled terminology which is the international
+standard diagnostic classification for epidemiological, health management,
+and clinical purposes (http://www.who.int/classifications/icd/en/).
+The codes are classified in a rooted-tree structure, with each edge
+representing an is-a relationship between parent and child, such that
+the parent diagnosis subsumes the child diagnosis. In the hospital,
+ICD-9 codes are generated manually by trained medical coders, who
+review all the information in the discharge summary. For the purposes
+of sLDA, ICD-9 codes will be used as labels for discharge summaries.
+
+We worked within the guidelines of the Health Insurance Portability
+and Accountability Act (HIPAA), which protects patient privacy and
+the security of potentially identifying medical material, known as
+personal health information (PHI). HIPAA covers any information within
+a medical record that was created, used, or disclosed during the course
+of providing a health care service and that can be used to identify
+an individual. Before beginning data processing, we generated a PHI-free
+dataset (see Data Pre-processing below).
+
+
+\subsection{Pre-Processing}
+
+Patient discharge summaries and their associated ICD-9 diagnoses are
+stored in two different places in the NewYork - Presbyterian data
+warehouse, and so had to be linked together before being fed into
+the sLDA algorithm. Each discharge note and set of diagnoses were
+assigned a patient unique identifier (PUID) and a visit unique identifier
+(VUID), allowing the two types of data to be linked.
+
+Natural Language Processsing (NLP) techniques were used to process
+the free-text discharge summaries. First, the Natural Language Toolkit
+(http://www.nltk.org/) was used to tokenize the text. Next, feature
+selection was performed using a term frequency - inverse document
+frequency (TF-IDF) algorithm on the entire document set and sorting
+the words by their TF-IDF values. The top 10,000 words were manually
+evaluated to eliminate all potentially identifying information. Finally,
+each discharge summary was converted to a bag-of-words, listing the
+frequencies of the remaining, free of protected health information,
+top 10,000 words.
+
+Preparation of the diagnostic codes involved inference over the ICD-9
+hierarchy. The is-a relationships of the hierarchy allowed us to make
+two important assumptions. First, if a diagnosis was observed to be
+present, all of its ancestors could be assumed to be present as well
+(e.g., if a patient had malignant hypertension, it could be assumed
+that they also had essential hypertension. Second, if a diagnosis
+was observed to be absent, it could be assumed that all of its descendants
+were also absent (e.g. if a patient did not have essential hypertension,
+it could be assumed that they did not have malignant hypertension).
+Unfortunately, ICD-9 code observations never include observations
+of disease absence. ICD-9 codes are only documented when the condition
+is observed to be present. Additionally, ICD-9 codes are known to
+have relatively low sensitivity; conditions that are present are often
+not documented in a set of ICD-9 codes (Surjan, 1999). Given these
+facts, we made the following assumptions regarding each visit: recorded
+diagnoses and their ancestors were labeled as true; diagnoses that
+were observed at some time for a patient but not at the current visit
+were labeled as unobserved; and diagnoses that had never been listed
+for a patient were labeled as false for all of that patient\textquoteright{}s
+visits. This last assumption captures the belief that parts of the
+ICD-9 hierarchy that are never observed for a particular patient are
+almost certain to be false. Additionally, for computational purposes,
+we decided not to include an ICD-9 code at all if neither it nor one
+of its descendants had been assigned to a patient in any of the records
+in our dataset.
+
+
+\subsection{ICD-9 Code Hierarchy}
+
+Here, we augment the sLDA model such that the supervised signal is
+distribution over the ICD-9 code tree, which is an is-a hierarchy
+\citep{ICD9NCBO}. An is-a hierarchy is represented by the tree data
+structure where each node has only a single parent and nodes cannot
+be parents of ancestors (ie. there are no loops). In this particular
+case, the ICD-9 code hierarchy is also partially a prefix trie where
+the labels for certain nodes are prefixes for child nodes. Given that
+this rule does not apply to all nodes in the hierarchy, we did not
+use this feature to determine the structure of the hierarchy. Instead
+we acquired a dataset that explicitly defined the relationships between
+the nodes of the hierarchy \citep{ICD9NCBO}. In documentation of
+ICD-9 codes for billing purposes, only a subset of the nodes can be
+used, however the nodes higher in the hierarchy contain semantic information
+about the categories of codes that are their descendants. For this
+reason, we included these nodes in our model.
 
 
 \section{Methods}
 
-\subsection{Data}
-Our data set was gathered from the clinical data warehouse of NewYork - Presbyterian Hospital. The data consisted of free-text discharge summaries and their respective ICD-9 codes. A discharge summary is a clinical report prepared by a physician or other health professional at the conclusion of a hospital stay or series of treatments. The note outlines the patient’s chief complaint, diagnostic findings, therapy administered, patient’s response to the chosen therapy, the treatment plan and the recommendations upon discharge. The ICD-9 codes used to structure the discharge summary data are part of a controlled terminology which is the international standard diagnostic classification for epidemiological, health management, and clinical purposes (http://www.who.int/classifications/icd/en/). The codes are classified in a rooted-tree structure, with each edge representing an is-a relationship between parent and child, such that the parent diagnosis subsumes the child diagnosis.  In the hospital, ICD-9 codes are generated manually by trained medical coders, who review all the information in the discharge summary.  For the purposes of sLDA, ICD-9 codes will be used as labels for discharge summaries.
-
-We worked within the guidelines of the Health Insurance Portability and Accountability Act (HIPAA), which protects patient privacy and the security of potentially identifying medical material, known as personal health information (PHI).  HIPAA covers any information within a medical record that was created, used, or disclosed during the course of providing a health care service and that can be used to identify an individual.  Before beginning data processing, we generated a PHI-free dataset (see Data Pre-processing below).
-
-\subsection{Pre-Processing}
-Patient discharge summaries and their associated ICD-9 diagnoses are stored in two different places in the NewYork - Presbyterian data warehouse, and so had to be linked together before being fed into the sLDA algorithm.  Each discharge note and set of diagnoses were assigned a patient unique identifier (PUID) and a visit unique identifier (VUID), allowing the two types of data to be linked.
-
-Natural Language Processsing (NLP) techniques were used to process the free-text discharge summaries.  First, the Natural Language Toolkit (http://www.nltk.org/) was used to tokenize the text.  Next, feature selection was performed using a term frequency - inverse document frequency (TF-IDF) algorithm on the entire document set and sorting the words by their TF-IDF values.  The top 10,000 words were manually evaluated to eliminate all potentially identifying information.  Finally, each discharge summary was converted to a bag-of-words, listing the frequencies of the remaining, free of protected health information, top 10,000 words.
-
-Preparation of the diagnostic codes involved inference over the ICD-9 hierarchy.  The is-a relationships of the hierarchy allowed us to make two important assumptions.  First, if a diagnosis was observed to be present, all of its ancestors could be assumed to be present as well (e.g., if a patient had malignant hypertension, it could be assumed that they also had essential hypertension.  Second, if a diagnosis was observed to be absent, it could be assumed that all of its descendants were also absent (e.g. if a patient did not have essential hypertension, it could be assumed that they did not have malignant hypertension).  Unfortunately, ICD-9 code observations never include observations of disease absence.  ICD-9 codes are only documented when the condition is observed to be present.  Additionally, ICD-9 codes are known to have relatively low sensitivity; conditions that are present are often not documented in a set of ICD-9 codes (Surjan, 1999). Given these facts, we made the following assumptions regarding each visit: recorded diagnoses and their ancestors were labeled as true; diagnoses that were observed at some time for a patient but not at the current visit were labeled as unobserved; and diagnoses that had never been listed for a patient were labeled as false for all of that patient’s visits. This last assumption captures the belief that parts of the ICD-9 hierarchy that are never observed for a particular patient are almost certain to be false.  Additionally, for computational purposes, we decided not to include an ICD-9 code at all if neither it nor one of its descendants had been assigned to a patient in any of the records in our dataset.
-
-\subsection{Supervised Topic Models}
-Latent dirichlet allocation (LDA) is a generative probabilistic model of corpora that represents documents as a mixed membership bag-of-words. Also known as topic models, these models infer the latent structure, or topics, of documents in a corpus. Each document is represented as a collection of words, generated from a set of topic assignments (one for each word), where each topic assignment is drawn from a distribution over topics \citep{Blei2003}.
-
-This model, supervised latent dirichlet allocation (sLDA), builds on LDA by incorporating an exponential family response variable. Although there are many models for making predictions based on free text, sLDA is unique in that it is a generative model, it represents documents as a mixed-membership, and constrains the inference of the latent structure of the documents by its predictability of the response variable.  In other words, sLDA infers topics such that the model is capable of a high predictive likelihood for words in a document and the response variable associated with a document.  This approach has been shown to outperform both LASSO (L1 regularized least squares regression) and LDA followed by least squares regression \citep{BleiMcAuliffe2008}.
-
-Here, we augment the sLDA model such that the supervised signal is distribution over the ICD-9 code tree, which is an is-a hierarchy \citep{ICD9NCBO}. An is-a hierarchy is represented by the tree data structure where each node has only a single parent and nodes cannot be parents of ancestors (ie. there are no loops). In this particular case, the ICD-9 code hierarchy is also partially a prefix trie where the labels for certain nodes are prefixes for child nodes. Given that this rule does not apply to all nodes in the hierarchy, we did not use this feature to determine the structure of the hierarchy.  Instead we acquired a dataset that explicitly defined the relationships between the nodes of the hierarchy \citep{ICD9NCBO}. In documentation of ICD-9 codes for billing purposes, only a subset of the nodes can be used, however the nodes higher in the hierarchy contain semantic information about the categories of codes that are their descendants. For this reason, we included these nodes in our model.
-
-\subsection{Generative Model}
-
 %
 \begin{figure}[h]
 %tbp] %  figure placement: here, top, bottom, or page
- \centering \includegraphics[width=4in]{model_1} \includegraphics[width=3in]{model_2}
-\caption{adapted sLDA model}
+ \centering \includegraphics[scale=0.3]{Graphical_Model2} \caption{adapted sLDA model}
 
 
 \label{fig:example} 
 \end{figure}
 
 
-Given the number of topics, K, the global prior over topic proportions,
-$\alpha'$, and the prior over topics, $\gamma$, the generative process
-for documents and responses is as follows: 
+Given the number of topics, K, and broad gamma priors on hyperparameters,
+the generative process is as follows: 
 \begin{enumerate}
-\item For each topic:
+\item For each topic, $k$:
 
 \begin{enumerate}
-\item Draw a distribution over words $\beta_{k}\sim Dir\left(u,\gamma\right)$
+\item Draw a distribution over words $\phi_{k}\sim Dir_{V}\left(\mathbf{1},\gamma\right)$ 
 \end{enumerate}
-\item For each ICD9 Code:
+\item For each ICD9 code, $c$, at all levels in the tree, $l$:
 
 \begin{enumerate}
-\item Draw regression coefficient $\eta_{i}\mid\mu,\sigma\sim\mathcal{N}\left(\mu,\sigma\right)$ 
+\item Draw regression coefficient $\eta_{i_{l,c}}\mid\sigma\sim\mathcal{N}_{K}\left(-\mathbf{1},\sigma\right)$ 
 \end{enumerate}
-\item Draw a prior over topic proportions $m\mid\alpha'\sim Dir\left(u,\alpha'\right)$ 
-\item For each document:
+\item Draw a prior over topic proportions $\beta\mid\alpha'\sim Dir_{K}\left(\mathbf{1},\alpha'\right)$ 
+\item For each document, $d$:
 
 \begin{enumerate}
-\item Draw topic proportions $\theta_{d}\mid\alpha\sim Dir\left(m,\alpha\right)$ 
-\item For each word:
+\item Draw topic proportions $\theta_{d}\mid\beta,\alpha\sim Dir_{K}\left(\beta,\alpha\right)$ 
+\item For each word, $n$:
 
 \begin{enumerate}
-\item Draw topic assignment $z_{n,d}\mid\theta_{d}\sim Mult\left(\theta_{d}\right)$ 
-\item Draw word $w_{n,d}\mid z_{n,d},\beta_{1:K}\sim Mult\left(\beta_{z_{n}}\right)$ 
+\item Draw topic assignment $z_{n,d}\mid\theta_{d}\sim Mult_{K}\left(\theta_{d}\right)$ 
+\item Draw word $w_{n,d}\mid z_{n,d},\beta_{1:K}\sim Mult_{V}\left(\beta_{z_{n}}\right)$ 
 \end{enumerate}
-\item For each ICD-9 code from the root of the hierarchy and recursively
-descending the tree:
+\item For each level of the ICD-9 code tree, $l$:
 
 \begin{enumerate}
-\item Draw a response variable $y_{i}\mid\bar{z},\eta_{i},y_{parent}\sim\Phi(\eta_{i}^{T}\bar{z},y_{parent})$
-where $\bar{z}=N^{-1}\sum_{n=1}^{N}z_{n}$ and $\Phi$ refers to a
-conditional probit model.
-\end{enumerate}
-\end{enumerate}
-\end{enumerate}
-We will employ a data augmentation scheme with auxiliary variables
-$a_{i}$ in the probit model where:
+\item For each ICD-9 code at this level, $c$:
 
-\begin{equation}
-y_{i}\sim\begin{cases}
+\begin{enumerate}
+\item Draw a latent variable \[
+a_{d,i_{l,c}}\sim\begin{cases}
+\mathcal{N}\left(\bar{z}^{T}\eta_{i_{l,c}},1\right), & y_{parent_{l,c}}=1\\
+trunc\mathcal{N}^{-}\left(\bar{z}^{T}\eta_{i_{l,c}},1\right), & y_{parent_{l,c}}=-1\end{cases}\]
+ where $\bar{z}=N^{-1}\sum_{n=1}^{N}z_{n}$ and $\mathcal{I}=\left\{ i_{0},i_{1},...,i_{\mathcal{L}}\right\} $
+and $i_{l}=\left\{ i_{l,0},i_{l,1},...,i_{l,C_{l}}\right\} $
+\item Draw a response variable $y_{d,i_{l,c}}\mid a_{d,i_{l,c}}\sim\begin{cases}
 \begin{array}{c}
 1,\\
-0,\end{array} & \begin{array}{c}
-a_{i}>0\; and\; y_{parent}=1\\
-otherwise\end{array}\end{cases}\end{equation}
-
-
-\begin{equation}
-a_{i}\sim\mathcal{N}\left(\eta_{i}^{T}\bar{z},1\right)\end{equation}
-
+-1,\end{array} & \begin{array}{c}
+a_{d,i_{l,c}}>0\\
+otherwise\end{array}\end{cases}$
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+The generative model for the ICD-9 codes is equivalent to a probit
+regression model. In our case, the regression is conditional on the
+parents according to the constraints of the ICD-9 code tree. The latent
+variable utilized here is also known as an auxiliary variable.
 
 
 \subsection{Posterior Inference}
 
 Given an observation of a set of ICD-9 codes and a document, the posterior
-distribution for the latent variables is given by Equation 4.
+distribution for the latent variables is given by Equation .
+
+\begin{equation}
+p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma\mid w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)\label{eq:Posterior}\end{equation}
+
+
+\[
+=\frac{p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}{\int_{\theta,\phi,a,\eta,\alpha,\alpha',\beta,\gamma}\sum_{z}p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}\]
+
 
 The denominator for this distribution is the marginal probability
 of the data and cannot be solved in closed form. This is often the
@@ -165,173 +303,182 @@ Markov chain Monte Carlo (MCMC) sampling. Since in this model it is
 possible to sample from the conditional distributions for all variables
 we will use the Gibbs sampling algorithm to obtain an approximation
 to this posterior. In particular, we will derive a collapsed Gibbs
-sampler for the supervised topic model.
-
-
-\subsection{Rao-Blackwellization}
-
-To derive the Gibbs sampler in general, we integrate over the parameters
-$\theta$ and $\phi_{1:K}$ resulting in the collapsed joint distribution
-shown in Equations 5-8.
-
-\begin{landscape} \centering % optional, probably makes it look better to have it centered on the page
-
-
-\begin{small}
-
-\begin{equation}
-p\left(\theta,z_{1:N}\mid w_{1:N},y_{1:I},\phi_{1:K},\eta_{1:I},\alpha,\beta,\mu,\xi\right)=\frac{p\left(\theta\mid\alpha\right)\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)}{\int_{\theta}p\left(\theta\mid\alpha\right)\sum_{k=1}^{K}\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)d\theta}\end{equation}
-
-
-\begin{equation}
-\intop_{\theta}\intop_{\phi_{1:K}}p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\theta},\mathbf{\phi},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)d\theta d\phi_{1:K}=\intop_{\theta}\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\left\{ p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}\left[p\left(z_{m,n}\mid\theta_{m}\right)p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)\right]\prod_{i=1}^{I}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right\} \prod_{i=1}^{I}p\left(\eta_{i};\mu\right)d\theta d\phi_{1:K}\end{equation}
-
-
-\begin{equation}
-p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\prod_{n=1}^{N}p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)d\phi_{1:K}\intop_{\theta}\prod_{m=1}^{M}p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}p\left(z_{m,n}\mid\theta_{m}\right)d\theta\end{equation}
-
-
-\begin{equation}
-=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}\end{equation}
-
-
-\begin{equation}
-=\prod_{i=1}^{I}\left[\mathcal{N}\left(\eta_{i}\mid\mu,1\right)\prod_{m=1}^{M}h\left(y\right)\exp\left\{ \left(\eta_{i}^{T}\bar{z}\right)y-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}\end{equation}
-
-
-\end{small} \end{landscape}
+sampler.
 
 
 \subsection{Gibbs Sampling}
 
-To derive the Gibbs sampler we evaluate the individual conditional
-probability distributions for all unobserved variables.
+We derive a collapsed Gibbs sampler for this model, marginalizing
+$\theta_{1:D}$ and $\phi_{1:K}$. For details regarding collapsing
+in LDA models see \citet{Griffiths04}. To derive the Gibbs sampler
+we evaluate the individual conditional probability distributions for
+all unobserved variables.
 
 
-\subsubsection{$p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)$}
+\subsubsection{$p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)$}
 
 For the purposes of sampling, we will be able to derive a representation
 of the joint distribution isolating a particular latent variable,
-$z$, for a word instance, $n$, in a document instance, $m$. The
+$z$, for a word instance, $n$, in a document instance, $d$. The
 conditional probability with respect to this latent variable is proportional
-to the joint distribution up to a constant.
+to the joint distribution of its markov blanket up to a constant.
 
 \begin{equation}
-p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)\propto p\left(z_{m,n},\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)\end{equation}
+p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\propto p\left(z_{d,n},\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\end{equation}
 
 
-Due to the factorization of this model we can rewrite the joint distribution
+Due to the factorization of this model, we can rewrite the joint distribution
 as the following:
 
 \begin{equation}
-\propto\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)p\left(y_{m,i}\mid z_{m,1:N},\eta_{i}\xi\right)\right]p\left(z_{m,n},\mathbf{z_{-\left(m,n\right)}},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)\end{equation}
+\propto\prod_{i_{l,c}\in\mathcal{I}}p\left(a_{i_{l,c}}\mid\mathbf{z},\eta_{i_{l,c}}\right)p\left(z_{d,n},\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\alpha,\beta,\gamma\right)\end{equation}
 
 
 We isolate only terms that depend on $z_{m,n}$ and absorb all other
 constant terms into the normalization constant \citep{Griffiths04}.
 
 \begin{equation}
-\propto\prod_{i=1}^{I}\left[p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\cdot\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\cdot\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\end{equation}
+\propto\prod_{i_{l,c}\in\mathcal{I}}\exp\left\{ -\frac{\left(\bar{z}^{T}\eta_{i_{l,c}}-a_{i_{l,c}}\right)^{2}}{2}\right\} p\left(a_{i_{l,c}}\mid\eta_{i_{l,c}}\right)\left(n_{d,\left(\cdot\right)}^{k,-\left(d,n\right)}+\alpha\beta_{k}\right)\frac{n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma}{\sum_{v=1}^{V}\left(n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma\right)}\label{eq:z-likelihood}\end{equation}
 
 
-Here, $n_{m,v}^{k,-\left(m,n\right)}$ represents the count of word
-$v$ in document $m$ assigned to topic $k$ omitting the $(m,n)^{th}$
-word count. For exponential family distributions, the normalization
-contant, $h(y_{m,i})$, does not depend on $z_{m,n}$.
+Here, $n_{d,v}^{k,-\left(d,n\right)}$ represents the count of word
+$v$ in document $d$ assigned to topic $k$ omitting the $(d,n)^{th}$
+word count.
 
-\begin{equation}
-\propto\exp\left\{ \sum_{i=1}^{I}\left(\eta_{i}^{T}\bar{z}\right)y_{m,i}-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\label{eq:z_likelihood}\end{equation}
-
-
-Given this expression, $p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)$
-can be sampled through enumeration as seen in Equation 13. In the
-case of probit regression, the expression for \ref{eq:z_likelihood}
-evaluates to Equation 14. Equivalently we can parameterize the model
-with an auxiliary variable $a_{i}$, resulting in Equation 15.
-
-%\begin{equation}
-%p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)=\frac{\exp\left\{ \sum_{i=1}^{I}\left(\eta_{i}^{T}\bar{z}\right)y_{m,i}-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}}{\sum_{k=1}^{K}\exp\left\{ \sum_{i=1}^{I}\left(\eta_{i}^{T}\bar{z}\right)y_{m,i}-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}}\end{equation}
+Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)$
+can be sampled through enumeration.
 
 
-%\begin{equation}
-%p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)\propto\prod_{i=1}^{I}\left[\Phi\left(\eta_{i}^{T}\bar{z}\right)^{y_{m,i}}\left(1-\Phi\left(\eta_{i}^{T}\bar{z}\right)\right)^{1-y_{m,i}}\right]\left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\end{equation}
+\subsubsection{$p\left(\eta_{i_{l,c}}\mid\mathbf{z}_{1:D},\mathbf{a};\sigma\right)$}
 
-
-%\begin{equation}
-%p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{w},\mathbf{\eta},\mathbf{a},\alpha,\beta,\mu\right)\propto\prod_{i=1}^{I}\left[\delta\left(sign\left(a_{m,i}\right)=y_{m,i}\right)\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1\right)\right]\left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\end{equation}
-
-
-\begin{landscape}
-
-\centering % optional, probably makes it look better to have it centered on the page
-\begin{equation}
-p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{Y},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)=\frac{\exp\left\{ \sum_{i=1}^{I}\left(\eta_{i}^{T}\bar{z}\right)y_{m,i}-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}}{\sum_{k=1}^{K}\exp\left\{ \sum_{i=1}^{I}\left(\eta_{i}^{T}\bar{z}\right)y_{m,i}-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}}\end{equation}
-
+Given that $\eta_{i_{l,c}}$ and $a_{d,i_{l,c}}$ are distributed
+normally, this posterior distribution is also normal. We evaluated
+the model over various values of $\sigma$ where $\sigma=\left\{ 0.01,0.1,0.25,1,2\right\} $.
 
 \begin{equation}
-p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{w},\mathbf{\eta},\alpha,\beta,\mu\right)\propto\prod_{i=1}^{I}\left[\Phi\left(\eta_{i}^{T}\bar{z}\right)^{y_{m,i}}\left(1-\Phi\left(\eta_{i}^{T}\bar{z}\right)\right)^{1-y_{m,i}}\right]\left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\end{equation}
-
-
-\begin{equation}
-p\left(z_{m,n}\mid\mathbf{z_{-\left(m,n\right)}},\mathbf{w},\mathbf{\eta},\mathbf{a},\alpha,\beta,\mu\right)\propto\prod_{i=1}^{I}\left[\delta\left(sign\left(a_{m,i}\right)=2y_{m,i}-1\right)\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1\right)\right]\left(n_{m,\left(\bullet\right)}^{k,-\left(m,n\right)}+\alpha_{k}\right)\frac{n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,w_{m,n}}}{\sum_{v=1}^{V}\left(n_{\left(\bullet\right),w_{m,n}}^{k,-\left(m,n\right)}+\beta_{k,v}\right)}\end{equation}
-
-
-\end{landscape}
-
-
-\subsubsection{$p\left(\eta_{i}\mid\mathbf{z},\mathbf{Y},\mu\right)$ or $p\left(\eta_{i}\mid\mathbf{z},\mathbf{a},\mu\right)$in
-the augmented probit regression model}
-
-Given that $\eta_{i}$ and $a_{m,i}$ are distributed normally, this
-posterior distribution is also normal. In the case for general exponential
-family distributions, $\eta_{i}$ can remain a parameter without a
-prior, fit with maximimum likelihood in the usual fashion.
-
-\begin{equation}
-p\left(\eta_{i}\mid\mathbf{z},\mathbf{a},\mu\right)=\mathcal{N}\left(\eta_{i}\mid\hat{\mathbf{\mu}_{i}},\hat{\mathbf{S}_{i}}\right)\end{equation}
+p\left(\eta_{i_{l,c}}\mid\mathbf{z}_{1:D},\mathbf{a};\sigma\right)=\mathcal{N}\left(\eta_{i_{l,c}}\mid\hat{\mu}_{i},\hat{\Sigma}_{i}\right)\end{equation}
 
 
 \[
-\hat{\mathbf{\mu}_{i}}=\hat{\mathbf{S}_{i}}\bar{\mathbf{Z}}^{T}\mathbf{a}_{\left(\bullet\right),i}\]
+\hat{\mu}_{i}=\hat{\mathbf{\Sigma}}_{i}\left(-\mathbf{1}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\mathbf{a}_{\left(\cdot\right),i_{l,c}}\right)\]
 
 
 \[
-\hat{\mathbf{S}_{i}}^{-1}=\mathbf{I}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}}\]
+\hat{\Sigma}_{i}^{-1}=\mathbf{I}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}}\]
 
 
 
-\subsubsection{$p\left(a_{m,i}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)$ in
-the augmented probit regression model}
+\subsubsection{$p\left(a_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)$
+and \textmd{$p\left(y_{m,i}\mid\mathbf{a}\right)$}}
 
 In the augmented probit regression model, the posterior distribution
-of $a_{i}$ is distributed according to a truncated normal distribution.
+of $a_{i_{l,c}}$ is distributed according to a truncated normal distribution
+where the response variable is observed.
+
+\begin{equation}
+p\left(a_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)=\begin{cases}
+trunc\mathcal{N}^{+}\left(a_{d,i_{l,c}}\mid\eta_{i}^{T}\bar{z,}\mathbf{1},y_{d,i_{l,c}}\right) & if\quad y_{d,i_{l,c}}=1\\
+trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\eta_{i}^{T}\bar{z,}\mathbf{1},y_{d,i_{l,c}}\right) & if\quad y_{d,i_{l,c}}=-1\end{cases}\end{equation}
+
+
+However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
+be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov
+chain is ergodic. Suppose that $a_{d,i_{l,c}}$ is sampled to have
+a negative value and $y_{d,i_{l,c}}$ is apporopriately sampled at
+-1. Although there exist valid states where $a_{d,i_{l,c}}>0$ and
+$y_{d,i_{l,c}}=1$, they will never be reached by such a Markov chain
+since $p\left(a_{d,i_{l,c}}<0\mid y_{d,i_{l,c}}=-1\right)=1$ and
+$p\left(y_{d,i_{l,c}}=-1\mid a_{d,i_{l,c}}<0\right)=1$. Therefore,
+to ensure ergodicity, $a_{d,i_{l,c}}$and $y_{d,i_{l,c}}$ must be
+sampled from the joint distribution as shown in Equation \ref{eq:Probit-Joint}.
+
+\begin{equation}
+p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\eta}\right)\propto p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)p\left(a_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)\end{equation}
+
+
+\begin{equation}
+p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)=\delta\left(sign\left(a_{d,i_{l,c}}\right)=y_{i_{l,c}}\right)p\left(y_{i_{l,c}}\mid y_{parents_{l,c}}\right)\prod_{i_{\hat{l},\hat{c}}\in children_{l,c}}p\left(y_{i_{\hat{l},\hat{c}}}\mid y_{i_{l,c}}\right)\end{equation}
+
+
+\begin{equation}
+p\left(y_{i_{l,c}}=-1\mid y_{parent{}_{l,c}}\right)=\begin{cases}
+1, & y_{parent_{l,c}}=-1\\
+0.5, & y_{parent_{l,c}}=1\end{cases}\end{equation}
+
 
 \[
-p\left(a_{m,i}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)=trunc\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1,y_{m,i}\right)\]
-
-
-
-\subsubsection{\textmd{$p\left(y_{m,i}\mid\mathbf{\eta},\mathbf{a},\xi\right)$}}
-
-In our model, response variables are not always observed and are treated
-as latent and sampled where appropriate. There are two factors influencing
-predictions of the response variable, $y_{m,i}$. There is an undirected
-model enforcing the aforementioned constraints and providing a prior
-and there is the probit regression.
-
-\begin{equation}
-p\left(y_{m,i}\mid\mathbf{\eta},\mathbf{a},\xi\right)\propto\psi\left(\mathbf{Y}\right)\delta\left(sign\left(a_{m,i}\right)=y_{m,i}\right)\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1\right)\end{equation}
+p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\eta}\right)\]
 
 
 \begin{equation}
-p\left(y_{m,i}\mid\mathbf{\eta},\mathbf{a},\xi\right)\propto\psi\left(\mathbf{Y}\right)trunc\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1,y_{m,i}\right)\end{equation}
+=\begin{cases}
+\mathcal{N}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)p\left(y_{d,i_{l,c}}\mid a_{d,i_{l,c}}\right), & y_{parent_{l,c}}=1,\forall y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}},y_{i_{\hat{l},\hat{c}}}=-1\\
+trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right),\delta\left(y_{d,i_{l,c}}=-1\right), & y_{parent_{l,c}}=-1\\
+trunc\mathcal{N}^{+}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=1\right), & \exists y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}}\setminus y_{i_{\hat{l},\hat{c}}}=1\\
+0 & otherwise\end{cases}\end{equation}
 
 
-Again, this conditional distribution can be evaluated through enumerations
-and normalization.
+where $\mathbf{Y}_{-\left(d,i_{l,c}\right)}$ denotes all of the response
+variables excluding the response variable being sampled.
+
+
+\subsubsection{$p\left(\beta\mid\mathbf{z},\alpha',\alpha\right)$}
+
+In our model, we place a hierarchical Dirichlet prior over topic assignments.
+This prior shares many features with the hierarchical Dirichlet process
+and inference over this distribution proceeds in a very similar fashion.
+This flexible distribution allows for an asymmetric prior over document
+level distributions over topics \citet{WallachMiMc2009}.
+
+Posterior inference was performed using the {}``direct assignment''
+method of \citet{TehJorBea2006}.
 
 \begin{equation}
-p\left(y_{m,i}\mid\mathbf{\eta},\mathbf{a},\xi\right)=\frac{\psi\left(\mathbf{Y}\right)trunc\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1,y_{m,i}\right)}{\sum_{y_{m,i}}\psi\left(\mathbf{Y}\right)trunc\mathcal{N}\left(a_{m,i}\mid\eta_{i}^{T}\bar{z,}1,y_{m,i}\right)}\end{equation}
+\beta\sim Dir\left(m_{\left(\cdot\right),1},m_{\left(\cdot\right),2},\ldots,m_{\left(\cdot\right),K}\right)\end{equation}
+
+
+\begin{equation}
+p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\beta\right)=\frac{\Gamma\left(\alpha\beta_{k}\right)}{\Gamma\left(\alpha\beta_{k}+n_{d,k}\right)}s\left(n_{d,k},m\right)\left(\alpha\beta_{k}\right)^{m}\end{equation}
+
+
+where $s\left(n,m\right)$ represents stirling numbers of the first
+kind.
+
+
+\subsubsection{$p\left(\alpha;\lambda\right)$, $p\left(\alpha';\lambda\right)$,
+$p\left(\beta;\lambda\right)$}
+
+All hyperparameters were given broad gamma priors $\left(\lambda=\left\{ shape=2,scale=1000\right\} \right)$
+and sampled via the Metropolis-Hastings algorithm.
+
+
+\subsection{Prediction}
+
+
+\subsection{Related Work}
+
+Latent dirichlet allocation (LDA) is a generative probabilistic model
+of corpora that represents documents as a mixed membership bag-of-words.
+Also known as topic models, these models infer the latent structure,
+or topics, of documents in a corpus. Each document is represented
+as a collection of words, generated from a set of topic assignments
+(one for each word), where each topic assignment is drawn from a distribution
+over topics \citep{Blei2003}.
+
+This model, supervised latent dirichlet allocation (sLDA), builds
+on LDA by incorporating an exponential family response variable. Although
+there are many models for making predictions based on free text, sLDA
+is unique in that it is a generative model, it represents documents
+as a mixed-membership, and constrains the inference of the latent
+structure of the documents by its predictability of the response variable.
+In other words, sLDA infers topics such that the model is capable
+of a high predictive likelihood for words in a document and the response
+variable associated with a document. This approach has been shown
+to outperform both LASSO (L1 regularized least squares regression)
+and LDA followed by least squares regression \citep{BleiMcAuliffe2008}.
+
+Other models - predicting document links, other supervised latent
+variable models
 
 
 
@@ -373,7 +520,49 @@ p\left(y_{m,i}\mid\mathbf{\eta},\mathbf{a},\xi\right)=\frac{\psi\left(\mathbf{Y}
 
 
 \begin{small} \bibliographystyle{plainnat} \bibliographystyle{plainnat}
+\bibliographystyle{plainnat}
 \bibliography{refs}
- \end{small} 
+
+
+\end{small} 
+
+\newpage{}
+
+
+\subsection{Rao-Blackwellization}
+
+To derive the Gibbs sampler in general, we integrate over the parameters
+$\theta$ and $\phi_{1:K}$ resulting in the collapsed joint distribution
+shown in Equations 5-8.
+
+\begin{landscape} \centering % optional, probably makes it look better to have it centered on the page
+
+
+\begin{small}
+
+\begin{equation}
+p\left(\theta,z_{1:N}\mid w_{1:N},y_{1:I},\phi_{1:K},\eta_{1:I},\alpha,\beta,\mu,\xi\right)=\frac{p\left(\theta\mid\alpha\right)\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)}{\int_{\theta}p\left(\theta\mid\alpha\right)\sum_{k=1}^{K}\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)d\theta}\end{equation}
+
+
+\begin{equation}
+\intop_{\theta}\intop_{\phi_{1:K}}p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\theta},\mathbf{\phi},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)d\theta d\phi_{1:K}=\intop_{\theta}\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\left\{ p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}\left[p\left(z_{m,n}\mid\theta_{m}\right)p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)\right]\prod_{i=1}^{I}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right\} \prod_{i=1}^{I}p\left(\eta_{i};\mu\right)d\theta d\phi_{1:K}\end{equation}
+
+
+\begin{equation}
+p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\prod_{n=1}^{N}p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)d\phi_{1:K}\intop_{\theta}\prod_{m=1}^{M}p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}p\left(z_{m,n}\mid\theta_{m}\right)d\theta\end{equation}
+
+
+\begin{equation}
+=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\cdot\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\cdot\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\cdot\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\cdot\right)}^{k}+\alpha_{k}\right)}\end{equation}
+
+
+\begin{equation}
+=\prod_{i=1}^{I}\left[\mathcal{N}\left(\eta_{i}\mid\mu,1\right)\prod_{m=1}^{M}h\left(y\right)\exp\left\{ \left(\eta_{i}^{T}\bar{z}\right)y-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}\end{equation}
+
+
+\end{small} \end{landscape}
 \end{document}
 
+%\begin{align}
+%p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma\mid w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right) & =\\
+% & \frac{p\left(\alpha,\alpha',\gamma;\lambda\right)p\left(\beta\mid\alpha'\right)p\left(\theta\mid\beta,\alpha\right)\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\gamma\right)\right)\left(\prod_{i_{l,c}\in\mathcal{I}}p\left(y_{i_{l,c}}\mid z_{1:N},\eta_{i_{l,c}}\right)p\left(\eta_{i_{l,c}};\sigma\right)\right)}{\int_{\alpha,\alpha',\gamma}p\left(\alpha,\alpha',\gamma;\lambda\right)p\left(\beta\mid\alpha'\right)\int_{\theta}p\left(\theta\mid\beta,\alpha\right)\sum_{k=1}^{K}\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\gamma\right)\right)\left(\prod_{i_{l,c}\in\mathcal{I}}p\left(y_{i_{l,c}}\mid z_{1:N},\eta_{i_{l,c}}\right)p\left(\eta_{i_{l,c}};\sigma\right)\right)}\end{align}
