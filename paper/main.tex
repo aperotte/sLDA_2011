@@ -22,7 +22,7 @@
 %Supervised Topic Modeling in Clinical Text}
 
 \author{
-Adler Perotte\hspace{1cm} Nicholas Bartlett \hspace{1cm} Noemie Elhaddad \hspace{1cm} Frank Wood\\
+Adler Perotte\hspace{1cm} Nicholas Bartlett \hspace{1cm} Noemie Elhadad \hspace{1cm} Frank Wood\\
 Columbia University, New York, NY 10027, USA \\
 \texttt{\{ajp9009@dbmi,bartlett@stat,noemie@dbmi,fwood@stat\}.columbia.edu}
 %\texttt{pfau@neurotheory.columbia.edu} 
@@ -239,7 +239,7 @@ We isolate only terms that depend on $z_{m,n}$ and absorb all other
 constant terms into the normalization constant \citep{Griffiths04}.
 
 \begin{equation}
-\propto\prod_{i_{l,c}\in\mathcal{I}}\exp\left\{ -\frac{\left(\bar{z}^{T}\eta_{i_{l,c}}-a_{i_{l,c}}\right)^{2}}{2}\right\} p\left(a_{i_{l,c}}\mid\eta_{i_{l,c}}\right)\left(n_{d,\left(\cdot\right)}^{k,-\left(d,n\right)}+\alpha\beta_{k}\right)\frac{n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma}{\sum_{v=1}^{V}\left(n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma\right)}\label{eq:z-likelihood}\end{equation}
+\propto\prod_{i_{l,c}\in\mathcal{I}}\exp\left\{ -\frac{\left(\bar{z}^{T}\eta_{i_{l,c}}-a_{i_{l,c}}\right)^{2}}{2}\right\} \left(n_{d,\left(\cdot\right)}^{k,-\left(d,n\right)}+\alpha\beta_{k}\right)\frac{n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma}{\sum_{v=1}^{V}\left(n_{\left(\cdot\right),w_{d,n}}^{k,-\left(d,n\right)}+\gamma\right)}\label{eq:z-likelihood}\end{equation}
 
 
 Here, $n_{d,v}^{k,-\left(d,n\right)}$ represents the count of word
@@ -314,7 +314,7 @@ p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\ri
 \begin{equation}
 =\begin{cases}
 \mathcal{N}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)p\left(y_{d,i_{l,c}}\mid a_{d,i_{l,c}}\right), & y_{parent_{l,c}}=1,\forall y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}},y_{i_{\hat{l},\hat{c}}}=-1\\
-trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right),\delta\left(y_{d,i_{l,c}}=-1\right), & y_{parent_{l,c}}=-1\\
+trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=-1\right), & y_{parent_{l,c}}=-1\\
 trunc\mathcal{N}^{+}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=1\right), & \exists y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}}\setminus y_{i_{\hat{l},\hat{c}}}=1\\
 0 & otherwise\end{cases}\end{equation}
 
