@@ -1,4 +1,20 @@
-There exist surprisingly many sources of unstructured text data that have been partially or completely categorized by human editors.  Examples include hierarchical directories of webpages \citep{DMOZ}, large hierarchically annotated product catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), manually annotated patient medical records, and many more.  In this work we show how to combine these two sources of information in a single model that allows us to, amongst other things, automatically annotate and/or categorize new text documents, effectively inserting them into the category
+There exist many sources of unstructured data that have been partially or completely categorized by human editors.  In this paper we focus on unstructured textual data that has been, at least in part, manually categorized.  Examples include but are not limited to webpages and curated hierarchical directories of the same \citep{DMOZ}, product descriptions and catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), and patient hospital treatment transcripts and  codes applied to them for bookkeeping and insurance purposes (e.g.~hospital discharge records and the International Classification of Disease 9th Revision,
+Clinical Modification (ICD-9-CM) codes assigned to them\cite{}).  In this work we show how to combine these two sources of information using a single model that allows one, among other things, to automatically categorize new text documents, suggest labels that might be inaccurate, and compute improved similarities between documents for information retrieval purposes.  The models and techniques that we develop in this paper are applicable in other domains as well, for instance, unstructured representations of data that have been hierarchically classified (e.g. image catalogs with bags of features image representations). 
+
+In this work we extent supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) augmented with per document ``supervision''  often taking the form of a single numerical or categorical ``label.''  More generally this ``supervision'' can be seen as extra data generated about a document;  for instance its quality or relevance (e.g.~online reviews), marks given to written work (e.g.~graded essays), or the number of times a web document is linked.  These labels are usually modeled as having been generated conditioned on the mix of topics found in a document.  It has been demonstrated that the signal provided by this supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{}.
+
+Our main contribution is to show how to utilize supervision in the form of  hierarchical and (often) multiple labelings in a similar manner.   As one concrete example consider web retailers.  They often have both a browse-able hierarchy and free-text descriptions of all products they sell.   The situation of each product in the product hierarchy (often multiply situated) can be seen as a form of multiple labeling and as a 
+similar products based on the similarity of their textual description is an u.  An equivalent challenge, particularly for larger retailers, is to situate the merchandise in as many categories as possible. 
+
+In this paper we describe the use of a topic model based on supervised
+latent Dirichlet allocation (sLDA) to identify topics within narrative
+discharge summaries and to automate the assignment of diagnostic codes,
+specifically International Classification of Disease 9th Revision,
+Clinical Modification (ICD-9-CM) codes. There are a number of advantages
+to this approach. First, manually coding diagnoses is a time-consuming
+and notoriously unreliable process. Many diagnoses are omitted in
+the final record, and a high error rate is found even in the principal
+diagnoses \citep{Surjan1999}.
 
 \begin{itemize}
 \item Benefits of combining human categorization information into ``topic models''
@@ -21,27 +37,15 @@ There exist surprisingly many sources of unstructured text data that have been p
 %and Reinvestment Act \citep{Blumenthal2009}, there has been little
 %movement forward in automating medical coding.
 
-In this paper we describe the use of a topic model based on supervised
-latent Dirichlet allocation (sLDA) to identify topics within narrative
-discharge summaries and to automate the assignment of diagnostic codes,
-specifically International Classification of Disease 9th Revision,
-Clinical Modification (ICD-9-CM) codes. There are a number of advantages
-to this approach. First, manually coding diagnoses is a time-consuming
-and notoriously unreliable process. Many diagnoses are omitted in
-the final record, and a high error rate is found even in the principal
-diagnoses \citep{Surjan1999}.
-
-
-
-An automated process would ideally produce a more complete and accurate
-diagnosis lists. Also, this model will reveal information about the
-medical records themselves. For example, we may gain an understanding
-of what a specific code actually means in terms of clinical narratives.
-Similarly, viewing the distribution of topics over discharge summaries
-may reveal information about the latent structure of clinician documentation.
-Lastly, the sLDA model would provide a novel approach to dealing with
-the problem of high dimensionality when representing narrative text
-in a vector space specifically by reducing dimensions from an entire
-vocabulary of potentially tens of thousands of words to a set of several
-dozen topics.
+%An automated process would ideally produce a more complete and accurate
+%diagnosis lists. Also, this model will reveal information about the
+%medical records themselves. For example, we may gain an understanding
+%of what a specific code actually means in terms of clinical narratives.
+%Similarly, viewing the distribution of topics over discharge summaries
+%may reveal information about the latent structure of clinician documentation.
+%Lastly, the sLDA model would provide a novel approach to dealing with
+%the problem of high dimensionality when representing narrative text
+%in a vector space specifically by reducing dimensions from an entire
+%vocabulary of potentially tens of thousands of words to a set of several
+%dozen topics.
 
