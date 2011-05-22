@@ -51,29 +51,19 @@ Columbia University, New York, NY 10027, USA \\
 \maketitle
 
 \begin{abstract}
-The benefits of supervision in topic modeling 
-%Current medical record keeping technology relies heavily upon human
-%capacity to effectively summarize and infer information from free-text
-%physician notes. We propose a novel method to suggest diagnostic code
-%assignment for patient visits, based upon narrative medical notes.
-%We applied a supervised latent Dirichlet allocation model to a corpora
-%of free-text medical notes from NewYork - Presbyterian Hospital to
-%infer a set of specific ICD-9 codes for each patient note. Evaluation
-%of the predictions were conducted by comparison to a gold-standard
-%set of ICD-9s assigned to a set of patient notes. 
+\input{abstract}
 \end{abstract}
 
 \section{Introduction}
-
 \label{sec:introduction}
-
 \input{introduction}
 
 
-\section{Background}
+%\section{Background}
 
 
 \section{Methods}
+\label{sec:methods}
 
 % generalize to arbitrary codes (not just ICD-9's
 
@@ -414,7 +404,7 @@ reason, we included these nodes in our model.
 
 
 \subsection{Related Work}
-
+\label{sec:related_work}
 Latent dirichlet allocation (LDA) is a generative probabilistic model
 of corpora that represents documents as a mixed membership bag-of-words.
 Also known as topic models, these models infer the latent structure,
@@ -460,6 +450,7 @@ methods to assign appropriate labels to the documents but did not
 utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 
 \section{Results}
+\label{sec:results}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -511,8 +502,9 @@ utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 
 
 
-\section{Conclusion}
-
+\section{Discussion}
+\label{sec:discussion}
+\input{discussion}
 %We have proposed a new method for prediction of ICD-9 codes given a medical discharge summary note.  Our method explicitly takes advantage of the ICD-9 hierarchical IS-A relationships as well as the word distributions in each document.  We used Gibbs sampling for a supervised latent dirichlet allocation model to learn a distribution of words over twenty topics and their appropriate ICD-9 codes (response variable). The model was then tested on 100 discharge summaries for which the ICD-9 diagnoses were known.  The amount of ICD-9 codes produced for some discharge summaries was quite high because of the way the model worked with the IS-A hierarchy, highlighting the completeness of ICD-9 coding when using this sLDA model.  Overall, the model had extremely good specificity while the sensitivity was lower than anticipated.  Given our limited set of documents, and very noisy gold standard it would not be accurate to discount the use of sLDA in medical document classification and automatic coding.
 %In future work, we plan to significantly expand the set of documents used to train the model (up to 15,000), as well as run several different iterations to learn the optimal topic number.  
 

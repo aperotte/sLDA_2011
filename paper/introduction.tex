@@ -1,27 +1,28 @@
-There exist many sources of unstructured data that have been partially or completely categorized by human editors.  In this paper we focus on unstructured textual data that has been, at least in part, manually categorized.  Examples include but are not limited to webpages and curated hierarchical directories of the same \citep{DMOZ}, product descriptions and catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), and patient hospital treatment transcripts and  codes applied to them for bookkeeping and insurance purposes (e.g.~hospital discharge records and the International Classification of Disease 9th Revision,
-Clinical Modification (ICD-9-CM) codes assigned to them\cite{}).  In this work we show how to combine these two sources of information using a single model that allows one, among other things, to automatically categorize new text documents, suggest labels that might be inaccurate, and compute improved similarities between documents for information retrieval purposes.  The models and techniques that we develop in this paper are applicable in other domains as well, for instance, unstructured representations of data that have been hierarchically classified (e.g. image catalogs with bags of features image representations). 
+There exist many sources of unstructured data that have been partially or completely categorized by human editors.  In this paper we focus on unstructured textual data that has been, at least in part, manually categorized.  Examples include but are not limited to webpages and curated hierarchical directories of the same \citep{DMOZ}, product descriptions and catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), and patient hospital treatment transcripts and  codes applied to them for bookkeeping and insurance purposes (e.g.~hospital discharge records with International Classification of Disease 9th Revision,
+Clinical Modification (ICD-9-CM) codes assigned \cite{}).  In this work we show how to combine these two sources of information using a single model that allows one to automatically categorize new text documents, suggest labels that might be inaccurate, compute improved similarities between documents for information retrieval purposes, and more.  The models and techniques that we develop in this paper are applicable in other domains as well, namely, any unstructured representations of data that have been hierarchically classified (e.g.~image catalogs with bag-of-feature image representations). 
 
-In this work we extent supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) augmented with per document ``supervision''  often taking the form of a single numerical or categorical ``label.''  More generally this ``supervision'' can be seen as extra data generated about a document;  for instance its quality or relevance (e.g.~online reviews), marks given to written work (e.g.~graded essays), or the number of times a web document is linked.  These labels are usually modeled as having been generated conditioned on the mix of topics found in a document.  It has been demonstrated that the signal provided by this supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{}.
+In this work we extend supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) \cite{Blei2003} augmented with per document ``supervision;''  often taking the form of a single numerical or categorical ``label.''  More generally this ``supervision'' can be seen as extra data  about a document;  for instance its quality or relevance (e.g.~online review scores), marks given to written work (e.g.~essay grades), or the number of times a web page is linked.  These labels are usually generatively modeled as having been conditional draw given an inferred document-specific topic mixture.  It has been demonstrated that the signal provided by this supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{}.
 
-Our main contribution is to show how to utilize supervision in the form of  hierarchical and (often) multiple labelings in a similar manner.   As one concrete example consider web retailers.  They often have both a browse-able hierarchy and free-text descriptions of all products they sell.   The situation of each product in the product hierarchy (often multiply situated) can be seen as a form of multiple labeling and as a 
-similar products based on the similarity of their textual description is an u.  An equivalent challenge, particularly for larger retailers, is to situate the merchandise in as many categories as possible. 
+Our main contribution is to show how to utilize supervision in the form of  hierarchical and (often) multiple labelings in a similar manner.   Consider web retail data.  Web retailers often have both a browse-able product hierarchy and free-text descriptions for all products they sell.   The situation of each product in a product hierarchy (often multiply situated) constitutes a multiple, hierarchical labeling of the free-text product descriptions.  We hypothesis that hierarchical labels should, at least in theory, provide better signal than the simpler unstructured supervision previously considered.  Results from applying our model to medical record and web retail data suggests that this is likely to be the case.  In particular, we observed big gains in our primary goal of out-of-sample label prediction when using hierarchical supervision. 
 
-In this paper we describe the use of a topic model based on supervised
-latent Dirichlet allocation (sLDA) to identify topics within narrative
-discharge summaries and to automate the assignment of diagnostic codes,
-specifically International Classification of Disease 9th Revision,
-Clinical Modification (ICD-9-CM) codes. There are a number of advantages
-to this approach. First, manually coding diagnoses is a time-consuming
-and notoriously unreliable process. Many diagnoses are omitted in
-the final record, and a high error rate is found even in the principal
-diagnoses \citep{Surjan1999}.
+The remainder of this paper is structured as follows.  In Section~\ref{sec:methods} we introduce hierarchically supervised LDA (HSLDA), in Section~\ref{sec:related_work} we review related work, and in Section~\ref{sec:experiments} we apply HSLDA to health care and web retail data, showing predictive performance and improved topic generation.   
 
-\begin{itemize}
-\item Benefits of combining human categorization information into ``topic models''
-\item LDA solved free text
-\item supervised LDA improves LDA (extra info) and allows new inference (predict links, etc.)
-\item amazon, freshdirect, netflix, dmoz, pandora (music genome)
-\end{itemize}
+%In this paper we describe the use of a topic model based on supervised
+%latent Dirichlet allocation (sLDA) to identify topics within narrative
+%discharge summaries and to automate the assignment of diagnostic codes,
+%specifically International Classification of Disease 9th Revision,
+%Clinical Modification (ICD-9-CM) codes. There are a number of advantages
+%to this approach. First, manually coding diagnoses is a time-consuming
+%and notoriously unreliable process. Many diagnoses are omitted in
+%the final record, and a high error rate is found even in the principal
+%diagnoses \citep{Surjan1999}.
+
+%\begin{itemize}
+%\item Benefits of combining human categorization information into ``topic models''
+%\item LDA solved free text
+%\item supervised LDA improves LDA (extra info) and allows new inference (predict links, etc.)
+%\item amazon, freshdirect, netflix, dmoz, pandora (music genome)
+%\end{itemize}
 
 
 % Informatics journal paper
