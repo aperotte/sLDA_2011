@@ -62,8 +62,8 @@ Columbia University, New York, NY 10027, USA \\
 %\section{Background}
 
 
-\section{Methods}
-\label{sec:methods}
+\section{Model}
+\label{sec:model}
 
 % generalize to arbitrary codes (not just ICD-9's
 
@@ -129,7 +129,8 @@ parents according to the constraints of the ICD-9 code tree. The latent
 variable utilized here is also known as an auxiliary variable.
 
 
-\subsection{Posterior Inference}
+\section{Inference}
+\label{sec:inference}
 
 Given an observation of a set of ICD-9 codes and a document, the posterior
 distribution for the latent variables is given by Equation .
@@ -154,7 +155,7 @@ to this posterior. In particular, we will derive a collapsed Gibbs
 sampler.
 
 
-\subsection{Gibbs Sampling}
+\subsection{Gibbs Sampler}
 
 We derive a collapsed Gibbs sampler for this model, marginalizing
 $\theta_{1:D}$ and $\phi_{1:K}$. For details regarding collapsing
@@ -460,7 +461,7 @@ utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 \subfigure[]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs}}
 \subfigure[]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
 \subfigure[]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
-\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.}
+\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  In all figures solid is HSLDA, dashed is ADLER, dotted is ADLER, and dot-dashed is ADLER.}
 \label{fig:icd9}
 \end{center}
 \end{figure}
