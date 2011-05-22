@@ -1,0 +1,47 @@
+There exist surprisingly many sources of unstructured text data that have been partially or completely categorized by human editors.  Examples include hierarchical directories of webpages \citep{DMOZ}, large hierarchically annotated product catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), manually annotated patient medical records, and many more.  In this work we show how to combine these two sources of information in a single model that allows us to, amongst other things, automatically annotate and/or categorize new text documents, effectively inserting them into the category
+
+\begin{itemize}
+\item Benefits of combining human categorization information into ``topic models''
+\item LDA solved free text
+\item supervised LDA improves LDA (extra info) and allows new inference (predict links, etc.)
+\item amazon, freshdirect, netflix, dmoz, pandora (music genome)
+\end{itemize}
+
+
+% Informatics journal paper
+%
+% Despite the growing emphasis on meaningful
+%use of technology in medicine, many aspects of medical record-keeping
+%remain a manual process. Diagnostic coding for billing and insurance
+%purposes is often handled by professional medical coders who must
+%explore a patient's extensive clinical record before assigning the
+%proper codes. So while electronic health records (EHRs) should be
+%adopted by most medical institutions within the next several years,
+%largely due to the provisions of HITECH under the American Recovery
+%and Reinvestment Act \citep{Blumenthal2009}, there has been little
+%movement forward in automating medical coding.
+
+In this paper we describe the use of a topic model based on supervised
+latent Dirichlet allocation (sLDA) to identify topics within narrative
+discharge summaries and to automate the assignment of diagnostic codes,
+specifically International Classification of Disease 9th Revision,
+Clinical Modification (ICD-9-CM) codes. There are a number of advantages
+to this approach. First, manually coding diagnoses is a time-consuming
+and notoriously unreliable process. Many diagnoses are omitted in
+the final record, and a high error rate is found even in the principal
+diagnoses \citep{Surjan1999}.
+
+
+
+An automated process would ideally produce a more complete and accurate
+diagnosis lists. Also, this model will reveal information about the
+medical records themselves. For example, we may gain an understanding
+of what a specific code actually means in terms of clinical narratives.
+Similarly, viewing the distribution of topics over discharge summaries
+may reveal information about the latent structure of clinician documentation.
+Lastly, the sLDA model would provide a novel approach to dealing with
+the problem of high dimensionality when representing narrative text
+in a vector space specifically by reducing dimensions from an entire
+vocabulary of potentially tens of thousands of words to a set of several
+dozen topics.
+
