@@ -456,27 +456,15 @@ utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=1\textwidth]{Combined_vs_Separate_Learning.png}
-\caption{default}
-\label{default}
+\subfigure[]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors}}
+\subfigure[]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs}}
+\subfigure[]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+\subfigure[]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.}
+\label{fig:icd9}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=1\textwidth]{TP_Rate.png}
-\caption{default}
-\label{default}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=1\textwidth]{FP_Rate.png}
-\caption{default}
-\label{default}
-\end{center}
-\end{figure}
 
 %We ran the Gibbs sampler for two days on 500 documents with 20 topics to learn the sLDA model which we then followed by a prediction of ICD-9 codes for 100 documents. The prediction resulted in 38 documents with at least 1 ICD-9 code assignment while some had over 200 assignments.
 
