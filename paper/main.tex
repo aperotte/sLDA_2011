@@ -104,7 +104,10 @@ We will now describe the stochastic generative process which defines our model. 
 		
 		\item For each label $l \in \mathcal{L}$:
 		\begin{itemize}
-			\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
+			\item Draw $a_{l,d}\mid z_{1:N_{d},d},\eta_{l},y_{parent(l),d}\sim\begin{cases}
+				\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right), & y_{parent(l)}=1\\
+				\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right)I\left(a_{l,d}<0\right), & y_{parent(l)}=-1\end{cases}$ where $\bar{z_{d}}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ 
+			%\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
 			\item Set the response variable \begin{equation*} y_{l, d} \ | \ a_{l, d} = \begin{cases}
 																										 \ \ \ 1 & \text{if $a_{l,d} > 0$ and $y_{{\rm parent}(l),d} = 1$} \\
 																										-1 & \text{otherwise}
@@ -252,7 +255,7 @@ where $s\left(n,m\right)$ represents stirling numbers of the first kind.
 %
 The hyperparameters $\alpha$, $\alpha^\prime$, and $\gamma$ are given broad ${\rm Gamma}(2, 1000)$ prior distributions and sampled via the Metropolis-Hastings algorithm.
 %
-\subsection{Prediction}
+
 
 \section{Experiments}
 
@@ -274,8 +277,8 @@ their respective ICD-9 codes. A discharge summary is a clinical report
 prepared by a physician or other health professional at the conclusion
 of a hospital stay or series of treatments. The note outlines the
 patient's chief complaint, diagnostic findings, therapy administered,
-patient's response to the chosen therapy, the treatment plan and
-the recommendations upon discharge. The ICD-9 codes used to structure
+patient's response to the chosen therapy, the treatment plan and the
+recommendations upon discharge. The ICD-9 codes used to structure
 the discharge summary data are part of a controlled terminology which
 is the international standard diagnostic classification for epidemiological,
 health management, and clinical purposes. The ICD-9 codes are organized
@@ -350,38 +353,53 @@ fit with fixed random regression parameters.
 
 \subsubsection{Prediction}
 
-Given the expectation o
+The two measures for predictive performance used here include the
+true positive rate and the false positive rate. We evaluate model
+performance on held out data. A more ideal evaluation of performance
+would include a manually labeled hierarchy since it is well known
+that ICD-9 codes have a relatively low sensitivity.
+
+Performance was evaluated against $p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$. 
 
 
 \subsubsection{Topic Quality and Character}
 
-
+TBD
 
 
 \subsection{Related Work}
-\label{sec:related_work}
-Latent dirichlet allocation (LDA) is a generative probabilistic model
-of corpora that represents documents as a mixed membership bag-of-words.
-Also known as topic models, these models infer the latent structure,
-or topics, of documents in a corpus. Each document is represented
-as a collection of words, generated from a set of topic assignments
-(one for each word), where each topic assignment is drawn from a distribution
-over topics \citep{Blei2003}.
 
-This model, supervised latent dirichlet allocation (sLDA), builds
-on LDA by incorporating an exponential family response variable. Although
-there are many models for making predictions based on free text, sLDA
-is unique in that it is a generative model, it represents documents
-as a mixed-membership, and constrains the inference of the latent
-structure of the documents by its predictability of the response variable.
-In other words, sLDA infers topics such that the model is capable
-of a high predictive likelihood for words in a document and the response
-variable associated with a document. This approach has been shown
-to outperform both LASSO (L1 regularized least squares regression)
-and LDA followed by least squares regression \citep{BleiMcAuliffe2008}.
+\label{sec:related_work} Latent dirichlet allocation (LDA) is a generative
+probabilistic model of corpora that represents documents as a mixed
+membership bag-of-words. Also known as topic models, these models
+infer the latent structure, or topics, of documents in a corpus. Each
+document is represented as a collection of words, generated from a
+set of topic assignments (one for each word), where each topic assignment
+is drawn from a distribution over topics \citep{Blei2003}.
 
-Other models - predicting document links, other supervised latent
-variable models
+Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
+an exponential family response variable. Although there are many models
+for making predictions based on free text, sLDA is unique in that
+it is a generative model, it represents documents as a mixed-membership,
+and constrains the inference of the latent structure of the documents
+by its predictability of the response variable. In other words, sLDA
+infers topics such that the model is capable of a high predictive
+likelihood for words in a document and the response variable associated
+with a document. This approach has been shown to outperform both LASSO
+(L1 regularized least squares regression) and LDA followed by least
+squares regression \citep{BleiMcAuliffe2008}.
+
+There have been many models that incorporate both latent models of
+text and some form of supervision {[}citations{]}. One set of models
+that are particularly relevant to HSLDA are Chang and Blei's {[}citation{]}
+hierarchical models for document networks. In that family of models,
+they encountered a similar scenario where the lack of a link did not
+truly indicate absence. In our model, the lack of a code in the hierarchy
+being assigned does not necessarily indicate absence. Therefore, as
+in the work of Chang and Blei, we employ regularization in the form
+of a negative prior on the regression parameters to provide a prior
+that indicates a bias towards being truly negative in the absence
+of a code.
 
 % move to related work?
 While there have been some attempts to automatically classify groups
@@ -391,7 +409,7 @@ automatic assignment of ICD-9 codes to medical text became a more
 prevalent research topic only in the last few years. A subset of earlier
 work proposed various methods on small corpora, based on a few specific
 diseases \citep{Rao2003} but the most recent and promising work on
-the subject was inspired by the 2007 Medical NLP Challenge: \textquotedblleft{}International
+the subject was inspired by the 2007 Medical NLP Challenge: {}``International
 Challenge: Classifying Clinical Free Text Using Natural Language Processing\textquotedblright{}
 (website). Most of the classification strategies included word matching
 and rule-based algorithms. \citep{Goldstein2007,Crammer2007,Farkas2008}.
@@ -403,8 +421,6 @@ scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.
 Lita proposed support vector machine and bayesian ridge regression
 methods to assign appropriate labels to the documents but did not
 utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
-
-\subsection{Evaluation}
 
 \section{Results}
 \label{sec:results}
@@ -474,43 +490,5 @@ utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 
 \end{small} 
 
-\newpage{}
-
-
-\subsection{Rao-Blackwellization}
-
-To derive the Gibbs sampler in general, we integrate over the parameters
-$\theta$ and $\phi_{1:K}$ resulting in the collapsed joint distribution
-shown in Equations 5-8.
-
-\begin{landscape} \centering % optional, probably makes it look better to have it centered on the page
-
-
-\begin{small}
-
-\begin{equation}
-p\left(\theta,z_{1:N}\mid w_{1:N},y_{1:I},\phi_{1:K},\eta_{1:I},\alpha,\beta,\mu,\xi\right)=\frac{p\left(\theta\mid\alpha\right)\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)}{\int_{\theta}p\left(\theta\mid\alpha\right)\sum_{k=1}^{K}\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\beta\right)\right)\left(\prod_{i=1}^{I}p\left(y_{i}\mid z_{1:N},\eta_{i},\xi\right)p\left(\eta_{i}\mid\mu\right)\right)d\theta}\end{equation}
-
-
-\begin{equation}
-\intop_{\theta}\intop_{\phi_{1:K}}p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\theta},\mathbf{\phi},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)d\theta d\phi_{1:K}=\intop_{\theta}\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\left\{ p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}\left[p\left(z_{m,n}\mid\theta_{m}\right)p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)\right]\prod_{i=1}^{I}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right\} \prod_{i=1}^{I}p\left(\eta_{i};\mu\right)d\theta d\phi_{1:K}\end{equation}
-
-
-\begin{equation}
-p\left(\mathbf{Y},\mathbf{w},\mathbf{z},\mathbf{\eta},\alpha,\beta,\mu,\xi\right)=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\intop_{\phi_{1:K}}\prod_{k=1}^{K}p\left(\phi_{k};\beta\right)\prod_{m=1}^{M}\prod_{n=1}^{N}p\left(w_{m,n}\mid\phi_{z_{m,n}}\right)d\phi_{1:K}\intop_{\theta}\prod_{m=1}^{M}p\left(\theta_{m};\alpha\right)\prod_{n=1}^{N}p\left(z_{m,n}\mid\theta_{m}\right)d\theta\end{equation}
-
-
-\begin{equation}
-=\prod_{i=1}^{I}\left[p\left(\eta_{i};\mu\right)\prod_{m=1}^{M}p\left(y_{m,i}\mid z_{m,1:N},\eta_{i},\xi\right)\right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\cdot\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\cdot\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\cdot\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\cdot\right)}^{k}+\alpha_{k}\right)}\end{equation}
-
-
-\begin{equation}
-=\prod_{i=1}^{I}\left[\mathcal{N}\left(\eta_{i}\mid\mu,1\right)\prod_{m=1}^{M}h\left(y\right)\exp\left\{ \left(\eta_{i}^{T}\bar{z}\right)y-A\left(\eta_{i}^{T}\bar{z}\right)\right\} \right]\prod_{k=1}^{K}\frac{\Gamma\left(\sum_{v=1}^{V}\beta_{v}\right)}{\prod_{v=1}^{V}\Gamma\left(\beta_{v}\right)}\frac{\prod_{v=1}^{V}\Gamma\left(n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}{\Gamma\left(\sum_{v=1}^{V}n_{\left(\bullet\right),v}^{k}+\beta_{v}\right)}\prod_{m=1}^{M}\frac{\Gamma\left(\sum_{k=1}^{K}\alpha_{k}\right)}{\prod_{k=1}^{K}\Gamma\left(\alpha_{k}\right)}\frac{\prod_{k=1}^{K}\Gamma\left(n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}{\Gamma\left(\sum_{k=1}^{K}n_{m,\left(\bullet\right)}^{k}+\alpha_{k}\right)}\end{equation}
-
-
-\end{small} \end{landscape}
 \end{document}
 
-%\begin{align}
-%p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma\mid w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right) & =\\
-% & \frac{p\left(\alpha,\alpha',\gamma;\lambda\right)p\left(\beta\mid\alpha'\right)p\left(\theta\mid\beta,\alpha\right)\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\gamma\right)\right)\left(\prod_{i_{l,c}\in\mathcal{I}}p\left(y_{i_{l,c}}\mid z_{1:N},\eta_{i_{l,c}}\right)p\left(\eta_{i_{l,c}};\sigma\right)\right)}{\int_{\alpha,\alpha',\gamma}p\left(\alpha,\alpha',\gamma;\lambda\right)p\left(\beta\mid\alpha'\right)\int_{\theta}p\left(\theta\mid\beta,\alpha\right)\sum_{k=1}^{K}\left(\prod_{n=1}^{N}p\left(z_{n}\mid\theta\right)p\left(w_{n}\mid z_{n},\phi_{1:K}\right)\right)\left(\prod_{k=1}^{K}p\left(\phi_{k}\mid\gamma\right)\right)\left(\prod_{i_{l,c}\in\mathcal{I}}p\left(y_{i_{l,c}}\mid z_{1:N},\eta_{i_{l,c}}\right)p\left(\eta_{i_{l,c}};\sigma\right)\right)}\end{align}
