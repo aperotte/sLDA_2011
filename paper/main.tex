@@ -61,139 +61,265 @@ Columbia University, New York, NY 10027, USA \\
 
 %\section{Background}
 
+
+\subsection{Related Work}
+
+\label{sec:related_work} Latent dirichlet allocation (LDA) is a generative
+probabilistic model of corpora that represents documents as a mixed
+membership bag-of-words. Also known as topic models, these models
+infer the latent structure, or topics, of documents in a corpus. Each
+document is represented as a collection of words, generated from a
+set of topic assignments (one for each word), where each topic assignment
+is drawn from a distribution over topics \citep{Blei2003}.
+
+Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
+an exponential family response variable. Although there are many models
+for making predictions based on free text, sLDA is unique in that
+it is a generative model, it represents documents as a mixed-membership,
+and constrains the inference of the latent structure of the documents
+by its predictability of the response variable. In other words, sLDA
+infers topics such that the model is capable of a high predictive
+likelihood for words in a document and the response variable associated
+with a document. This approach has been shown to outperform both LASSO
+(L1 regularized least squares regression) and LDA followed by least
+squares regression \citep{BleiMcAuliffe2008}.
+
+There have been many models that incorporate both latent models of
+text and some form of supervision \citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}.
+One set of models that are particularly relevant to HSLDA are Chang
+and Blei's hierarchical models for document networks (Relational Topic
+Models). In that family of models, they encountered a similar scenario
+where the lack of a link did not truly indicate absence. In hierarchically
+labeled data, negative labels are uncommon and the lack of a label
+in the hierarchy is not equivalent to a negative label. Therefore,
+as in the work of Chang and Blei, we employ regularization to account
+for the lack of negative labels. This will be discussed further in
+\ref{sec:model}.
+
+% move to related work?
+While there have been some attempts to automatically classify groups
+of patients as a potential preliminary step to ICD-9 code assignment
+\citep{Ruch2008,FreitasJunior2006,RibeiroNeto2001,Brown2006}, fully
+automatic assignment of ICD-9 codes to medical text became a more
+prevalent research topic only in the last few years. A subset of earlier
+work proposed various methods on small corpora, based on a few specific
+diseases \citep{Rao2003} but the most recent and promising work on
+the subject was inspired by the 2007 Medical NLP Challenge: {}``International
+Challenge: Classifying Clinical Free Text Using Natural Language Processing\textquotedblright{}
+(website). Most of the classification strategies included word matching
+and rule-based algorithms. \citep{Goldstein2007,Crammer2007,Farkas2008}.
+The data set given to the participants consisted only of documents
+that were 1-2 lines each and all of the documents were radiology reports
+- clearly limiting the scope of potential ICD-9 codes which could
+be assigned. The only paper which has attempted to work with a document
+scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.
+Lita proposed support vector machine and bayesian ridge regression
+methods to assign appropriate labels to the documents but did not
+utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
+
+
 \section{Model}
-\label{sec:model}
-We define here a hierarchically supervised LDA model.  We assume a pre-specified set of labels $\mathcal{L}$. Each document is assigned a response of either -1 or 1 for at least one, but potentially many, label(s) in $\mathcal{L}$.  A response of 1 or -1 to label $l$ indicates if the document respectively is or is not $l$.  The label $l$ for a document $d$ will be used interchangeably to refer the observed response of document $d$ to label $l$. The label set is assumed to be an ``is a" hieararchy.  This means that if a label $l_1$ is a parent of label $l_2$ in the hierarchy and document $d$ has a positive response to the label $l_2$ then document $d$ also has a positive response to the label $l_1$.  Seen in a negative light, if document $d$ has a negative response to the $l_1$ label then document $d$ also has a negative response to the $l_2$ label.  To capture this hierarchical structure we model the labeling of documents using a generative cascade of conditional probit regression models.  Approximate inference is performed using Gibbs sampling.
+
+\label{sec:model} We define here a hierarchically supervised LDA
+model. Although we will focus on document modeling in our description
+and experiments, this model applies equally well to other collections
+of discrete data with hierarchically constrained labels. 
+
+We assume a pre-specified set of labels $\mathcal{L}=\left\{ l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $.
+Each document is assigned a response of either -1 or 1 for at least
+one, but potentially many labels in $\mathcal{L}$. The label, $l$,
+for a document, $d$, will be used interchangeably to refer to the
+observed response of document $d$ to label $l$. The label set is
+assumed to be structured as an {}``is-a'' hieararchy.
+To understand this, consider a hierarchy where label $l_{1}$ is a
+parent of label $l_{2}$. If document $d$ has a positive response
+to label $l_{2}$ then it will also have a positive response to label
+$l_{1}$. Conversely, if document $d$ has a negative response to
+label $l_{1}$ then it will also has a negative response to $l_{2}$.
+To capture this hierarchical structure we model the labeling of documents
+using a generative cascade of conditional probit regression models.
 
 % generalize to arbitrary codes (not just ICD-9's
-%
 %
 \begin{figure}[h]
 %tbp] %  figure placement: here, top, bottom, or page
  \centering \includegraphics[scale=0.3]{Graphical_Model2} \caption{adapted sLDA model}
+
+
 \label{fig:example} 
 \end{figure}
-%
-The fixed parameters of the model are the number of topics $K$, the number of unique words in the vocabulary $V$, the number of documents $D$, and the standard deviation $\sigma$ used in a normal prior distribution.  The hyper-parameters $\alpha^\prime$, $\alpha$, and $\gamma$ are weight parameters for Dirichlet prior distributions. We will denote the $K$-dimensional Dirichlet distribution as Dir$_K(\cdot)$ and the $K$ dimensional normal distribution as $\mathcal{N}_k(\cdot)$.
 
-We will now describe the stochastic generative process which defines our model.  The graphical model is show in Figure~\ref{fig:example}. 
-%
+
+The fixed parameters of the model are the number of topics $K$, the
+number of unique words in the vocabulary $V$, the number of documents
+$D$, as well as the mean, $\mu$, and the standard deviation, $\sigma$,
+used in a normal prior distribution. The hyper-parameters $\alpha^{\prime}$,
+$\alpha$, and $\gamma$ are weight parameters for Dirichlet prior
+distributions. We will denote the $K$-dimensional Dirichlet distribution
+as Dir$_{K}(\cdot)$ and the $K$ dimensional normal distribution
+as $\mathcal{N}_{K}(\cdot)$.
+
+We will now describe the stochastic generative process which defines
+our model. The graphical model is show in Figure~\ref{fig:example}.
 %Given the number of topics, K, and broad gamma priors on hyperparameters,
 %the generative process is as follows: 
+
 \begin{enumerate}
-	\item For each topic $k = 1,\ldots, K$:
-	\begin{itemize}
-		\item Draw a distribution over words $\mathbf{\phi_{k}}\sim {\rm Dir}_{V}\left(\gamma \mathbf{1}\right)$, where $\mathbf{1}$ is a vector of ones of length $V$
-	\end{itemize}
-	
-	\item For each label $l \in \mathcal{L}$:
-	\begin{itemize}
-		\item Draw the regression coefficients $\mathbf{\eta_l} \ | \ \sigma \sim \mathcal{N}_{K} \left( -\mathbf{1}, \sigma I_K \right)$, where $I_K$ is the $K$ dimensional identity matrix
-	\end{itemize}
-	
-	\item Draw a prior over topic proportions $\mathbf{\beta}\mid\alpha'\sim {\rm Dir}_{K} \left(\alpha^{\prime} \mathbf{1} \right)$ 
+\item For each topic $k=1,\ldots,K$: 
 
-	\item For each document $d = 1, \ldots, D$:
-	\begin{itemize} 
-		\item Draw topic proportions $\mathbf{\theta_{d}} \ | \ \mathbf{\beta},\alpha \sim {\rm Dir}_{K}\left(\alpha \mathbf{\beta} \right)$ 
-		\item For $n = 1, \ldots, N_d$:
-		\begin{itemize}
-			\item Draw topic assignment $z_{n,d} \ | \ \mathbf{\theta_{d}} \sim {\rm Multinomial} \left(\mathbf{\theta_{d}} \right)$ 
-			\item Draw word $w_{n,d} \ | \ z_{n,d},\mathbf{\beta_{1:K}} \sim {\rm Multinomial} \left(\mathbf{\beta_{z_{n,d}}} \right)$ 
-		\end{itemize}
-		
-		\item For each label $l \in \mathcal{L}$:
-		\begin{itemize}
-			\item Draw $a_{l,d}\mid z_{1:N_{d},d},\eta_{l},y_{parent(l),d}\sim\begin{cases}
-				\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right), & y_{parent(l)}=1\\
-				\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right)I\left(a_{l,d}<0\right), & y_{parent(l)}=-1\end{cases}$ where $\bar{z_{d}}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ 
-			%\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
-			\item Set the response variable \begin{equation*} y_{l, d} \ | \ a_{l, d} = \begin{cases}
-																										 \ \ \ 1 & \text{if $a_{l,d} > 0$ and $y_{{\rm parent}(l),d} = 1$} \\
-																										-1 & \text{otherwise}
-																								\end{cases}  
-															 \end{equation*}															 
-		\end{itemize}
-	\end{itemize}
+\begin{itemize}
+\item Draw a distribution over words $\mathbf{\phi_{k}}\sim{\rm Dir}_{V}\left(\gamma\mathbf{1}\right)$,
+where $\mathbf{1}$ is a vector of ones of length $V$ 
+\end{itemize}
+\item For each label $l\in\mathcal{L}$: 
+
+\begin{itemize}
+\item Draw the regression coefficients $\mathbf{\eta_{l}}\mid\sigma\sim\mathcal{N}_{K}\left(\mu I_{K},\sigma I_{K}\right)$,
+where $I_{K}$ is the $K$ dimensional identity matrix 
+\end{itemize}
+\item Draw a prior over topic proportions $\mathbf{\beta}\mid\alpha'\sim{\rm Dir}_{K}\left(\alpha^{\prime}\mathbf{1}\right)$
+\item For each document $d=1,\ldots,D$: 
+
+\begin{itemize}
+\item Draw topic proportions $\mathbf{\theta_{d}}\mid\beta,\alpha\sim{\rm Dir}_{K}\left(\alpha\mathbf{\beta}\right)$ 
+\item For $n=1,\ldots,N_{d}$: 
+
+\begin{itemize}
+\item Draw topic assignment $z_{n,d}\mid\mathbf{\theta_{d}}\sim{\rm Multinomial}\left(\mathbf{\theta_{d}}\right)$ 
+\item Draw word $w_{n,d}\mid z_{n,d},\mathbf{\beta_{1:K}}\sim{\rm Multinomial}\left(\mathbf{\beta_{z_{n,d}}}\right)$ 
+\end{itemize}
+\item For each label $l\in\mathcal{L}$: 
+
+\begin{itemize}
+\item Draw $a_{l,d}\mid z_{1:N_{d},d},\eta_{l},y_{parent(l),d}\sim\begin{cases}
+\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right), & y_{parent(l)}=1\\
+\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right)I\left(a_{l,d}<0\right), & y_{parent(l)}=-1\end{cases}$ where $\bar{z_{d}}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
+ 
+\item Set the response variable \[
+y_{l,d}\mid a_{l,d}=\begin{cases}
+\ \ \ 1 & \text{if \ensuremath{a_{l,d}>0}and \ensuremath{y_{{\rm parent}(l),d}=1}}\\
+-1 & \text{otherwise}\end{cases}\]
+ 
+\end{itemize}
+\end{itemize}
 \end{enumerate}
-%
-This type of generative model is known as a probit regression model. Probit regression is like logistic regression except instead of modeling the logit of $P(y = 1)$ using a linear form we model $\Phi^{-1}(P(y = 1))$ using a linear form, where $\Phi(\cdot)$ is the CDF for a standard normal distribution.  In this case, the regression is conditional on the parents according to the constraints of the labeling hierarchy. The latent variables $a_{l,d}$ utilized here are also known as an auxiliary variables because the are introduced to make exact Gibbs sampling possible and are not of primary interest.  
-%
-\section{Inference}
-\label{sec:inference}
-%
-In the Bayesian approach to statistical modeling the primary task of inference is to find the posterior distribution over the unobserved parameters of the model. However, it will often be the case that the set of labels $\mathcal{L}$ is not fully observed for every document.  We will define $\mathcal{L}_d$ to be the subset of labels which have been observed for document $d$.  It is straightforward to integrate out the variables $a_{l^\prime,d}$ and $y_{l^\prime,d}$ for $l^\prime \in \mathcal{L} \backslash \mathcal{L}_d$ from the full generative model.  We can also integrate out the parameters $\mathbf{\phi_{1:K}}$ and $\mathbf{\theta_{1:D}}$ as in \citet{Griffiths04}.  Therefore, in our model the latent variables are $\mathbf{z} = \{ z_{1:N_d,d} \}_{d = 1, \ldots, D},\mathbf{\eta} = \{ \mathbf{\eta_l} \}_{l \in \mathcal{L}},\mathbf{a} = \{ a_{l,d}\}_{l \in \mathcal{L}, d = 1, \ldots, D}, \mathbf{\beta}, \alpha, \alpha^{\prime}$ and $\gamma$.  
+This type of generative model is known as a probit regression model.
+Probit regression models are a type of discriminative probabilistic
+model similar to logistic regression. However, instead of using the
+logistic sigmoid as the link function, the probit regression model
+uses the CDF for a standard normal distribution - the inverse of which
+is known as the probit. In this case, the regression is conditional
+on the parents according to the constraints of the labeling hierarchy.
+The latent variables $a_{l,d}$ utilized here are also known as an
+auxiliary variables because the are introduced to make exact Gibbs
+sampling possible and are not of primary interest.
 
-The posterior distribution we seek cannot be solved in closed form. This is often the case in evaluating posterior distributions of non-trivial probabilistic models. We will appeal to one of the common methods for approximating posterior distributions in the face of intractable normalization factors: Markov chain Monte Carlo (MCMC) sampling. Since in this model it is possible to sample from the conditional distributions for all variables we will use the Gibbs sampling algorithm to obtain an approximation to this posterior. In particular, we will derive a collapsed Gibbs sampler.
-%
-%
+Given that negative labels are uncommon and that the absence of a
+label is not equivalent to a negative label, we apply an informative
+prior to the regression parameters, $\mathbf{\eta}_{\mathcal{L}}$,
+in the form of a negative prior that encodes a bias towards being
+truly negative in the absence of a label.
+
+
+\section{Inference}
+
+\label{sec:inference} In the Bayesian approach to statistical modeling,
+the primary task of inference is to find the posterior distribution
+over the unobserved parameters of the model. However, it is often
+possible and desirable to integrate over certain variables in the
+model, also known as collapsing. In our model, it will often be the
+case that the set of labels $\mathcal{L}$ is not fully observed for
+every document. We will define $\mathcal{L}_{d}$ to be the subset
+of labels which have been observed for document $d$. It is straightforward
+to integrate out the variables $a_{l^{\prime},d}$ and $y_{l^{\prime},d}$
+for $l^{\prime}\in\mathcal{L}\backslash\mathcal{L}_{d}$ from the
+full generative model. We can also integrate out the parameters $\mathbf{\phi_{1:K}}$
+and $\mathbf{\theta_{1:D}}$ as in \citet{Griffiths04}. Therefore,
+in our model the latent variables are $\mathbf{z}=\{z_{1:N_{d},d}\}_{d=1,\ldots,D},\mathbf{\eta}=\{\mathbf{\eta_{l}}\}_{l\in\mathcal{L}},\mathbf{a}=\{a_{l^{\prime},d}\}_{l^{\prime}\in\mathcal{L}_{d},d=1,\ldots,D},\mathbf{\beta},\alpha,\alpha^{\prime}$
+and $\gamma$.
+
+The posterior distribution we seek cannot be solved in closed form.
+This is often the case in evaluating posterior distributions of non-trivial
+probabilistic models. We will appeal to one of the common methods
+for approximating posterior distributions in the face of intractable
+normalization factors: Markov chain Monte Carlo (MCMC) sampling. Since
+in this model it is possible to sample from the conditional distributions
+for all variables we will use the Gibbs sampling algorithm to obtain
+an approximation to this posterior. %In particular, we will derive a collapsed Gibbs sampler.
 %Given an observation of a set of observed labels and a document, the posterior distribution for the latent variables is
-%
 %\begin{equation}
 %p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma\mid w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)\label{eq:Posterior}\end{equation}
 %\[
 %=\frac{p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}{\int_{\theta,\phi,a,\eta,\alpha,\alpha',\beta,\gamma}\sum_{z}p\left(\theta,z_{1:N},\phi_{1:K},\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}\]
-%
+
+
+
 \subsection{Gibbs Sampler}
 
-We derive a collapsed Gibbs sampler for this model by considering the individual conditional probability distributions for
-each of the unobserved variables.  We use the notation $\mathbf{z}_{-(n,d)}$ to denote $\mathbf{z} \backslash z_{n,d}$.
-%, marginalizing
+We derive a collapsed Gibbs sampler for this model by considering
+the individual conditional probability distributions for each of the
+unobserved variables. We use the notation $\mathbf{z}_{-(n,d)}$ to
+denote $\mathbf{z}\backslash z_{n,d}$. %, marginalizing
 %$\theta_{1:D}$ and $\phi_{1:K}$. For details regarding collapsing
 %in LDA models see \citet{Griffiths04}. 
-\subsubsection{$p\left(z_{n,d} \mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)$}
-%
-First we consider the conditional distribution of the assignment variable for each word $n = 1, \ldots, N_d$ in documents $d = 1, \ldots, D$.  The conditional distribution does not include $\theta_{1:D}$ and $\phi_{1:K}$ because they have been integrated out as in the collapsed Gibbs sampler \citep{Griffiths04}.  The conditional distribution of $z_{n,d}$ is proportional to the joint distribution of its markov blanket, explicitly this means
-%\begin{equation}
+
+
+
+\subsubsection{$p\left(z_{n,d}\mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)$}
+
+First we consider the conditional distribution of the assignment variable
+for each word $n=1,\ldots,N_{d}$ in documents $d=1,\ldots,D$. The
+conditional distribution does not include $\theta_{1:D}$ and $\phi_{1:K}$
+because they have been integrated out as in the collapsed Gibbs sampler
+\citep{Griffiths04}. The conditional distribution of $z_{n,d}$ is
+proportional to the joint distribution of its markov blanket. %\begin{equation}
 %p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\propto p\left(z_{d,n},\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\end{equation}
-%
-%
 %Due to the factorization of this model, we can rewrite the joint distribution
 %as the following:
-%
 \begin{equation}
-p\left(z_{n,d}\mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\propto \prod_{l \in \mathcal{L}_d}p\left(a_{l,d}\mid\mathbf{z},\eta_l \right)p\left(z_{n,d} \ | \ \mathbf{z_{-\left(n, d \right)}},\mathbf{a},\mathbf{w},\alpha,\beta,\gamma\right).
-\end{equation}
-%
-The product is only over the subset of labels $\mathcal{L}_d$ which have been observed for document $d$. By isolating terms that depend on $z_{n,d}$ and absorbing all other terms into a normalizing constant \citep{Griffiths04} we find 
-%
+p\left(z_{n,d}\mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\propto\prod_{l\in\mathcal{L}_{d}}p\left(a_{l,d}\mid\mathbf{z},\eta_{l}\right)p\left(z_{n,d}\ |\ \mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\alpha,\beta,\gamma\right).\end{equation}
+ The product is only over the subset of labels $\mathcal{L}_{d}$
+which have been observed for document $d$. By isolating terms that
+depend on $z_{n,d}$ and absorbing all other terms into a normalizing
+constant as in \citep{Griffiths04} we find \begin{eqnarray}
+\lefteqn{p\left(z_{n,d}=k\mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\beta,\gamma\right)\propto}\nonumber \\
+ & \hspace{2cm}\left(n_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\beta_{k}\right)\frac{n_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(n_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)}\prod_{l\in\mathcal{L}_{d}}\exp\left\{ -\frac{\left(\bar{z}_{d}^{T}\eta_{l}-a_{l,d}\right)^{2}}{2}\right\} .\label{eq:z-likelihood}\end{eqnarray}
+ Here, $n_{v,d}^{k,-\left(n,d^{\prime}\right)}$ represents the number
+of words of type $v$ in document $d$ assigned to topic $k$ omitting
+the $n^{{\rm th}}$ word of document $d^{\prime}$. The notation $(\cdot)$
+in the subscript means the count resulting from summing over the omitted
+subscript variable. Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\mathbf{\beta},\gamma\right)$
+can be sampled through enumeration. 
+
+
+\subsubsection{$p\left(\mathbf{\eta_{l}}\mid\mathbf{z},\mathbf{a},\sigma\right)$}
+
+We now consider the conditional distribution of the regression coefficients
+$\mathbf{\eta_{l}}$ for $l\in\mathcal{L}$. Given that $\mathbf{\eta_{l}}$
+and $a_{l,d}$ are distributed normally, the posterior distribution
+of $\mathbf{\eta_{l}}$ is normally distributed with mean $\hat{\mu}$
+and covariance $\hat{\mathbf{\Sigma}}$ such that % (probably not the right place for this) We evaluated the model over various values of $\sigma$ where $\sigma=\left\{ 0.01,0.1,0.25,1,2\right\} $.
 \begin{eqnarray}
-\lefteqn{p\left(z_{n,d} = k \mid\mathbf{z_{-\left(n,d\right)}},\mathbf{a},\mathbf{w}, \mathbf{\eta},\alpha,\beta,\gamma\right)\propto} \nonumber\\ 
-& \hspace{2cm}  \left(n_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\beta_{k}\right)\frac{n_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(n_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)} \prod_{l \in \mathcal{L}_d} \exp\left\{ -\frac{\left(\bar z_d^{T}\eta_{l}-a_{l,d} \right)^{2}}{2}\right\}\label{eq:z-likelihood}.
-\end{eqnarray}
-%
-Here, $n_{v,d}^{k,-\left(n, d^{\prime} \right)}$ represents the number of words of type $v$ in document $d$ assigned to topic $k$ omitting the $n^{\rm th}$ word of document $d^{\prime}$.  The notation $(\cdot)$ in the subscript means the count resulting from summing over the omitted subscript variable.  Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\eta},\alpha,\mathbf{\beta},\gamma\right)$ can be sampled through enumeration.
-%
-\subsubsection{$p\left(\mathbf{\eta_l}\mid\mathbf{z},\mathbf{a},\sigma\right)$}
-%
-We now consider the conditional distribution of the regression coefficients $\mathbf{eta_l}$ for $l \in \mathcal{L}$.  Given that $\mathbf{\eta_l}$ and $a_{l,d}$ are distributed normally, the posterior distribution of $\mathbf{\eta_l}$ is normally distributed with mean $\hat \mu$ and covariance $\hat{\mathbf{\Sigma}}$ such that
-% (probably not the right place for this) We evaluated the model over various values of $\sigma$ where $\sigma=\left\{ 0.01,0.1,0.25,1,2\right\} $.
-\begin{eqnarray}
-\hat{\mathbf{\Sigma}}^{-1} &=&\mathbf{I}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}} \\
-\hat \mu &=&\hat{\mathbf{\Sigma}}_{i}\left(-\mathbf{1}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\mathbf{a}_l\right). 
-\end{eqnarray}
-This is a standard result from normal Bayesian linear regression \citep{BishopPRML}.  Here, $\bar{\mathbf{Z}}$ is a $D \times K$ matrix such that row $d$ of $\mathbf{\bar Z}$ is $\bar z_d$, and $\mathbf{a}_l = [a_{l,1}, a_{l,2}, \ldots, a_{l,D}]^T$.
-%
-%
-%
+\hat{\mathbf{\Sigma}}^{-1} & = & \mathbf{I}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}}\\
+\hat{\mu} & = & \hat{\mathbf{\Sigma}}_{i}\left(\mathbf{1}\frac{\mu}{\sigma}+\bar{\mathbf{Z}}^{T}\mathbf{a}_{l}\right).\end{eqnarray}
+ This is a standard result from normal Bayesian linear regression
+\citep{BishopPRML}. Here, $\bar{\mathbf{Z}}$ is a $D\times K$ matrix
+such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{z}_{d}$, and $\mathbf{a}_{l}=[a_{l,1},a_{l,2},\ldots,a_{l,D}]^{T}$.
 %p\left(\eta_{i_{l,c}}\mid\mathbf{z}_{1:D},\mathbf{a};\sigma\right)=\mathcal{N}\left(\eta_{i_{l,c}}\mid\hat{\mu}_{i},\hat{\Sigma}_{i}\right)\end{equation}
-%
 %\[
-%
-%
-%
 %\[
+
+
+
 \subsubsection{$p\left(a_{l,d}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)$}
+
 %and \textmd{$p\left(y_{m,i}\mid\mathbf{a}\right)$}}
-%
-The auxiliary variables $a_{l,d}$ must be sampled for documents $d = 1, \ldots, D$ and $l \in \mathcal{L}_d$.  The conditional posterior distribution of $a_{l,d}$ is the truncated normal distribution
-%
-\begin{equation}
-p\left(a_{l,d,} \ | \ \mathbf{z},\mathbf{Y},\mathbf{\eta}\right) \propto \frac{1}{\sqrt{2\pi}} exp \left\{ \frac{-1}{2}\left(a_{l,d} - \mathbf{\eta_l}^T\mathbf{\bar z}_d\right) \right\} I \left(a_{l,d} y_{l,d} > 0\right).
-\end{equation}
-This conditional distribution can be sampled using an inverse CDF method.
-%
-%However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
+The auxiliary variables $a_{l,d}$ must be sampled for documents $d=1,\ldots,D$
+and $l\in\mathcal{L}_{d}$. The conditional posterior distribution
+of $a_{l,d}$ is the truncated normal distribution \begin{equation}
+p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)\propto\frac{1}{\sqrt{2\pi}}exp\left\{ -\frac{1}{2}\left(a_{l,d}-\mathbf{\eta_{l}}^{T}\mathbf{\bar{z}}_{d}\right)\right\} I\left(a_{l,d}y_{l,d}>0\right).\end{equation}
+ This conditional distribution can be sampled using an inverse CDF
+method. %However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
 %be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov
 %chain is ergodic. Suppose that $a_{d,i_{l,c}}$ is sampled to have
 %a negative value and $y_{d,i_{l,c}}$ is apporopriately sampled at
@@ -203,73 +329,74 @@ This conditional distribution can be sampled using an inverse CDF method.
 %$p\left(y_{d,i_{l,c}}=-1\mid a_{d,i_{l,c}}<0\right)=1$. Therefore,
 %to ensure ergodicity, $a_{d,i_{l,c}}$and $y_{d,i_{l,c}}$ must be
 %sampled from the joint distribution as shown in Equation \ref{eq:Probit-Joint}.
-%
 %\begin{equation}
 %p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\eta}\right)\propto p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)p\left(a_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y},\mathbf{\eta}\right)\end{equation}
-%
-%
 %\begin{equation}
 %p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)=\delta\left(sign\left(a_{d,i_{l,c}}\right)=y_{i_{l,c}}\right)p\left(y_{i_{l,c}}\mid y_{parents_{l,c}}\right)\prod_{i_{\hat{l},\hat{c}}\in children_{l,c}}p\left(y_{i_{\hat{l},\hat{c}}}\mid y_{i_{l,c}}\right)\end{equation}
-%
-%
 %\begin{equation}
 %p\left(y_{i_{l,c}}=-1\mid y_{parent{}_{l,c}}\right)=\begin{cases}
 %1, & y_{parent_{l,c}}=-1\\
 %0.5, & y_{parent_{l,c}}=1\end{cases}\end{equation}
-%
-%
 %\[
 %p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\eta}\right)\]
-%
-%
 %\begin{equation}
 %=\begin{cases}
 %\mathcal{N}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)p\left(y_{d,i_{l,c}}\mid a_{d,i_{l,c}}\right), & y_{parent_{l,c}}=1,\forall y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}},y_{i_{\hat{l},\hat{c}}}=-1\\
 %trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=-1\right), & y_{parent_{l,c}}=-1\\
 %trunc\mathcal{N}^{+}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=1\right), & \exists y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}}\setminus y_{i_{\hat{l},\hat{c}}}=1\\
 %0 & otherwise\end{cases}\end{equation}
-%
-%
 %where $\mathbf{Y}_{-\left(d,i_{l,c}\right)}$ denotes all of the response
 %variables excluding the response variable being sampled.
-%
-%
-\subsubsection{$p\left(\beta\mid\mathbf{z},\alpha',\alpha\right)$}
-%
-In our model, we place a hierarchical Dirichlet prior over topic assignments. This prior shares many features with the hierarchical Dirichlet process and inference over this distribution proceeds in a very similar fashion. This flexible distribution allows for an asymmetric prior over document level distributions over topics \citep{WallachMiMc2009}.
 
-Posterior inference is performed using the {}``direct assignment'' method of \citet{TehJorBea2006}.
-%
-\begin{equation}
-\beta\sim {\rm Dir}\left(m_{\left(\cdot\right),1},m_{\left(\cdot\right),2},\ldots,m_{\left(\cdot\right),K}\right)
-\end{equation}
-%
-\begin{equation}
-p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\beta\right)=\frac{\Gamma\left(\alpha\beta_{k}\right)}{\Gamma\left(\alpha\beta_{k}+n_{d,k}\right)}s\left(n_{d,k},m\right)\left(\alpha\beta_{k}\right)^{m}
-\end{equation}
-%
-%
-where $s\left(n,m\right)$ represents stirling numbers of the first kind.
-%
-\subsubsection{$p\left(\alpha\right)$, $p\left(\alpha' \right)$, $p\left(\gamma \right)$}
-%
-The hyperparameters $\alpha$, $\alpha^\prime$, and $\gamma$ are given broad ${\rm Gamma}(2, 1000)$ prior distributions and sampled via the Metropolis-Hastings algorithm.
-%
+
+
+\subsubsection{$p\left(\beta\mid\mathbf{z},\alpha^{\prime},\alpha\right)$}
+
+In our model, we place a hierarchical Dirichlet prior over topic assignments.
+This flexible distribution allows for an asymmetric prior over document
+level distributions over topics \citep{WallachMiMc2009}. This prior
+shares many features with the hierarchical Dirichlet process and inference
+over this distribution proceeds in a very similar fashion.
+
+Posterior inference is performed using the {}``direct assignment''
+method of \citet{TehJorBea2006}. \begin{equation}
+\beta\sim{\rm Dir}\left(m_{\left(\cdot\right),1}+\alpha^{\prime},m_{\left(\cdot\right),2}+\alpha^{\prime},\ldots,m_{\left(\cdot\right),K}+\alpha^{\prime}\right)\end{equation}
+ \begin{equation}
+p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\beta\right)=\frac{\Gamma\left(\alpha\beta_{k}\right)}{\Gamma\left(\alpha\beta_{k}+n_{d,k}\right)}s\left(n_{d,k},m\right)\left(\alpha\beta_{k}\right)^{m}\end{equation}
+ where $s\left(n,m\right)$ represents stirling numbers of the first
+kind. 
+
+
+\subsubsection{$p\left(\alpha\right)$, $p\left(\alpha'\right)$, $p\left(\gamma\right)$}
+
+The hyperparameters $\alpha$, $\alpha^{\prime}$, and $\gamma$ are
+given broad ${\rm Gamma}(1,1000)$ prior distributions and sampled
+via the Metropolis-Hastings algorithm. 
 
 
 \section{Experiments}
 
+\label{sec:experiments}
+
+%\begin{itemize}
+%\item Describe Data for both Experiments
+%\item Describe the Four different conditions
+%\item Describe how they are all evaluated, with and without hierarchy
+%\end{itemize}
 In the section we describe the application of HSLDA for prediction
 in two hierarchically structured domains. Firstly, we describe using
 discharge summaries to predict diagnoses, encoded as ICD-9 codes.
 Discharge summaries are documents that are authored by clinicians
-to summarize the course of someone who has been hospitalized. ICD-9
-codes are used mainly for billing purposes to indicate the conditions
-for which a patient was treated. Secondly, we describe using Amazon.com
-product descriptions to predict product categories.
+to summarize the course of a hospitalization. ICD-9 codes are used
+mainly for billing purposes to indicate the conditions for which a
+patient was treated. Secondly, we describe using Amazon.com product
+descriptions to predict product categories.
 
 
-\subsection{Diagnosis Prediction}
+\subsection{Data and Pre-Processing}
+
+
+\subsubsection{Diagnosis Prediction}
 
 Our data set was gathered from the clinical data warehouse of NewYork-Presbyterian
 Hospital. The data consisted of free-text discharge summaries and
@@ -300,16 +427,9 @@ inclusion in the vocabulary.
 
 For each hospitalization there are usually several ICD-9 codes assigned
 for billing purposes. These codes are known to be quite specific but
-not very sensitive {[}citation{]}. Regardless of that fact, this is
-one of the only sources for information on patient diagnoses aside
-from the free text. Aside from prediction, one of the goals is to
-compare the sensitivity of predictions from the HSLDA model in comparison
-to the codes in a case where a test closer to ground truth is available.
-For this we will compare whether predictions for the ICD-9 code associated
-with anemia are better predicted by HSLDA or by the ICD-9 codes. Anemia
-was chosen because hemoglobin values are readily available and the
-definition of anemia according the World Health Organization is approximately
-12.5, with a threshold of 12 for women and 13 for men {[}citation{]}.
+not very sensitive \citep{Birmetal2005}. Regardless of that fact,
+this is one of the only sources for information on patient diagnoses
+aside from the free text. %Aside from prediction, one of the goals is to compare the sensitivity of predictions from the HSLDA model in comparison to the codes in a case where a test closer to ground truth is available. For this we will compare whether predictions for the ICD-9 code associated with anemia are better predicted by HSLDA or by the ICD-9 codes. Anemia was chosen because hemoglobin values are readily available and the definition of anemia according the World Health Organization is approximately 12.5, with a threshold of 12 for women and 13 for men [citation].
 
 We worked within the guidelines of the Health Insurance Portability
 and Accountability Act (HIPAA), which protects patient privacy and
@@ -321,13 +441,13 @@ an individual. This study was approved by the Institutional Review
 Board.
 
 
-\subsection{Product Category Prediction}
+\subsubsection{Product Category Prediction}
 
 Data for these experiments were obtained partially from the Stanford
-Network Analysis Platform (SNAP) Amazon product metadata dataset and
-partially directly from the the Amazon.com website. The product ID's
-and categorizations were obtained from the SNAP dataset and the product
-descriptions were obtained directly from the website.
+Network Analysis Platform (SNAP) Amazon product metadata dataset \citep{SNAP}
+and partially directly from the the Amazon.com website \citep{AMAZON}.
+The product ID's and categorizations were obtained from the SNAP dataset
+and the product descriptions were obtained directly from the website.
 
 We were able to deduce the structure of the hierarchy for the Amazon.com
 products directly since all ancestors in the hierarchy were included
@@ -340,15 +460,36 @@ The vocabulary for this experiment was created by including the most
 frequent 30K words omitting stopwords.
 
 
-\subsection{Evaluation}
+\subsection{Comparison Models}
 
-The two main methods of evaluation for the model are prediction and
-topic quality. We compare model performance against 3 similar models
-to demonstrate that each component of the model is important for performance.
-Specifically, we evaluate models including independent regressors
-+ sLDA (hierarchical constraints on labels ignored), HSLDA fit by
-running LDA first then running tree-conditional regressions, and HSLDA
-fit with fixed random regression parameters.
+We applied HSLDA, along with three other closely related models, to
+the clinical data and the retail product data. Specifically, we evaluate
+models including sLDA with independent regressors (hierarchical constraints
+on labels ignored), HSLDA fit by performing LDA followed by tree-conditional
+regressions, and HSLDA fit with fixed random regression parameters.
+We will refer to the three comparison models as the sLDA model, the
+separate HSLDA model, and the random HSLDA model, respectively. These
+models were chosen as to highlight performance in absence of hierarchical
+constraints, the effect of the combined inference procedure, and regression
+performance attributable solely to the hierarchical constraints.
+
+We evaluated model performance for all three models with a range of
+values for $\mu$ ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\} )$,
+the mean prior parameter for regression parameters. 
+
+
+\subsection{Evaluation}
+%\begin{itemize}
+%\item Talk about hierarchy and no hierarchy
+%\item Make explicit calculation of sensitivity and 1-specificity
+%\end{itemize}
+For each dataset, a held out set of 1,000 documents and accompanying
+labels were used for evaluation. The two main methods of evaluation
+for the model are prediction and topic quality. To evaluate predictive
+performance for all comparison models equivalently, each model was
+evaluated with two methods. The first method augmented the observed
+labels in the held out set as well as their ancestors in the hierarchy
+as 
 
 
 \subsubsection{Prediction}
@@ -359,68 +500,13 @@ performance on held out data. A more ideal evaluation of performance
 would include a manually labeled hierarchy since it is well known
 that ICD-9 codes have a relatively low sensitivity.
 
-Performance was evaluated against $p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$. 
+Performance was evaluated against $p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$.
 
 
 \subsubsection{Topic Quality and Character}
 
 TBD
 
-
-\subsection{Related Work}
-
-\label{sec:related_work} Latent dirichlet allocation (LDA) is a generative
-probabilistic model of corpora that represents documents as a mixed
-membership bag-of-words. Also known as topic models, these models
-infer the latent structure, or topics, of documents in a corpus. Each
-document is represented as a collection of words, generated from a
-set of topic assignments (one for each word), where each topic assignment
-is drawn from a distribution over topics \citep{Blei2003}.
-
-Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
-an exponential family response variable. Although there are many models
-for making predictions based on free text, sLDA is unique in that
-it is a generative model, it represents documents as a mixed-membership,
-and constrains the inference of the latent structure of the documents
-by its predictability of the response variable. In other words, sLDA
-infers topics such that the model is capable of a high predictive
-likelihood for words in a document and the response variable associated
-with a document. This approach has been shown to outperform both LASSO
-(L1 regularized least squares regression) and LDA followed by least
-squares regression \citep{BleiMcAuliffe2008}.
-
-There have been many models that incorporate both latent models of
-text and some form of supervision {[}citations{]}. One set of models
-that are particularly relevant to HSLDA are Chang and Blei's {[}citation{]}
-hierarchical models for document networks. In that family of models,
-they encountered a similar scenario where the lack of a link did not
-truly indicate absence. In our model, the lack of a code in the hierarchy
-being assigned does not necessarily indicate absence. Therefore, as
-in the work of Chang and Blei, we employ regularization in the form
-of a negative prior on the regression parameters to provide a prior
-that indicates a bias towards being truly negative in the absence
-of a code.
-
-% move to related work?
-While there have been some attempts to automatically classify groups
-of patients as a potential preliminary step to ICD-9 code assignment
-\citep{Ruch2008,FreitasJunior2006,RibeiroNeto2001,Brown2006}, fully
-automatic assignment of ICD-9 codes to medical text became a more
-prevalent research topic only in the last few years. A subset of earlier
-work proposed various methods on small corpora, based on a few specific
-diseases \citep{Rao2003} but the most recent and promising work on
-the subject was inspired by the 2007 Medical NLP Challenge: {}``International
-Challenge: Classifying Clinical Free Text Using Natural Language Processing\textquotedblright{}
-(website). Most of the classification strategies included word matching
-and rule-based algorithms. \citep{Goldstein2007,Crammer2007,Farkas2008}.
-The data set given to the participants consisted only of documents
-that were 1-2 lines each and all of the documents were radiology reports
-- clearly limiting the scope of potential ICD-9 codes which could
-be assigned. The only paper which has attempted to work with a document
-scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.
-Lita proposed support vector machine and bayesian ridge regression
-methods to assign appropriate labels to the documents but did not
-utilize the ICD-9 hierarchy to leverage more comprehensive predictions.
 
 \section{Results}
 \label{sec:results}
