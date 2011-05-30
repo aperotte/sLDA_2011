@@ -431,6 +431,7 @@ not very sensitive \citep{Birmetal2005}. Regardless of that fact,
 this is one of the only sources for information on patient diagnoses
 aside from the free text. %Aside from prediction, one of the goals is to compare the sensitivity of predictions from the HSLDA model in comparison to the codes in a case where a test closer to ground truth is available. For this we will compare whether predictions for the ICD-9 code associated with anemia are better predicted by HSLDA or by the ICD-9 codes. Anemia was chosen because hemoglobin values are readily available and the definition of anemia according the World Health Organization is approximately 12.5, with a threshold of 12 for women and 13 for men [citation].
 
+
 We worked within the guidelines of the Health Insurance Portability
 and Accountability Act (HIPAA), which protects patient privacy and
 the security of potentially identifying medical material, known as
@@ -475,10 +476,11 @@ performance attributable solely to the hierarchical constraints.
 
 We evaluated model performance for all three models with a range of
 values for $\mu$ ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\} )$,
-the mean prior parameter for regression parameters. 
+the mean prior parameter for regression parameters.
 
 
 \subsection{Evaluation}
+
 %\begin{itemize}
 %\item Talk about hierarchy and no hierarchy
 %\item Make explicit calculation of sensitivity and 1-specificity
@@ -487,26 +489,17 @@ For each dataset, a held out set of 1,000 documents and accompanying
 labels were used for evaluation. The two main methods of evaluation
 for the model are prediction and topic quality. To evaluate predictive
 performance for all comparison models equivalently, each model was
-evaluated with two methods. The first method augmented the observed
-labels in the held out set as well as their ancestors in the hierarchy
-as 
-
-
-\subsubsection{Prediction}
+evaluated with two methods. The first evaluation method augments the
+observed labels in the held out set with their ancestors and considers
+all other non-existant labels to be negative. The second method ignores
+the ancestors of the observed labels in the held out set and considers
+all other non-existant labels to be negative. This uniform treatment
+of ancestors allows for a fair comparison of the models.
 
 The two measures for predictive performance used here include the
-true positive rate and the false positive rate. We evaluate model
-performance on held out data. A more ideal evaluation of performance
-would include a manually labeled hierarchy since it is well known
-that ICD-9 codes have a relatively low sensitivity.
-
-Performance was evaluated against $p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$.
-
-
-\subsubsection{Topic Quality and Character}
-
-TBD
-
+true positive rate and the false positive rate evaluated based on
+$p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$ for each label in each
+model.
 
 \section{Results}
 \label{sec:results}
