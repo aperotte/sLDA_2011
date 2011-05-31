@@ -71,8 +71,8 @@ where $\mathbf{I}_{K}$ is the $K$ dimensional identity matrix
 
 \begin{itemize}
 \item Draw $a_{l,d}\mid \bar{\mathbf{z}}_d,\boldsymbol\beta_{l},y_{\mathrm{pa}(l),d}\sim\begin{cases}
-\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\beta_{l},1), & y_{\mathrm{pa}(l)}=1\\
-\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\beta_{l},1)\mathbb{I}(a_{l,d}<0), & y_{\mathrm{pa}(l)}=-1\end{cases}$ \\where $\bar{z}_{d}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \boldsymbol\beta_l \sim \mathcal{N} \left(\bar z_d^{T} \boldsymbol\beta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
+\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\eta_{l},1), & y_{\mathrm{pa}(l)}=1\\
+\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\eta_{l},1)\mathbb{I}(a_{l,d}<0), & y_{\mathrm{pa}(l)}=-1\end{cases}$ \\where $\bar{z}_{d}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \boldsymbol\beta_l \sim \mathcal{N} \left(\bar z_d^{T} \boldsymbol\beta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
  
 \item Set the response variable \[
 y_{l,d}\mid a_{l,d}=\begin{cases}
