@@ -1,8 +1,11 @@
 
-\label{sec:model} We define here a hierarchically supervised LDA
-model. Although we will focus on document modeling in our description
-and experiments, this model applies equally well to other collections
-of discrete data with hierarchically constrained labels. 
+\label{sec:model} 
+%We define here a hierarchically supervised LDA
+%model. Although we will focus on document modeling in our description
+%and experiments, this model applies equally well to other collections
+%of discrete data with hierarchically constrained labels. 
+
+HSLDA is a model for hierarchically, multiply labeled, bag-of-words data.  We will refer to the grouped bag-of-word data as a document.  Let $w_{n,d} \in \Sigma$ be the $n$th observation in the $d$th document.  Let $\mathbf{w}_d = \{w_{1,d},\ldots,w_{1,N_d}\}$ be the ordered set of $N_d$ observations in document $d$.  Let there be $D$ such documents and let the size of the vocabulary be $V=|\Sigma|$.  
 
 We assume a pre-specified set of labels $\mathcal{L}=\left\{ l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $.
 Each document is assigned a response of either -1 or 1 for at least
