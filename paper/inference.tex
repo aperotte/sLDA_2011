@@ -94,7 +94,7 @@ such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{\mathbf{z}}_{d}$, and $\mathbf{
 The auxiliary variables $a_{l,d}$ must be sampled for documents $d=1,\ldots,D$
 and $l\in\mathcal{L}_{d}$. The conditional posterior distribution
 of $a_{l,d}$ is the truncated normal distribution \begin{equation}
-p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} I\left(a_{l,d}y_{l,d}>0\right).\end{equation}
+p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right).\end{equation}
  This conditional distribution can be sampled using an inverse CDF
 method. %However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
 %be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov
