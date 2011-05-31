@@ -1,0 +1,52 @@
+Latent dirichlet allocation (LDA) is a generative
+probabilistic model of corpora that represents documents as a mixed
+membership bag-of-words. Also known as topic models, these models
+infer the latent structure, or topics, of documents in a corpus. Each
+document is represented as a collection of words, generated from a
+set of topic assignments (one for each word), where each topic assignment
+is drawn from a distribution over topics \citep{Blei2003}.
+
+Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
+an exponential family response variable. Although there are many models
+for making predictions based on free text, sLDA is unique in that
+it is a generative model, it represents documents as a mixed-membership,
+and constrains the inference of the latent structure of the documents
+by its predictability of the response variable. In other words, sLDA
+infers topics such that the model is capable of a high predictive
+likelihood for words in a document and the response variable associated
+with a document. This approach has been shown to outperform both LASSO
+(L1 regularized least squares regression) and LDA followed by least
+squares regression \citep{BleiMcAuliffe2008}.
+
+There have been many models that incorporate both latent models of
+text and some form of supervision \citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}.
+One set of models that are particularly relevant to HSLDA are Chang
+and Blei's hierarchical models for document networks (Relational Topic
+Models). In that family of models, they encountered a similar scenario
+where the lack of a link did not truly indicate absence. In hierarchically
+labeled data, negative labels are uncommon and the lack of a label
+in the hierarchy is not equivalent to a negative label. Therefore,
+as in the work of Chang and Blei, we employ regularization to account
+for the lack of negative labels. This will be discussed further in
+\ref{sec:model}.
+
+% move to related work?
+%While there have been some attempts to automatically classify groups
+%of patients as a potential preliminary step to ICD-9 code assignment
+%\citep{Ruch2008,FreitasJunior2006,RibeiroNeto2001,Brown2006}, fully
+%automatic assignment of ICD-9 codes to medical text became a more
+%prevalent research topic only in the last few years. A subset of earlier
+%work proposed various methods on small corpora, based on a few specific
+%diseases \citep{Rao2003} but the most recent and promising work on
+%the subject was inspired by the 2007 Medical NLP Challenge: {}``International
+%Challenge: Classifying Clinical Free Text Using Natural Language Processing\textquotedblright{}
+%(website). Most of the classification strategies included word matching
+%and rule-based algorithms. \citep{Goldstein2007,Crammer2007,Farkas2008}.
+%The data set given to the participants consisted only of documents
+%that were 1-2 lines each and all of the documents were radiology reports
+%- clearly limiting the scope of potential ICD-9 codes which could
+%be assigned. The only paper which has attempted to work with a document
+%scope as large as ours was the 2008 Lita et al publication \citep{Lita2008}.
+%Lita proposed support vector machine and bayesian ridge regression
+%methods to assign appropriate labels to the documents but did not
+%utilize the ICD-9 hierarchy to leverage more comprehensive predictions.

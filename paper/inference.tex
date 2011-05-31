@@ -9,8 +9,8 @@ every document. We will define $\mathcal{L}_{d}$ to be the subset
 of labels which have been observed for document $d$. It is straightforward
 to integrate out the variables $a_{l^{\prime},d}$ and $y_{l^{\prime},d}$
 for $l^{\prime}\in\mathcal{L}\backslash\mathcal{L}_{d}$ from the
-full generative model. We can also integrate out the parameters $\mathbf{\phi_{1:K}}$
-and $\mathbf{\theta_{1:D}}$ as in \citet{Griffiths04}. Therefore,
+full generative model. We can also integrate out the parameters $\boldsymbol{\phi}_{1:K}$
+and $\boldsymbol{\theta}_{1:D}$ as in \citet{Griffiths04}. Therefore,
 in our model the latent variables are $\mathbf{z}=\{z_{1:N_{d},d}\}_{d=1,\ldots,D},\boldsymbol\eta=\{\boldsymbol\eta_{l}\}_{l\in\mathcal{L}},\mathbf{a}=\{a_{l^{\prime},d}\}_{l^{\prime}\in\mathcal{L}_{d},d=1,\ldots,D},\boldsymbol\beta,\alpha,\alpha^{\prime}$
 and $\gamma$.
 
@@ -60,12 +60,12 @@ depend on $z_{n,d}$ and absorbing all other terms into a normalizing
 constant as in \citep{Griffiths04} we find 
 \begin{eqnarray}
 \lefteqn{p\left(z_{n,d}=k\mid\mathbf{z}_{-\left(n,d\right)},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\propto}\nonumber \\
- & \hspace{2cm}\left(n_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\boldsymbol\beta_{k}\right)\frac{n_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(n_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)}\prod_{l\in\mathcal{L}_{d}}\exp\left\{ -\frac{\left(\bar{\mathbf{z}}_{d}^{T}\boldsymbol\eta_{l}-a_{l,d}\right)^{2}}{2}\right\} .\label{eq:z-likelihood}\end{eqnarray}
- Here, $n_{v,d}^{k,-\left(n,d^{\prime}\right)}$ represents the number
+ & \hspace{2cm}\left(c_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\boldsymbol\beta_{k}\right)\frac{c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(c_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)}\prod_{l\in\mathcal{L}_{d}}\exp\left\{ -\frac{\left(\bar{\mathbf{z}}_{d}^{T}\boldsymbol\eta_{l}-a_{l,d}\right)^{2}}{2}\right\} .\label{eq:z-likelihood}\end{eqnarray}
+ Here, $c_{v,d}^{k,-\left(n,d^{\prime}\right)}$ represents the number
 of words of type $v$ in document $d$ assigned to topic $k$ omitting
 the $n^{{\rm th}}$ word of document $d^{\prime}$. The notation $(\cdot)$
 in the subscript means the count resulting from summing over the omitted
-subscript variable. Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)$
+subscript variable. Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z}_{-\left(d,n\right)},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)$
 can be sampled through enumeration. 
 
 
