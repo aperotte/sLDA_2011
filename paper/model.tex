@@ -1,0 +1,101 @@
+
+\label{sec:model} We define here a hierarchically supervised LDA
+model. Although we will focus on document modeling in our description
+and experiments, this model applies equally well to other collections
+of discrete data with hierarchically constrained labels. 
+
+We assume a pre-specified set of labels $\mathcal{L}=\left\{ l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $.
+Each document is assigned a response of either -1 or 1 for at least
+one, but potentially many labels in $\mathcal{L}$. The label, $l$,
+for a document, $d$, will be used interchangeably to refer to the
+observed response of document $d$ to label $l$. The label set is
+assumed to be structured as an {}``is-a'' hieararchy.
+To understand this, consider a hierarchy where label $l_{1}$ is a
+parent of label $l_{2}$. If document $d$ has a positive response
+to label $l_{2}$ then it will also have a positive response to label
+$l_{1}$. Conversely, if document $d$ has a negative response to
+label $l_{1}$ then it will also has a negative response to $l_{2}$.
+To capture this hierarchical structure we model the labeling of documents
+using a generative cascade of conditional probit regression models.
+
+% generalize to arbitrary codes (not just ICD-9's
+%
+\begin{figure}[h]
+%tbp] %  figure placement: here, top, bottom, or page
+ \centering \includegraphics[scale=0.3]{Graphical_Model2} \caption{adapted sLDA model}
+
+
+\label{fig:example} 
+\end{figure}
+
+
+The fixed parameters of the model are the number of topics $K$, the
+number of unique words in the vocabulary $V$, the number of documents
+$D$, as well as the mean, $\mu$, and the standard deviation, $\sigma$,
+used in a normal prior distribution. The hyper-parameters $\alpha^{\prime}$,
+$\alpha$, and $\gamma$ are weight parameters for Dirichlet prior
+distributions. We will denote the $K$-dimensional Dirichlet distribution
+as Dir$_{K}(\cdot)$ and the $K$ dimensional normal distribution
+as $\mathcal{N}_{K}(\cdot)$.
+
+We will now describe the stochastic generative process which defines
+our model. The graphical model is show in Figure~\ref{fig:example}.
+%Given the number of topics, K, and broad gamma priors on hyperparameters,
+%the generative process is as follows: 
+
+\begin{enumerate}
+\item For each topic $k=1,\ldots,K$: 
+
+\begin{itemize}
+\item Draw a distribution over words $\mathbf{\phi_{k}}\sim{\rm Dir}_{V}\left(\gamma\mathbf{1}\right)$,
+where $\mathbf{1}$ is a vector of ones of length $V$ 
+\end{itemize}
+\item For each label $l\in\mathcal{L}$: 
+
+\begin{itemize}
+\item Draw the regression coefficients $\mathbf{\eta_{l}}\mid\sigma\sim\mathcal{N}_{K}\left(\mu I_{K},\sigma I_{K}\right)$,
+where $I_{K}$ is the $K$ dimensional identity matrix 
+\end{itemize}
+\item Draw a prior over topic proportions $\mathbf{\beta}\mid\alpha'\sim{\rm Dir}_{K}\left(\alpha^{\prime}\mathbf{1}\right)$
+\item For each document $d=1,\ldots,D$: 
+
+\begin{itemize}
+\item Draw topic proportions $\mathbf{\theta_{d}}\mid\beta,\alpha\sim{\rm Dir}_{K}\left(\alpha\mathbf{\beta}\right)$ 
+\item For $n=1,\ldots,N_{d}$: 
+
+\begin{itemize}
+\item Draw topic assignment $z_{n,d}\mid\mathbf{\theta_{d}}\sim{\rm Multinomial}\left(\mathbf{\theta_{d}}\right)$ 
+\item Draw word $w_{n,d}\mid z_{n,d},\mathbf{\beta_{1:K}}\sim{\rm Multinomial}\left(\mathbf{\beta_{z_{n,d}}}\right)$ 
+\end{itemize}
+\item For each label $l\in\mathcal{L}$: 
+
+\begin{itemize}
+\item Draw $a_{l,d}\mid z_{1:N_{d},d},\eta_{l},y_{parent(l),d}\sim\begin{cases}
+\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right), & y_{parent(l)}=1\\
+\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right)I\left(a_{l,d}<0\right), & y_{parent(l)}=-1\end{cases}$ where $\bar{z_{d}}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
+ 
+\item Set the response variable \[
+y_{l,d}\mid a_{l,d}=\begin{cases}
+\ \ \ 1 & \text{if \ensuremath{a_{l,d}>0}and \ensuremath{y_{{\rm parent}(l),d}=1}}\\
+-1 & \text{otherwise}\end{cases}\]
+ 
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+This type of generative model is known as a probit regression model.
+Probit regression models are a type of discriminative probabilistic
+model similar to logistic regression. However, instead of using the
+logistic sigmoid as the link function, the probit regression model
+uses the CDF for a standard normal distribution - the inverse of which
+is known as the probit. In this case, the regression is conditional
+on the parents according to the constraints of the labeling hierarchy.
+The latent variables $a_{l,d}$ utilized here are also known as an
+auxiliary variables because the are introduced to make exact Gibbs
+sampling possible and are not of primary interest.
+
+Given that negative labels are uncommon and that the absence of a
+label is not equivalent to a negative label, we apply an informative
+prior to the regression parameters, $\mathbf{\eta}_{\mathcal{L}}$,
+in the form of a negative prior that encodes a bias towards being
+truly negative in the absence of a label.
+
