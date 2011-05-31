@@ -1,0 +1,126 @@
+
+%\begin{itemize}
+%\item Describe Data for both Experiments
+%\item Describe the Four different conditions
+%\item Describe how they are all evaluated, with and without hierarchy
+%\end{itemize}
+To examine HSLDA empirically, we evaluated predictive performance in
+two domains. Firstly, we modeled 
+
+In the section we describe the application of HSLDA for prediction
+in two hierarchically structured domains. Firstly, we describe using
+discharge summaries to predict diagnoses, encoded as ICD-9 codes.
+Discharge summaries are documents that are authored by clinicians
+to summarize the course of a hospitalization. ICD-9 codes are used
+mainly for billing purposes to indicate the conditions for which a
+patient was treated. Secondly, we describe using Amazon.com product
+descriptions to predict product categories.
+
+
+\subsection{Data and Pre-Processing}
+
+
+\subsubsection{Diagnosis Prediction}
+
+Our data set was gathered from the clinical data warehouse of NewYork-Presbyterian
+Hospital. The data consisted of free-text discharge summaries and
+their respective ICD-9 codes. A discharge summary is a clinical report
+prepared by a physician or other health professional at the conclusion
+of a hospital stay or series of treatments. The note outlines the
+patient's chief complaint, diagnostic findings, therapy administered,
+patient's response to the chosen therapy, the treatment plan and the
+recommendations upon discharge. The ICD-9 codes used to structure
+the discharge summary data are part of a controlled terminology which
+is the international standard diagnostic classification for epidemiological,
+health management, and clinical purposes. The ICD-9 codes are organized
+in a rooted-tree structure, with each edge representing an is-a relationship
+between parent and child, such that the parent diagnosis subsumes
+the child diagnosis. For example, the code representing {}``Pneumonia
+due to adenovirus'' is a child of the code representing {}``Viral
+pneumonia'' where the former is a type of the latter. In the hospital,
+ICD-9 codes are generated manually by trained medical coders, who
+review all the information in the discharge summary.
+
+The text of the discharge summaries were pre-processed such that each
+document would be represented as counts over a 10,000 word vocabulary.
+The Natural Language Toolkit was used to tokenize the text. A vocabulary
+was identified by first sorting terms based on a global term frequency-inverse
+document frequency measure. The top 10,000 words which were not identifying
+in some way (a name, place, or identifying number) were selected for
+inclusion in the vocabulary.
+
+For each hospitalization there are usually several ICD-9 codes assigned
+for billing purposes. These codes are known to be quite specific but
+not very sensitive \citep{Birmetal2005}. Regardless of that fact,
+this is one of the only sources for information on patient diagnoses
+aside from the free text. %Aside from prediction, one of the goals is to compare the sensitivity of predictions from the HSLDA model in comparison to the codes in a case where a test closer to ground truth is available. For this we will compare whether predictions for the ICD-9 code associated with anemia are better predicted by HSLDA or by the ICD-9 codes. Anemia was chosen because hemoglobin values are readily available and the definition of anemia according the World Health Organization is approximately 12.5, with a threshold of 12 for women and 13 for men [citation].
+
+
+We worked within the guidelines of the Health Insurance Portability
+and Accountability Act (HIPAA), which protects patient privacy and
+the security of potentially identifying medical material, known as
+personal health information (PHI). HIPAA covers any information within
+a medical record that was created, used, or disclosed during the course
+of providing a health care service and that can be used to identify
+an individual. This study was approved by the Institutional Review
+Board.
+
+
+\subsubsection{Product Category Prediction}
+
+Data for these experiments were obtained partially from the Stanford
+Network Analysis Platform (SNAP) Amazon product metadata dataset \citep{SNAP}
+and partially directly from the the Amazon.com website \citep{AMAZON}.
+The product ID's and categorizations were obtained from the SNAP dataset
+and the product descriptions were obtained directly from the website.
+
+We were able to deduce the structure of the hierarchy for the Amazon.com
+products directly since all ancestors in the hierarchy were included
+with each category label. For example, {}``DVD / Genres / Science
+Fiction \& Fantasy / Classic Sci-Fi'' is a single product category
+for the DVD, {}``The Time Machine''. Each product was labeled with
+multiple categories.
+
+The vocabulary for this experiment was created by including the most
+frequent 30K words omitting stopwords.
+
+
+\subsection{Comparison Models}
+
+We applied HSLDA, along with three other closely related models, to
+the clinical data and the retail product data. Specifically, we evaluate
+models including sLDA with independent regressors (hierarchical constraints
+on labels ignored), HSLDA fit by performing LDA followed by tree-conditional
+regressions, and HSLDA fit with fixed random regression parameters.
+We will refer to the three comparison models as the sLDA model, the
+separate HSLDA model, and the random HSLDA model, respectively. These
+models were chosen as to highlight performance in absence of hierarchical
+constraints, the effect of the combined inference procedure, and regression
+performance attributable solely to the hierarchical constraints.
+
+We evaluated model performance for all three models with a range of
+values for $\mu$ ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\} )$,
+the mean prior parameter for regression parameters.
+
+
+\subsection{Evaluation}
+
+%\begin{itemize}
+%\item Talk about hierarchy and no hierarchy
+%\item Make explicit calculation of sensitivity and 1-specificity
+%\end{itemize}
+For each dataset, a held out set of 1,000 documents and accompanying
+labels were used for evaluation. The two main methods of evaluation
+for the model are prediction and topic quality. To evaluate predictive
+performance for all comparison models equivalently, each model was
+evaluated with two methods. The first evaluation method augments the
+observed labels in the held out set with their ancestors and considers
+all other non-existant labels to be negative. The second method ignores
+the ancestors of the observed labels in the held out set and considers
+all other non-existant labels to be negative. This uniform treatment
+of ancestors allows for a fair comparison of the models.
+
+The two measures for predictive performance used here include the
+true positive rate and the false positive rate evaluated based on
+$p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$ for each label in each
+model.
