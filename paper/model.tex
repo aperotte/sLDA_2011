@@ -5,21 +5,24 @@
 %and experiments, this model applies equally well to other collections
 %of discrete data with hierarchically constrained labels. 
 
-HSLDA is a model for hierarchically, multiply labeled, bag-of-words data.  We will refer to the grouped bag-of-word data as a document.  Let $w_{n,d} \in \Sigma$ be the $n$th observation in the $d$th document.  Let $\mathbf{w}_d = \{w_{1,d},\ldots,w_{1,N_d}\}$ be the ordered set of $N_d$ observations in document $d$.  Let there be $D$ such documents and let the size of the vocabulary be $V=|\Sigma|$.  
-
-We assume a pre-specified set of labels $\mathcal{L}=\left\{ l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $.
-Each document is assigned a response of either -1 or 1 for at least
-one, but potentially many labels in $\mathcal{L}$. The label, $l$,
-for a document, $d$, will be used interchangeably to refer to the
-observed response of document $d$ to label $l$. The label set is
-assumed to be structured as an {}``is-a'' hieararchy.
-To understand this, consider a hierarchy where label $l_{1}$ is a
-parent of label $l_{2}$. If document $d$ has a positive response
+HSLDA is a model for hierarchically, multiply-labeled, bag-of-words data.  We will refer to individual groups of bag-of-word data as documents.  Let $w_{n,d} \in \Sigma$ be the $n$th observation in the $d$th document.  Let $\mathbf{w}_d = \{w_{1,d},\ldots,w_{1,N_d}\}$ be the  set of $N_d$ observations in document $d$.  Let there be $D$ such documents and let the size of the vocabulary be $V=|\Sigma|$.  Let the set of labels be $\mathcal{L}=\left\{ l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $. Each label $l \in \mathcal{L}$ has a parent $\mathrm{pa}(l) \in \mathcal{L}$ also in the set of labels.
+ We will for exposition purposes assume that this label set has hard ``is-a'' parent-child constraints (explained later), although this assumption can be relaxed at the cost of more complicated inference.  Such a label hierarchy forms a multiply rooted tree.  Without loss of generality we will consider a trees with a single root $r\in\mathcal{L}$.  Each document has a response $y_{l,d} \in \{-1,1\}$ to every label which indicates whether the label applies to document $d$ or not.  
+ 
+ 
+The is-a hierarchical constraint is a hard constraint that 
+document $d$ has a positive response
 to label $l_{2}$ then it will also have a positive response to label
 $l_{1}$. Conversely, if document $d$ has a negative response to
 label $l_{1}$ then it will also has a negative response to $l_{2}$.
 To capture this hierarchical structure we model the labeling of documents
 using a generative cascade of conditional probit regression models.
+
+
+Each document is assigned a response of either -1 or 1 for at least
+one, but potentially many labels in $\mathcal{L}$. 
+The label, $l$,
+for a document, $d$, will be used interchangeably to refer to the
+observed response of document $d$ to label $l$.
 
 % generalize to arbitrary codes (not just ICD-9's
 %
