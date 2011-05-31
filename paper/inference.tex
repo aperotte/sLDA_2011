@@ -74,11 +74,11 @@ can be sampled through enumeration.
 We now consider the conditional distribution of the regression coefficients
 $\boldsymbol\eta_{l}$ for $l\in\mathcal{L}$. Given that $\boldsymbol\eta_{l}$
 and $a_{l,d}$ are distributed normally, the posterior distribution
-of $\boldsymbol\eta_{l}$ is normally distributed with mean $\hat{\mu}$
+of $\boldsymbol\eta_{l}$ is normally distributed with mean $\hat{\boldsymbol\mu}_{l}$
 and covariance $\hat{\mathbf{\Sigma}}$ such that % (probably not the right place for this) We evaluated the model over various values of $\sigma$ where $\sigma=\left\{ 0.01,0.1,0.25,1,2\right\} $.
 \begin{eqnarray}
 \hat{\mathbf{\Sigma}}^{-1} & = & \mathbf{I}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}}\\
-\hat{\mu} & = & \hat{\mathbf{\Sigma}}_{i}\left(\mathbf{1}\frac{\mu}{\sigma}+\bar{\mathbf{Z}}^{T}\mathbf{a}_{l}\right).\end{eqnarray}
+\hat{\boldsymbol\mu}_{l} & = & \hat{\mathbf{\Sigma}}_{i}\left(\mathbf{1}\frac{\mu}{\sigma}+\bar{\mathbf{Z}}^{T}\mathbf{a}_{l}\right).\end{eqnarray}
  This is a standard result from normal Bayesian linear regression
 \citep{BishopPRML}. Here, $\bar{\mathbf{Z}}$ is a $D\times K$ matrix
 such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{\mathbf{z}}_{d}$, and $\mathbf{a}_{l}=[a_{l,1},a_{l,2},\ldots,a_{l,D}]^{T}$.
