@@ -31,7 +31,7 @@ using a generative cascade of conditional probit regression models.
 
 The fixed parameters of the model are the number of topics $K$, the
 number of unique words in the vocabulary $V$, the number of documents
-$D$, as well as the mean, $\mu$, and the standard deviation, $\sigma$,
+$D$, as well as the mean, $\boldsymbol\mu$, and the standard deviation, $\sigma$,
 used in a normal prior distribution. The hyper-parameters $\alpha^{\prime}$,
 $\alpha$, and $\gamma$ are weight parameters for Dirichlet prior
 distributions. We will denote the $K$-dimensional Dirichlet distribution
@@ -44,39 +44,39 @@ our model. The graphical model is show in Figure~\ref{fig:example}.
 %the generative process is as follows: 
 
 \begin{enumerate}
-\item For each topic $k=1,\ldots,K$: 
+\item For each topic $k=1,\ldots,K$
 
 \begin{itemize}
-\item Draw a distribution over words $\mathbf{\phi_{k}}\sim{\rm Dir}_{V}\left(\gamma\mathbf{1}\right)$,
-where $\mathbf{1}$ is a vector of ones of length $V$ 
+\item Draw a distribution over words $\boldsymbol\phi_{k}\sim{\rm Dir}_{V}(\gamma\mathbf{1}_V)$%,
+%where $\mathbf{1}$ is a vector of ones of length $V$ 
+\end{itemize}
+\item For each label $l\in\mathcal{L}$
+
+\begin{itemize}
+\item Draw a regression coefficient $\boldsymbol\eta_{l}\mid\mu,\sigma\sim\mathcal{N}_{K}(\mu \mathbf{1}_K,\sigma \mathbf{I}_{K})$,
+where $\mathbf{I}_{K}$ is the $K$ dimensional identity matrix 
+\end{itemize}
+\item Draw the global topic proportions $\boldsymbol\beta\mid\alpha'\sim{\rm Dir}_{K}\left(\alpha^{\prime}\mathbf{1}_K\right)$
+\item For each document $d=1,\ldots,D$
+
+\begin{itemize}
+\item Draw topic proportions $\boldsymbol\theta_d\mid\boldsymbol\beta,\alpha\sim{\rm Dir}_{K}\left(\alpha\boldsymbol\beta\right)$ 
+\item For $n=1,\ldots,N_{d}$
+
+\begin{itemize}
+\item Draw topic assignment $z_{n,d}\mid\boldsymbol\theta_d\sim{\rm Multinomial}(\boldsymbol\theta_d)$ 
+\item Draw word $w_{n,d}\mid z_{n,d},\boldsymbol\beta_{1:K}\sim{\rm Multinomial}(\boldsymbol\beta_{z_{n,d}})$ 
 \end{itemize}
 \item For each label $l\in\mathcal{L}$: 
 
 \begin{itemize}
-\item Draw the regression coefficients $\mathbf{\eta_{l}}\mid\sigma\sim\mathcal{N}_{K}\left(\mu I_{K},\sigma I_{K}\right)$,
-where $I_{K}$ is the $K$ dimensional identity matrix 
-\end{itemize}
-\item Draw a prior over topic proportions $\mathbf{\beta}\mid\alpha'\sim{\rm Dir}_{K}\left(\alpha^{\prime}\mathbf{1}\right)$
-\item For each document $d=1,\ldots,D$: 
-
-\begin{itemize}
-\item Draw topic proportions $\mathbf{\theta_{d}}\mid\beta,\alpha\sim{\rm Dir}_{K}\left(\alpha\mathbf{\beta}\right)$ 
-\item For $n=1,\ldots,N_{d}$: 
-
-\begin{itemize}
-\item Draw topic assignment $z_{n,d}\mid\mathbf{\theta_{d}}\sim{\rm Multinomial}\left(\mathbf{\theta_{d}}\right)$ 
-\item Draw word $w_{n,d}\mid z_{n,d},\mathbf{\beta_{1:K}}\sim{\rm Multinomial}\left(\mathbf{\beta_{z_{n,d}}}\right)$ 
-\end{itemize}
-\item For each label $l\in\mathcal{L}$: 
-
-\begin{itemize}
-\item Draw $a_{l,d}\mid z_{1:N_{d},d},\eta_{l},y_{parent(l),d}\sim\begin{cases}
-\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right), & y_{parent(l)}=1\\
-\mathcal{N}\left(\bar{z}^{T}\eta_{l},1\right)I\left(a_{l,d}<0\right), & y_{parent(l)}=-1\end{cases}$ where $\bar{z_{d}}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \eta_l \sim \mathcal{N} \left(\bar z_d^{T} \eta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
+\item Draw $a_{l,d}\mid \bar{\mathbf{z}}_d,\boldsymbol\beta_{l},y_{\mathrm{pa}(l),d}\sim\begin{cases}
+\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\beta_{l},1), & y_{\mathrm{pa}(l)}=1\\
+\mathcal{N}(\bar{\mathbf{z}}^{T}\boldsymbol\beta_{l},1)\mathbb{I}(a_{l,d}<0), & y_{\mathrm{pa}(l)}=-1\end{cases}$ \\where $\bar{z}_{d}=N_{d}^{-1}\sum_{n=1}^{N}z_{n,d}$ %\item Draw $a_{l, d} \ | \ z_{1:N_d,d}, \boldsymbol\beta_l \sim \mathcal{N} \left(\bar z_d^{T} \boldsymbol\beta_{l},1\right)$, where $\bar z_d=N_d^{-1}\sum_{n=1}^{N_d}z_{n,d}$ 
  
 \item Set the response variable \[
 y_{l,d}\mid a_{l,d}=\begin{cases}
-\ \ \ 1 & \text{if \ensuremath{a_{l,d}>0}and \ensuremath{y_{{\rm parent}(l),d}=1}}\\
+\ \ \ 1 & \text{if \ensuremath{a_{l,d}>0} and \ensuremath{y_{{\rm \mathrm{pa}}(l),d}=1}}\\
 -1 & \text{otherwise}\end{cases}\]
  
 \end{itemize}
@@ -95,7 +95,7 @@ sampling possible and are not of primary interest.
 
 Given that negative labels are uncommon and that the absence of a
 label is not equivalent to a negative label, we apply an informative
-prior to the regression parameters, $\mathbf{\eta}_{\mathcal{L}}$,
+prior to the regression parameters, $\mathbf{\boldsymbol\beta}_{\mathcal{L}}$,
 in the form of a negative prior that encodes a bias towards being
 truly negative in the absence of a label.
 
