@@ -14,9 +14,15 @@ improing word likelihood.  This approach has been shown to outperform both LASSO
 (L1 regularized least squares regression) and LDA followed by least
 squares regression \citep{BleiMcAuliffe2008}.
 
-Other models that incorporate both and some form of supervision include
-LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, models applied to 
+Other models that incorporate LDA and supervision include
+LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, and other models applied to 
 computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}. 
+These models, however, do not implement contraints on the label space.
+
+In other work, researchers have classified documents in a hierarchy with naive Bayes classifiers
+and support vector machines. Most of this work has been demonstrated on relatively
+small datasets, small label spaces and has focused on single label classification without
+a model of documents such as LDA\citep{mccallum99building,Dumais2000HCW,Kollerilprints291,Chakrabarti1998SFS}.
 
 %One set of models that are particularly relevant to HSLDA are Chang
 %and Blei's hierarchical models for document networks (Relational Topic
@@ -26,7 +32,6 @@ computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}.
 %in the hierarchy is not equivalent to a negative label. Therefore,
 %as in the work of Chang and Blei, we employ regularization to account
 %for the lack of negative labels. This will be discussed further in
-\ref{sec:model}.
 
 % move to related work?
 %While there have been some attempts to automatically classify groups

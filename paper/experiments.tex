@@ -14,7 +14,7 @@ categories from Amazon.com product descriptions.
 
 \subsection{Data and Pre-Processing}
 
-\subsubsection{Diagnosis Prediction}
+\subsubsection{Discharge Summaries and ICD-9 Codes}
 
 Discharge summaries are authored by clinicians to summarize the course of a
 hospitalized patient. The summaries typically contain a record of the patient
@@ -69,14 +69,24 @@ Insurance Portability and Accountability Act) privacy guidelines.
 %this is one of the only sources for information on patient diagnoses
 %aside from the free text. %Aside from prediction, one of the goals is to compare the sensitivity of predictions from the HSLDA model in comparison to the codes in a case where a test closer to ground truth is available. For this we will compare whether predictions for the ICD-9 code associated with anemia are better predicted by HSLDA or by the ICD-9 codes. Anemia was chosen because hemoglobin values are readily available and the definition of anemia according the World Health Organization is approximately 12.5, with a threshold of 12 for women and 13 for men [citation].
 
-\subsubsection{Product Category Prediction}
+\subsubsection{Product Descriptions and Categorizations}
 
-In this experiment, we look at product descriptions and their
-categorizations according to a product hierarchy. Product ID's
-and categorizations were obtained from the Stanford Network Analysis Platform
-(SNAP) dataset~\citep{SNAP}. Product descriptions were crawled from the
-amazon.com website directly. We were able to deduce the structure of the
-hierarchy for the Amazon.com products directly since all ancestors in the
+Amazon.com, an online retail store, organizes its catalog of 
+products in a hierarchy and provides product descriptions
+for most products in their catolog.  Products can be discovered by users
+through query-based searching or through product category exploration. Top-level
+product categories are displayed on the front page of the website and lower
+level categories can be discovered by choosing one of the top-level categories.
+Products can exist in multiple locations in the hierarchy.
+
+In this experiment, we obtained Amazon.com product categorization data from 
+the Stanford Network Analysis Platform (SNAP) dataset~\citep{SNAP}. 
+Product descriptions were obtained separately from the
+Amazon.com website directly. We limited our dataset to the collection of DVDs
+in the product catalog.
+
+We were able to deduce the structure of the
+hierarchy for the Amazon.com products because all ancestors in the
 hierarchy were included with each category label. For example, {}``DVD / Genres
 / Science Fiction \& Fantasy / Classic Sci-Fi'' is a single product category 
 for the DVD, {}``The Time Machine.''
@@ -93,17 +103,14 @@ We applied HSLDA, along with three other closely related models, to
 the clinical data and the retail product data. Specifically, we evaluate
 models including sLDA with independent regressors (hierarchical constraints
 on labels ignored), HSLDA fit by performing LDA followed by tree-conditional
-regressions, and HSLDA fit with fixed random regression parameters.
-We will refer to the three comparison models as the sLDA model, the
-separate HSLDA model, and the random HSLDA model, respectively. These
-models were chosen as to highlight performance in absence of hierarchical
-constraints, the effect of the combined inference procedure, and regression
+regressions, and HSLDA fit with fixed random regression parameters. These
+models were chosen to highlight several aspects of the model including performance in the absence 
+of hierarchical constraints, the effect of the combined inference procedure, and regression
 performance attributable solely to the hierarchical constraints.
 
 We evaluated model performance for all three models with a range of
 values for $\mu$ ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\} )$,
 the mean prior parameter for regression parameters.
-
 
 \subsection{Evaluation}
 
@@ -111,8 +118,8 @@ the mean prior parameter for regression parameters.
 %\item Talk about hierarchy and no hierarchy
 %\item Make explicit calculation of sensitivity and 1-specificity
 %\end{itemize}
-For each dataset, a held out set of 1,000 documents and accompanying
-labels were used for evaluation. The two main methods of evaluation
+
+The two main methods of evaluation
 for the model are prediction and topic quality. To evaluate predictive
 performance for all comparison models equivalently, each model was
 evaluated with two methods. The first evaluation method augments the
