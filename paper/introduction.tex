@@ -1,23 +1,44 @@
-There exist many sources of unstructured data that have been partially or
-completely categorized by human editors.  In this paper we focus on
-unstructured textual data that has been, at least in part, manually
-categorized.  Examples include but are not limited to webpages and curated
-hierarchical directories of the same \citep{DMOZ}, product descriptions and
-catalogs~\citep{SNAP}, and patient records and their associated billing codes.
-In this work we show how to combine these two sources of information using a
-single model that allows one to automatically categorize new text documents,
-suggest labels that might be inaccurate, compute improved similarities between
-documents for information retrieval purposes, and more. The models and
-techniques that we develop in this paper are applicable in other domains as
-well, namely, any unstructured representations of data that have been
-hierarchically classified (e.g.~image catalogs with bag-of-feature image
-representations).   
+The task of multi-label classification, selecting the k-best labels for a given
+instance, has been a topic of research for several years. One simplistic way to
+carry out the classification is through a series of independent binary
+classifiers, but this ignores the many inherent dependencies among the
+labels. Thus, much work has been devoted on incorporating the co-occurence
+patterns of the labels into the classification task. In this paper, we focus on
+multi-label classification, where the labels are organized in a hierarchical
+structure. Scenarios of use include, but are not limited to, placing webpages
+into manually curated Internet directories~\cite{DMOZ}, categorizing images
+according to a taxonomy, tagging product descriptions with catalogue
+information~\cite{SNAP}, and assigning diagnosis codes to clinical
+records~\cite{Challenge07}.
 
-In this work we extend supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) \cite{Blei2003} augmented with per document ``supervision'';  often taking the form of a single numerical or categorical ``label.''  More generally this supervision is just extra per document data;  for instance its quality or relevance (e.g.~online review scores), marks given to written work (e.g.~essay grades), or the number of times a web page is linked.  These labels are usually generatively modeled as having been conditionally drawn from some distribution that depends on the document-specific topic mixture.  It has been demonstrated that the signal provided by such supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{BleiMcAuliffe2008}.
+There are several challenges entailed in incorporating the hierarchical nature
+of labels into the classification task. One pertains to the labeling itself: in
+the datasets (especially real-world, noisy ones), for a given label, instances
+labeled with it contribute positive instance, but it is unclear how to
+determine the negative instances. In particular, how to treat the parent labels
+of the selected ones? 
 
-Our main contribution is to show how to utilize supervision in the form of  hierarchical and (often) multiple labelings in a similar manner.   Consider web retail data.  Web retailers often have both a browse-able product hierarchy and free-text descriptions for all products they sell.   The situation of each product in a product hierarchy (often multiply situated) constitutes a multiple, hierarchical labeling of the free-text product descriptions.  We hypothesize that such hierarchical labels should, at least in theory, provide better supervision than the simpler unstructured labels previously considered.  Results from applying our model to both medical record and web retail data suggests that this is likely the case.  In particular, we observe gains in our primary goal of out-of-sample label prediction that result specifically from leveraging hierarchical supervision. 
+Our work operates within the framework of topic modeling. Our approach learns
+topic models of the underlying data and labeling strategies in a joint model,
+while leveraging the hierarchical structure of the labels. In particular, we
+extend supervised latent Dirichlet allocation (sLDA)~\cite{BleiMcAuliffe2008}
+to take advantage of hierarchical supervision. We hypothesize that hierarchical
+label information provides more information about labeling than considering
+labels as a flat list.
 
-The remainder of this paper is structured as follows.   Section~\ref{sec:model}  introduces hierarchically supervised LDA (HSLDA), Section~\ref{sec:inference} details a sampling approach to inference in HSLDA,  Section~\ref{sec:related_work} reviews related work, and Section~\ref{sec:experiments} shows results from applying HSLDA to health care and web retail data.
+We demonstrate our model on large, real-world datasets in the clinical and web
+retail domains. We observe that hierarchical information is valuable when
+incorporated into the learning and improves our primary goal of multi-label
+classification. Following the trend observed in supervised topic modeling, we
+note that the learned topic models are more representative of the underlying
+data in both of our datasets~\cite{BleiMcAuliffe2008}.
+
+The remainder of this paper is as follows. Section~\ref{sec:model}
+introduces hierarchically supervised LDA (HSLDA), while
+Section~\ref{sec:inference} details a sampling approach to inference in HSLDA. 
+Section~\ref{sec:related_work} reviews related work, and
+Section~\ref{sec:experiments} shows results from applying HSLDA to health care
+and web retail data.  
 
 %In this paper we describe the use of a topic model based on supervised
 %latent Dirichlet allocation (sLDA) to identify topics within narrative
@@ -28,6 +49,19 @@ The remainder of this paper is structured as follows.   Section~\ref{sec:model} 
 %and notoriously unreliable process. Many diagnoses are omitted in
 %the final record, and a high error rate is found even in the principal
 %diagnoses \citep{Surjan1999}.
+
+%Our main contribution is to show how to utilize supervision in the form of
+%hierarchical and (often) multiple labelings in a similar manner. Consider web
+%retail data. Web retailers often have both a browse-able product hierarchy and
+%free-text descriptions for all products they sell. The situation of each
+%product in a product hierarchy (often multiply situated) constitutes a
+%multiple, hierarchical labeling of the free-text product descriptions. We
+%hypothesize that such hierarchical labels should, at least in theory, provide
+%better supervision than the simpler unstructured labels previously considered.
+%Results from applying our model to both medical record and web retail data
+%suggests that this is likely the case. In particular, we observe gains in our
+%primary goal of out-of-sample label prediction that result specifically from
+%leveraging hierarchical supervision. 
 
 %\begin{itemize}
 %\item Benefits of combining human categorization information into ``topic models''
