@@ -7,27 +7,25 @@ set of topic assignments (one for each word), where each topic assignment
 is drawn from a distribution over topics \citep{Blei2003}.
 
 Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
-an exponential family response variable. Although there are many models
-for making predictions based on free text, sLDA is unique in that
-it is a generative model, it represents documents as a mixed-membership,
-and constrains the inference of the latent structure of the documents
-by its predictability of the response variable. In other words, sLDA
-infers topics such that the model is capable of a high predictive
-likelihood for words in a document and the response variable associated
-with a document. This approach has been shown to outperform both LASSO
+supervision in the form of an observed exponential family response 
+variable per document. As a result, sLDA
+infers topics such that the model predicts the response variable while
+improing word likelihood.  This approach has been shown to outperform both LASSO
 (L1 regularized least squares regression) and LDA followed by least
 squares regression \citep{BleiMcAuliffe2008}.
 
-There have been many models that incorporate both latent models of
-text and some form of supervision \citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}.
-One set of models that are particularly relevant to HSLDA are Chang
-and Blei's hierarchical models for document networks (Relational Topic
-Models). In that family of models, they encountered a similar scenario
-where the lack of a link did not truly indicate absence. In hierarchically
-labeled data, negative labels are uncommon and the lack of a label
-in the hierarchy is not equivalent to a negative label. Therefore,
-as in the work of Chang and Blei, we employ regularization to account
-for the lack of negative labels. This will be discussed further in
+Other models that incorporate both and some form of supervision include
+LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, models applied to 
+computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}. 
+
+%One set of models that are particularly relevant to HSLDA are Chang
+%and Blei's hierarchical models for document networks (Relational Topic
+%Models). In that family of models, they encountered a similar scenario
+%where the lack of a link did not truly indicate absence. In hierarchically
+%labeled data, negative labels are uncommon and the lack of a label
+%in the hierarchy is not equivalent to a negative label. Therefore,
+%as in the work of Chang and Blei, we employ regularization to account
+%for the lack of negative labels. This will be discussed further in
 \ref{sec:model}.
 
 % move to related work?
