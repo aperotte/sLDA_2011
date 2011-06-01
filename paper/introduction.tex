@@ -1,5 +1,17 @@
-There exist many sources of unstructured data that have been partially or completely categorized by human editors.  In this paper we focus on unstructured textual data that has been, at least in part, manually categorized.  Examples include but are not limited to webpages and curated hierarchical directories of the same \citep{DMOZ}, product descriptions and catalogs (e.g.~\citep{AMAZON} as available from \citep{SNAP}), and patient hospital treatment transcripts and  codes applied to them for bookkeeping and insurance purposes (e.g.~hospital discharge records with International Classification of Disease 9th Revision,
-Clinical Modification (ICD-9-CM) codes assigned \cite{ICD9}).  In this work we show how to combine these two sources of information using a single model that allows one to automatically categorize new text documents, suggest labels that might be inaccurate, compute improved similarities between documents for information retrieval purposes, and more.  The models and techniques that we develop in this paper are applicable in other domains as well, namely, any unstructured representations of data that have been hierarchically classified (e.g.~image catalogs with bag-of-feature image representations). 
+There exist many sources of unstructured data that have been partially or
+completely categorized by human editors.  In this paper we focus on
+unstructured textual data that has been, at least in part, manually
+categorized.  Examples include but are not limited to webpages and curated
+hierarchical directories of the same \citep{DMOZ}, product descriptions and
+catalogs~\citep{SNAP}, and patient records and their associated billing codes.
+In this work we show how to combine these two sources of information using a
+single model that allows one to automatically categorize new text documents,
+suggest labels that might be inaccurate, compute improved similarities between
+documents for information retrieval purposes, and more. The models and
+techniques that we develop in this paper are applicable in other domains as
+well, namely, any unstructured representations of data that have been
+hierarchically classified (e.g.~image catalogs with bag-of-feature image
+representations).   
 
 In this work we extend supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) \cite{Blei2003} augmented with per document ``supervision'';  often taking the form of a single numerical or categorical ``label.''  More generally this supervision is just extra per document data;  for instance its quality or relevance (e.g.~online review scores), marks given to written work (e.g.~essay grades), or the number of times a web page is linked.  These labels are usually generatively modeled as having been conditionally drawn from some distribution that depends on the document-specific topic mixture.  It has been demonstrated that the signal provided by such supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{BleiMcAuliffe2008}.
 
