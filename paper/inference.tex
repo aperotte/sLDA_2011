@@ -99,7 +99,7 @@ such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{\mathbf{z}}_{d}$, and $\mathbf{
 %of 
 That the conditional posterior distribution of $a_{l,d}$ is a truncated normal distribution \begin{equation}
 p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right).\label{eqn:a_l_d}\end{equation}
- is also a standard probit regression result \cite{gelman}.
+ is also a standard probit regression result \cite{Albert_Chib_1993}.
 % This conditional distribution can be sampled using an inverse CDF
 %method. %However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
 %be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov
@@ -134,7 +134,7 @@ p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\
 %
 %\subsection{$p\left(\boldsymbol\beta\mid\mathbf{z},\alpha^{\prime},\alpha\right)$}
 
-HSLDA departs from stock LDA in that we estimate a hierarchical Dirichlet prior over topic assignments (i.e.~$\boldsymbol\beta$ is a parameter in our model).  This has been shown to ADLER \citep{WallachMiMc2009}. 
+HSLDA departs from stock LDA in that we estimate a hierarchical Dirichlet prior over topic assignments (i.e.~$\boldsymbol\beta$ is a parameter in our model).  This has been shown to improve the quality and stability of inferred topics \citep{WallachMiMc2009}. 
 %This prior
 %shares many features with the hierarchical Dirichlet process and inference
 %over this distribution proceeds in a very similar fashion.
@@ -142,11 +142,11 @@ HSLDA departs from stock LDA in that we estimate a hierarchical Dirichlet prior 
 Sampling $\boldsymbol\beta$ is done using the ``direct assignment''
 method of \citet{TehJorBea2006} \begin{equation}
 \boldsymbol\beta\mid\mathbf{z},\alpha^{\prime},\alpha\sim{\rm Dir}\left(m_{\left(\cdot\right),1}+\alpha^{\prime},m_{\left(\cdot\right),2}+\alpha^{\prime},\ldots,m_{\left(\cdot\right),K}+\alpha^{\prime}\right)\end{equation}
-where $m_{d,k}$ are ADLER
+where $m_{d,k}$ are auxiliary variables that are required to sample the posterior distribution of $\boldsymbol\beta$ and are governed by the following function.
  \begin{equation}
-p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\boldsymbol\beta\right)=\frac{\Gamma\left(\alpha\boldsymbol\beta_{k}\right)}{\Gamma\left(\alpha\boldsymbol\beta_{k}+n_{d,k}\right)}s\left(n_{d,k},m\right)\left(\alpha\boldsymbol\beta_{k}\right)^{m}\end{equation}
- where $s\left(n,m\right)$ represents stirling numbers of the first
-kind.  ADLER check this.  I suspect that some of the n's need some summing.
+p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\boldsymbol\beta\right)=\frac{\Gamma\left(\alpha\boldsymbol\beta_{k}\right)}{\Gamma\left(\alpha\boldsymbol\beta_{k}+c^k_{\cdot,d}\right)}s\left(c^k_{\cdot,d},m\right)\left(\alpha\boldsymbol\beta_{k}\right)^{m}\end{equation}
+$s\left(n,m\right)$ represents stirling numbers of the first
+kind.
 
 
 %\subsection{$p\left(\alpha\right)$, $p\left(\alpha'\right)$, $p\left(\gamma\right)$}
