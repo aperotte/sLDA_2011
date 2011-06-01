@@ -1,6 +1,5 @@
 While there has been much work in multi-label classification of text and
 text modeling in general, we focus here on topic modeling approaches.
-% Noemie: do we need that much text on LDA?
 Latent Dirichlet allocation (LDA) is a generative probabilistic model which
 represents documents as a mixed-membership bag of word. Each document is
 represented as a collection of words, generated from a set of topic assignments
@@ -13,17 +12,47 @@ webpage is linked. This approach has been shown to outperform both LASSO
 (L1 regularized least squares regression) and LDA followed by least
 squares regression~\cite{BleiMcAuliffe2008}.
 
+%Latent dirichlet allocation (LDA) is a generative
+%probabilistic model of corpora that represents documents as a mixed
+%membership bag-of-words. Also known as topic models, these models
+%infer the latent structure, or topics, of documents in a corpus. Each
+%document is represented as a collection of words, generated from a
+%set of topic assignments (one for each word), where each topic assignment
+%is drawn from a distribution over topics \citep{Blei2003}.
+
+%Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
+%supervision in the form of an observed exponential family response 
+%variable per document. As a result, sLDA
+%infers topics such that the model predicts the response variable while
+%improing word likelihood.  This approach has been shown to outperform both LASSO
+%(L1 regularized least squares regression) and LDA followed by least
+%squares regression \citep{BleiMcAuliffe2008}.
+
+Other models that incorporate both and some form of supervision include
+LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, models applied to 
+computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}. 
+
+%One set of models that are particularly relevant to HSLDA are Chang
+%and Blei's hierarchical models for document networks (Relational Topic
+%Models). In that family of models, they encountered a similar scenario
+%where the lack of a link did not truly indicate absence. In hierarchically
+%labeled data, negative labels are uncommon and the lack of a label
+%in the hierarchy is not equivalent to a negative label. Therefore,
+%as in the work of Chang and Blei, we employ regularization to account
+%for the lack of negative labels. This will be discussed further in
+\ref{sec:model}.
+
 % Noemie: check out what I wrote here, because I am not really sure this is
 % correct. 
-There have been several models that incorporate both latent models of text and
-some form of
-supervision~\citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}. One set 
-of models that are particularly relevant to HSLDA are Chang and Blei's
-hierarchical models for document networks (Relational Topic Models). In that
-family of models, they encountered a similar scenario where an unselected label 
-does not always indicate absence. In hierarchical labels, this phenomenon is
-even more pervasive -- there are no explicit negative labels, but it is also
-unclear how to treat the parents of selected labels. Like in the work of Chang
-and Blei, we employ regularization to account for the lack of negative
-labeling. In our experiments, we look at the impact of assigning positive and
-negative instances to the ancestors of selected labels.
+%There have been several models that incorporate both latent models of text and
+%some form of
+%supervision~\citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}. One set 
+%of models that are particularly relevant to HSLDA are Chang and Blei's
+%hierarchical models for document networks (Relational Topic Models). In that
+%family of models, they encountered a similar scenario where an unselected label 
+%does not always indicate absence. In hierarchical labels, this phenomenon is
+%even more pervasive -- there are no explicit negative labels, but it is also
+%unclear how to treat the parents of selected labels. Like in the work of Chang
+%and Blei, we employ regularization to account for the lack of negative
+%labeling. In our experiments, we look at the impact of assigning positive and
+%negative instances to the ancestors of selected labels.
