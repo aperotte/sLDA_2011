@@ -174,33 +174,35 @@ with standard metrics -- sensitiviy (true positive rate) and 1-specificity
 
 The gold standard for comparison was derived from the testing set in each
 dataset. To make the comparison as fair as possible among models, ancestors of
-observed 
-nodes in the label hierarchy were ignored, observed nodes were considered
-positive and descendents of observed nodes were considered to be negative. In
-particular, since the sLDA model does not enforce the hierarchical constraints,
-its performance was found to be so poor on joint prediction that it was not
-included. 
-The models can be compared on a more equal footing by considering only on the observed labels
-as being positive despite the fact that ancestors must also be positive. The gold standard 
-defined in this way will likely inflate the number of
-false positives because the labels applied to any particular document are usually not as complete as they could be. 
-ICD-9 codes lack sensitivity and their use as a
-gold standard could lead to correctly positive predictions being labeled as false positives\citep{Birmetal2005}.
-However, given that the label space is often large (as in our examples) it is a moderate assumption that
-erroneous false positives should not skew results significantly.
+observed nodes in the label hierarchy were ignored, observed nodes were
+considered positive and descendents of observed nodes were considered to be
+negative. In particular, since the sLDA model does not enforce the hierarchical
+constraints, its performance was found to be so poor on joint prediction that
+it was not included. The models can be compared on a more equal footing by
+considering only on the observed labels as being positive, despite the fact
+that, following the hierarchical constraints, ancestors must also be positive.
+Such a gold standard will likely inflate the number of false positives because
+the labels applied to any particular document are usually not as complete as
+they could be.  ICD-9 codes, for instance, lack sensitivity and their use as a
+gold standard could lead to correctly positive predictions being labeled as
+false positives\citep{Birmetal2005}. 
+However, given that the label space is often large (as in our examples) it is a
+moderate assumption that erroneous false positives should not skew results
+significantly. 
 
 Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ 
-for each test document, $\hat{d}$. For efficiency,
-the expectation of this probability distribution was estimated in the following way. Expectations
-of $\mathbf{\bar{z}}_d$ and $\boldsymbol{\eta}_l$ were estimated with samples from the posterior.
-Using these expectations, we performed Gibbs sampling over the hierarchy to acquire predictive
-samples for the documents in the test set. The true positive rate was calculated as the
- average expected labeling for gold standard positive labels. The false positive rate was calculated
+for each test document, $\hat{d}$. For efficiency, the expectation of this
+probability distribution was estimated in the following way. Expectations 
+of $\mathbf{\bar{z}}_d$ and $\boldsymbol{\eta}_l$ were estimated with samples
+from the posterior. Using these expectations, we performed Gibbs sampling over
+the hierarchy to acquire predictive samples for the documents in the test set.
+The true positive rate was calculated as the average expected labeling for
+gold standard positive labels. The false positive rate was calculated 
 as the average expected labeling for gold standard negative labels.
 
-The following are the performance results for the clinical
-data given a prior mean for the regression parameters of $\mu=-1.6$. 
-The full HSLDA model had a true positive rate of 0.57 
+The following are the performance results for the clinical data given a prior
+mean for the regression parameters of $\mu=-1.6$.  The full HSLDA model had a
+true positive rate of 0.57  
 and a false positive rate of 0.13, the sLDA model had a true positive
 rate of 0.42 and a false positive rate of 0.07, and the HSLDA model where
 LDA and the regressions were fit separately had a true positive rate of 0.39
