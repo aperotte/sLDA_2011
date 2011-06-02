@@ -153,26 +153,28 @@ and a scale parameters of 1000.
 
 We evaluated our model, HSLDA, against the comparison models with a focus
 on predictive performance. Predictive performance was measured with
-standard metrics of performance - sensitiviy (true positive rate) and 
+standard metrics - sensitiviy (true positive rate) and 
 1-specificity (false positive rate). We evaluate on the two aforementioned
-datasets to demonstrate that model performance generalizes over two very disparate
+datasets to demonstrate that our model generalizes to two different
 domains.
 
-To evaluate the performance of these models, we establish a gold standard for comparison.
-In our evaluation of each dataset, a held out set of 1000 documents and labels were
-reserved for evaluation and predictive performance was evaluated against the observed
-labeling. Specifically, ancestors of observed nodes were ignored, observed nodes 
+To evaluate the performance of these models, we established a gold standard for comparison.
+For each dataset, a held out set of 1000 documents and labels were
+reserved for evaluation and predictive performance was evaluated against a standard derived
+from the observed labeling. Specifically, ancestors of observed nodes were ignored, observed nodes 
 were considered positive and unobserved nodes were considered to be negative. This method of 
 defining positive and negative labels was chosen to be as fair as possible to all models
 being compared.  In particular, since the sLDA model does not enforce the hierarchical
-constraints, the models can be compared on a more equal footing by focusing on the observed labels
-as positives. The gold standard defined in this way will likely lead to a slight overestimation of the number of
+constraints, the models can be compared on a more equal footing by considering only on the observed labels
+as being positive despite the fact that ancestors must also be positive. The gold standard 
+defined in this way will likely lead to a slight overestimation of the number of
 false positives. It is known that ICD-9 codes lack sensitivity and their use as a
 gold standard could lead to correctly positive predictions being labeled as false positives.
 However, given that the label space is often large (as in our examples) it is a moderate assumption that
 erroneous false positives should not skew results significantly.
 
-Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ where $\hat{d}$ represents the test document. For efficiency,
+Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ 
+where $\hat{d}$ represents the test document. For efficiency,
 the expectation of this probability distribution was estimated in the following way. Expectations
 of $\mathbf{\bar{z}}_d$ and $\boldsymbol{\eta}_l$ were estimated with samples from the posterior.
 Using these expectations, we performed Gibbs sampling over the hierarchy to acquire predictive
@@ -217,43 +219,101 @@ a single model was fit for each model type and prediction was evaluated
 based on predictive samples drawn subject to different auxiliary variable
 thresholds. These methods are significantly different since the prior mean
 is varied prior to inference and the auxiliary variable threshold is varied
-after inference.  However, as intended, they both highlight model performance
+following inference.  However, as intended, they both highlight model performance
 under more or less stringent requirements for predicting positive labels.
 
+Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
+relative to the three comparison models. In figure %\ref{fig:1b}.
 
+%\begin{figure}%[htbp]
+%\begin{center}
+%%\subfloat[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+%\subfigure[][]{\label{1b}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
+%%\subfloat[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+%\subfigure[][]{\label{1d}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+%\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records 
+%(\subref{} and \subref{1b}). Out-of-sample Amazon product category predictions from 
+%product free-text descriptions (\subref{} and \subref{1d}). In all figures, solid is 
+%HSLDA, dashed are independent regressors + sLDA (hierarchical 
+%constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
+%tree-conditional regressions. \subref{} and \subref{} show predictive performance as a function of the 
+%auxiliary variable threshold and \subref{1b} and \subref{1d} show predictive perfmance as a function of the
+%prior mean on regression coefficients.}
+%\label{fig:main_results}
+%\end{center}
+%\end{figure}
 
-
-Figures \ref{fig:main_clinical_results} and \ref{fig:main_amazon_results} show the predictive performance
-of HSLDA relative to the three comparison models.
-
-\begin{figure}[htbp]
-\begin{center}
-%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
-%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
-\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  
-In all figures, solid is HSLDA, dashed are independent regressors + sLDA (hierarchical 
-constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
-tree-conditional regressions. \subref{} shows predictive performance as a function of the 
-auxiliary variable threshold and \subref{1b} shows predictive perfmance as a function of the
-prior mean on regression parameters.}
-\label{fig:main_clinical_results}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
-\caption{Out-of-sample Amazon product category predictions from product free-text descriptions.  
-In all figures, solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints 
-on labels ignored), and dotted is HSLDA fit by running LDA first then running tree-conditional 
-regressions. \subref{} shows predictive performance as a function of the 
-auxiliary variable threshold and \subref{1b} shows predictive perfmance as a function of the
-prior mean on regression parameters.}
-\label{fig:main_amazon_results}
-\end{center}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\parbox{0.9\columnwidth}{
+% \vspace*{-\subfigtopskip}
+% \subfigure[]{
+%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
+%       \textsf{TEMPLATE Id: 12.01\\
+%         FILE No: ahj\_137\_02\_0424\\
+%         SENTENCE No: S-98\\
+%         RELATION: prediction\\
+%         ANALYSIS TYPE: independent\\
+%         FINDING(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0155626\\
+%         \mbox{~~~~~~}LEX: new acute myocardial infarction\\
+%         PARAMETER(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0520887\\
+%         \mbox{~~~~~~}LEX: ST-segment depression
+%       }}}
+% }\goodgap
+% \subfigure[]{
+%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
+%       \textsf{TEMPLATE Id: 12.02\\
+%         FILE No: ahj\_137\_02\_0424\\
+%         SENTENCE No: S-98\\
+%         RELATION: prediction\\
+%         ANALYSIS TYPE: independent\\
+%         FINDING(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0155626\\
+%         \mbox{~~~~~~}LEX: new acute myocardial infarction\\
+%         PARAMETER(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0002962\\
+%         \mbox{~~~~~~}LEX: prior angina%
+%       }}}
+% }\\     \vspace*{-\subfigtopskip}
+% \subfigure[]{
+%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
+%       \textsf{TEMPLATE Id: 12.03\\
+%         FILE No: ahj\_137\_02\_0424\\
+%         SENTENCE No: S-98\\
+%         RELATION: prediction\\
+%         ANALYSIS TYPE: independent\\
+%         FINDING(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0011065\\
+%         \mbox{~~~~~~}LEX: death\\
+%         PARAMETER(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0520887\\
+%         \mbox{~~~~~~}LEX: ST-segment depression%
+%       }}}
+% }\goodgap
+% \subfigure[]{
+%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
+%       \textsf{TEMPLATE Id: 12.04\\
+%         FILE No: ahj\_137\_02\_0424\\
+%         SENTENCE No: S-98\\
+%         RELATION: prediction\\
+%         ANALYSIS TYPE: independent\\
+%         FINDING(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0011065\\
+%         \mbox{~~~~~~}LEX: death\\
+%         PARAMETER(S):\\
+%         \mbox{~~~}ITEM: \\
+%         \mbox{~~~~~~}CUI: C0002962\\
+%         \mbox{~~~~~~}LEX: prior angina%
+%       }}}
+% }}
+%\caption{A Content Item after atomization.}\label{fig:org-afteratom}
+%\end{figure}
