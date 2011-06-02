@@ -6,8 +6,8 @@ represented as a collection of words, generated from a set of topic assignments
 (one for each word), where each topic assignment is drawn from a distribution
 over topics~\citep{Blei2003}. sLDA is latent Dirichlet allocation (LDA)
 \cite{Blei2003} augmented with per-document labeling, often taking the form of
-a single numerical or categorical label. Examples of labels include rating
-associated with an online  eview, grades for an essay, and number of times a
+a single numerical or categorical label. Examples of labels include ratings
+associated with online reviews, grades for essays, and the number of times a
 webpage is linked. This approach has been shown to outperform both LASSO
 (L1 regularized least squares regression) and LDA followed by least
 squares regression~\cite{BleiMcAuliffe2008}.
@@ -33,7 +33,7 @@ LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, and other models applied t
 computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}. 
 These models, however, do not implement contraints on the label space.
 
-In other work, researchers have classified documents in a hierarchy with naive Bayes classifiers
+In other work, researchers have classified documents into a hierarchy with naive Bayes classifiers
 and support vector machines. Most of this work has been demonstrated on relatively
 small datasets, small label spaces and has focused on single label classification without
 a model of documents such as LDA\citep{mccallum99building,Dumais2000HCW,Kollerilprints291,Chakrabarti1998SFS}.
