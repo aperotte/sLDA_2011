@@ -23,13 +23,6 @@ instance has only a small number of labels associated to it. There are no
 naturally occurring negative labeling in the data, and the absence of a label
 cannot always be interpreted as a negative labeling. 
 
-%The task of multi-label classification, selecting the k-best labels for a given
-%instance, has been a topic of research for several years. One simplistic way to
-%carry out the classification is through a series of independent binary
-%classifiers, but this ignores the many inherent dependencies among the
-%labels. Thus, much work has been devoted on incorporating the co-occurence
-%patterns of the labels into the classification task. 
-
 Our work operates within the framework of topic modeling. Our approach learns
 topic models of the underlying data and labeling strategies in a joint model,
 while leveraging the hierarchical structure of the labels. For the sake of
