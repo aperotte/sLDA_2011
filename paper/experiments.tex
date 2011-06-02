@@ -162,11 +162,14 @@ To evaluate the performance of these models, we establish a gold standard for co
 In our evaluation of each dataset, a held out set of 1000 documents and labels were
 reserved for evaluation and predictive performance was evaluated against the observed
 labeling. Specifically, ancestors of observed nodes were ignored, observed nodes 
-were considered positive and unobserved nodes were considered to be negative. The gold
-standard defined in this way will likely lead to a slight overestimation of the number of
+were considered positive and unobserved nodes were considered to be negative. This method of 
+defining positive and negative labels was chosen to be as fair as possible to all models
+being compared.  In particular, since the sLDA model does not enforce the hierarchical
+constraints, the models can be compared on a more equal footing by focusing on the observed labels
+as positives. The gold standard defined in this way will likely lead to a slight overestimation of the number of
 false positives. It is known that ICD-9 codes lack sensitivity and their use as a
 gold standard could lead to correctly positive predictions being labeled as false positives.
-However, given that the label space is often large (as in our examples) these potentially
+However, given that the label space is often large (as in our examples) it is a moderate assumption that
 erroneous false positives should not skew results significantly.
 
 Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ where $\hat{d}$ represents the test document. For efficiency,
