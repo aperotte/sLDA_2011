@@ -179,3 +179,34 @@ Using these expectations, we performed Gibbs sampling over the hierarchy to acqu
 samples for the documents in the test set.
 
 
+\begin{figure}[htbp]
+\begin{center}
+%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
+%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  
+In all figures, solid is HSLDA, dashed are independent regressors + sLDA (hierarchical 
+constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
+tree-conditional regressions. \subref{} shows predictive performance as a function of the 
+auxiliary variable threshold and \subref{1b} shows predictive perfmance as a function of the
+prior mean on regression parameters.}
+\label{fig:main_clinical_results}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+\caption{Out-of-sample Amazon product category predictions from product free-text descriptions.  
+In all figures, solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints 
+on labels ignored), and dotted is HSLDA fit by running LDA first then running tree-conditional 
+regressions. \subref{} shows predictive performance as a function of the 
+auxiliary variable threshold and \subref{1b} shows predictive perfmance as a function of the
+prior mean on regression parameters.}
+\label{fig:main_amazon_results}
+\end{center}
+\end{figure}

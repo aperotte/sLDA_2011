@@ -83,27 +83,27 @@ Columbia University, New York, NY 10027, USA \\
 \input{experiments}
 
 
-\begin{figure}[htbp]
-\begin{center}
-\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors}}
-\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs}}
-\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
-\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{1a} includes ancestor prediction performance,  \subref{1b} results are for given (leaf) labels alone.  Bottom row: \subref{1c} are the sensitivity curves from \subref{1b} aligned on threshold value,  \subref{1d} are the 1-specificity curves from \subref{1b} aligned on threshold value.}
-\label{fig:icd9}
-\end{center}
-\end{figure}
+%\begin{figure}[htbp]
+%\begin{center}
+%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors}}
+%\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs}}
+%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+%\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{1a} includes ancestor prediction performance,  \subref{1b} results are for given (leaf) labels alone.  Bottom row: \subref{1c} are the sensitivity curves from \subref{1b} aligned on threshold value,  \subref{1d} are the 1-specificity curves from \subref{1b} aligned on threshold value.}
+%\label{fig:icd9}
+%\end{center}
+%\end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\subfigure[][\label{2a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors_amazon}}
-\subfigure[][\label{2b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs_amazon}}
-\subfigure[][\label{2c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs_amazon}}
-\subfigure[][\label{2d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
-\caption{Out-of-sample Amazon product code predictions from product free-text descriptions.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{2a} includes ancestor prediction performance,  \subref{2b} results are for given (leaf) labels alone.  Bottom row: \subref{2c} are the sensitivity curves from \subref{2b} aligned on threshold value,  \subref{2d} are the 1-specificity curves from \subref{2b} aligned on threshold value.}
-\label{fig:icd9}
-\end{center}
-\end{figure}
+%\begin{figure}[htbp]
+%\begin{center}
+%\subfigure[][\label{2a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors_amazon}}
+%\subfigure[][\label{2b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs_amazon}}
+%\subfigure[][\label{2c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs_amazon}}
+%\subfigure[][\label{2d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+%\caption{Out-of-sample Amazon product code predictions from product free-text descriptions.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{2a} includes ancestor prediction performance,  \subref{2b} results are for given (leaf) labels alone.  Bottom row: \subref{2c} are the sensitivity curves from \subref{2b} aligned on threshold value,  \subref{2d} are the 1-specificity curves from \subref{2b} aligned on threshold value.}
+%\label{fig:icd9}
+%\end{center}
+%\end{figure}
 
 %We ran the Gibbs sampler for two days on 500 documents with 20 topics to learn the sLDA model which we then followed by a prediction of ICD-9 codes for 100 documents. The prediction resulted in 38 documents with at least 1 ICD-9 code assignment while some had over 200 assignments.
 
