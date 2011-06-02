@@ -98,8 +98,8 @@ consists of the most frequent 30,000 words omitting stopwords.
 
 \subsection{Comparison Models}
 
-We evaluated HSLDA along with three closely related models against 
-these two datasets. The comparison models included sLDA with independent 
+We evaluated HSLDA along with two closely related models against
+the two datasets. The comparison models included sLDA with independent
 regressors (hierarchical constraints on labels ignored), HSLDA fit by first
 performing LDA then fitting tree-conditional regressions. These models were
 chosen to  highlight several aspects of HSLDA including performance in the
@@ -126,19 +126,37 @@ documents and the label space.
 %provides for the prediction of labels. This comparison model is intended to
 %quantify the contribution of the structure alone.
 
-For all of these models, particular attention was payed to the settings of the
+For all three models, particular attention was given to the settings of the 
 prior parameters for the regression coefficients. These parameters implement an
-important form of regularization in HSLDA. In the setting where there are no negative
-labels, a Gaussian prior over the regression parameters with a negative mean implements
-a prior belief that missing labels are likely to be negative. We evaluated model performance 
-for all three models with a range of values for $\mu$, the mean prior parameter for regression coefficients
+important form of regularization in HSLDA. In the setting where there are no
+negative labels, a Gaussian prior over the regression parameters with a
+negative mean implements a prior belief that missing labels are likely to be
+negative. Thus, we evaluated model performance for all three models with a
+range of values for $\mu$, the mean prior parameter for regression coefficients 
 ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\}$).
 
-The number of topics for all
-models was set to 50, the prior distributions of
-$p\left(\alpha\right)$, $p\left(\alpha^{\prime}\right)$, and $p\left(\gamma\right)$ were gamma distributed with a shape parameter of 1
-and a scale parameters of 1000.
+The number of topics for all models was set to 50, the prior distributions of
+$p\left(\alpha\right)$, $p\left(\alpha^{\prime}\right)$, and
+$p\left(\gamma\right)$ were gamma distributed with a shape parameter of 1 and a
+scale parameters of 1000. 
 
+\begin{figure}[h]
+\begin{center}
+%\subfloat[][\label{fig:1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+\subfigure[][]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
+%\subfloat[][\label{fig:1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+\subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+\subfigure[][]{\label{fig:clinical_roc}\includegraphics[scale=0.4]{figs/ROC_comparison_leafs}}
+\caption{ROC curves for out-of-sample ICD-9 code prediction from patient free-text discharge records 
+(\subref{fig:1a},\subref{fig:clinical_roc}). ROC curve for out-of-sample Amazon product category predictions from 
+product free-text descriptions \subref{fig:1b}. Figures \subref{fig:1a} and \subref{fig:1b} are a function 
+of the prior means of the regression parameters. Figure \subref{fig:clinical_roc} is a function of auxiliary variable threshold. In all figures, solid is 
+HSLDA, dashed are independent regressors + sLDA (hierarchical 
+constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
+tree-conditional regressions.}
+\label{fig:main_results}
+\end{center}
+\end{figure}
 
 \subsection{Evaluation and Results}
 
@@ -149,20 +167,19 @@ and a scale parameters of 1000.
 %4. Discussion of results
 %5. Connection of results with contribution and generality etc
 
-We evaluated our model, HSLDA, against the comparison models with a focus
-on predictive performance on held-out data. Prediction performance was measured with
-standard metrics - sensitiviy (true positive rate) and 
-1-specificity (false positive rate).
+We evaluated our model, HSLDA, against the comparison models with a focus on
+predictive performance on held-out data. Prediction performance was measured
+with standard metrics -- sensitiviy (true positive rate) and 1-specificity
+(false positive rate). 
 
-To evaluate the performance of these models, we established a gold standard for comparison.
-For each dataset, a held out set of 1000 documents and labels were
-reserved for evaluation and predictive performance was evaluated against a standard derived
-from the observed labeling. To make the comparison as fair as possible, 
-ancestors of observed nodes were ignored, observed nodes 
-were considered positive and descendents of observed nodes were considered to be negative. This method of 
-defining positive and negative labels was chosen to be as fair as possible to all models
-being compared.  In particular, since the sLDA model does not enforce the hierarchical
-constraints, its performance was found to be so poor on joint prediction that it was not included.
+The gold standard for comparison was derived from the testing set in each
+dataset. To make the comparison as fair as possible among models, ancestors of
+observed 
+nodes in the label hierarchy were ignored, observed nodes were considered
+positive and descendents of observed nodes were considered to be negative. In
+particular, since the sLDA model does not enforce the hierarchical constraints,
+its performance was found to be so poor on joint prediction that it was not
+included. 
 The models can be compared on a more equal footing by considering only on the observed labels
 as being positive despite the fact that ancestors must also be positive. The gold standard 
 defined in this way will likely inflate the number of
@@ -235,24 +252,6 @@ hand corner of the ROC curve. For all values of the prior mean in both datasets
 HSLDA outperforms sLDA with independent regressors. In the case of HSLDA with
 separately trained regression, HSLDA outperforms in the clinical dataset but
 performs equally well across the board with the retail product dataset.
-
-\begin{figure}%[htbp]
-\begin{center}
-%\subfloat[][\label{fig:1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
-%\subfloat[][\label{fig:1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-\subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][]{\label{fig:clinical_roc}\includegraphics[scale=0.4]{figs/ROC_comparison_leafs}}
-\caption{ROC curves for out-of-sample ICD-9 code prediction from patient free-text discharge records 
-(\subref{fig:1a},\subref{fig:clinical_roc}). ROC curve for out-of-sample Amazon product category predictions from 
-product free-text descriptions \subref{fig:1b}. Figures \subref{fig:1a} and \subref{fig:1b} are a function 
-of the prior means of the regression parameters. Figure \subref{fig:clinical_roc} is a function of auxiliary variable threshold. In all figures, solid is 
-HSLDA, dashed are independent regressors + sLDA (hierarchical 
-constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
-tree-conditional regressions.}
-\label{fig:main_results}
-\end{center}
-\end{figure}
 
 %\begin{figure}[t]
 %%tbp] %  figure placement: here, top, bottom, or page
