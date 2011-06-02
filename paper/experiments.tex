@@ -200,37 +200,36 @@ The true positive rate was calculated as the average expected labeling for
 gold standard positive labels. The false positive rate was calculated 
 as the average expected labeling for gold standard negative labels.
 
-The following are the performance results for the clinical data given a prior
-mean for the regression parameters of $\mu=-1.6$.  The full HSLDA model had a
-true positive rate of 0.57  
-and a false positive rate of 0.13, the sLDA model had a true positive
-rate of 0.42 and a false positive rate of 0.07, and the HSLDA model where
-LDA and the regressions were fit separately had a true positive rate of 0.39
-and a false positive rate of 0.08.
+Figure~\ref{fig:1a} shows the results for the clinical data. For instance, 
+a prior mean for the regression of $\mu=-1.6$ yields the following performance:
+the full HSLDA model had a 
+true positive rate of 0.57 and a false positive rate of 0.13, the sLDA model
+had a true positive rate of 0.42 and a false positive rate of 0.07, and the
+HSLDA model where LDA and the regressions were fit separately had a true
+positive rate of 0.39 and a false positive rate of 0.08.
 
 These results indicate that the full HSLDA model predicts more of the the
 correct labels at a cost of an increase in the number of false positives
 relative to the comparison models.
 
-The following are the predictive performance results for the retail product
-data given a prior mean for the regression parameters of $\mu=-2.2$. 
-The full HSLDA model had a true positive rate of 0.85 
+Figure~\ref{fig:1b} shows the results for the retail product data. For
+instance, a prior mean for the regression of $\mu=-2.2$ yields the following
+performance: the full HSLDA model had a true positive rate of 0.85 
 and a false positive rate of 0.30, the sLDA model had a true positive
 rate of 0.78 and a false positive rate of 0.14, and the HSLDA model where
 LDA and the regressions were fit separately had a true positive rate of 0.77
 and a false positive rate of 0.16. These results follow a similar pattern to the clinical data.
 
-As sensitivity and specificity can always be traded off we examined sensitivity for a range of values
-for two different parameters - the prior means for the regression coefficients
-and the threshold for the auxiliary variables.  The goal in this analysis
-was to evaluate the performance of these models subject to more or less
-stringent requirements for predicting positive labels. These two parameters 
-have important related functions in the model. The prior mean in combination 
-with the auxiliary variable threshold together encode the strength of the prior
-belief that unobserved labels are likely to be negative. Effectively, the
-prior mean applies negative pressure to the predictions and the auxiliary
-variable threshold determines the cutoff.
-
+As sensitivity and specificity can always be traded off, we examined
+sensitivity for a range of values for two different parameters -- the prior
+means for the regression coefficients and the threshold for the auxiliary
+variables.  The goal in this analysis was to evaluate the performance of these
+models subject to more or less stringent requirements for predicting positive
+labels. These two parameters have important related functions in the model. The
+prior mean in combination with the auxiliary variable threshold together encode
+the strength of the prior belief that unobserved labels are likely to be
+negative. Effectively, the prior mean applies negative pressure to the
+predictions and the auxiliary variable threshold determines the cutoff. 
 For each model type, separate models were fit for each value of the 
 prior mean of the regression coefficients.  This is a proper Bayesian
 sensitivity analysis. In contrast, to evaluate
@@ -239,21 +238,22 @@ a single model was fit for each model type and prediction was evaluated
 based on predictive samples drawn subject to different auxiliary variable
 thresholds. These methods are significantly different since the prior mean
 is varied prior to inference and the auxiliary variable threshold is varied
-following inference.  However, as intended, they both highlight model performance
-under more or less stringent requirements for predicting positive labels.
+following inference.
+%However, as intended, they both highlight model performance 
+%under more or less stringent requirements for predicting positive labels.
 
 Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
 relative to the three comparison models as a function of the prior mean
 on regression coefficients as a receiver operating characteristic (ROC) curve. 
-For low values of the auxiliary variable
-threshold, the models predict labels in a more sensitive and less specific
-manner, creating the points in the upper right corner of the ROC curve. As
-the auxiliary variable threshold is increased, the models predict in a less
-sensitive and more specific manner, creating the points in the lower left
-hand corner of the ROC curve. For all values of the prior mean in both datasets
-HSLDA outperforms sLDA with independent regressors. In the case of HSLDA with
-separately trained regression, HSLDA outperforms in the clinical dataset but
-performs equally well across the board with the retail product dataset.
+For low values of the auxiliary variable threshold, the models predict labels
+in a more sensitive and less specific manner, creating the points in the upper
+right corner of the ROC curve. As the auxiliary variable threshold is
+increased, the models predict in a less sensitive and more specific manner,
+creating the points in the lower left hand corner of the ROC curve. For all
+values of the prior mean in both datasets HSLDA outperforms sLDA with
+independent regressors. In the case of HSLDA with separately trained
+regression, HSLDA outperforms in the clinical dataset but performs equally well
+across the board with the retail product dataset. 
 
 %\begin{figure}[t]
 %%tbp] %  figure placement: here, top, bottom, or page
