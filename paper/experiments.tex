@@ -31,7 +31,7 @@ pneumonia,'' where the former is a type of the latter.  It is worth noting that
 the coding can be noisy. Human coders sometimes disagree~\cite{Challenge07},
 tend to be more specific than sensitive in their
 assignments~\cite{Birmetal2005}, and sometimes make
-mistakes~\cite{FarzandipourEtAl10}. 
+mistakes~\cite{FarzandipourEtAl10}.
 
 The task of automatic ICD-9 coding has been investigated in the clinical
 domain.  Methods range from manual
@@ -39,7 +39,7 @@ rules to online learning~\cite{Crammer2007,Goldstein2007,Farkas2008}.
 Other work had leveraged larger datasets and experimented with K-nearest
 neighbor, Naive Bayes, support vector machines, Bayesian Ridge Regression, as
 well as simple keyword mappings, all with promising
-results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Ruch2008,Lita2008}.
+results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Lita2008}.%Ruch2008 omitted
 
 %Much of the work was triggered by the 2007 medical NLP community
 %challenge~\cite{Challenge07}.
@@ -242,9 +242,11 @@ performs equally well across the board with the retail product dataset.
 \subfigure[][]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
 %\subfloat[][\label{fig:1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
 \subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records 
-(\subref{fig:1b}). Out-of-sample Amazon product category predictions from 
-product free-text descriptions (\subref{fig:1b}). In both figures, solid is 
+\subfigure[][]{\label{fig:clinical_roc}\includegraphics[scale=0.4]{figs/ROC_comparison_leafs}}
+\caption{ROC curves for out-of-sample ICD-9 code prediction from patient free-text discharge records 
+(\subref{fig:1a},\subref{fig:clinical_roc}). ROC curve for out-of-sample Amazon product category predictions from 
+product free-text descriptions \subref{fig:1b}. Figures \subref{fig:1a} and \subref{fig:1b} are a function 
+of the prior means of the regression parameters. Figure \subref{fig:clinical_roc} is a function of auxiliary variable threshold. In all figures, solid is 
 HSLDA, dashed are independent regressors + sLDA (hierarchical 
 constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
 tree-conditional regressions.}
@@ -252,8 +254,8 @@ tree-conditional regressions.}
 \end{center}
 \end{figure}
 
-\begin{figure}[t]
-%tbp] %  figure placement: here, top, bottom, or page
- \centering \includegraphics[scale=0.4]{figs/ROC_comparison_leafs} \caption{ROC Curve for clinical data}
-\label{fig:clinical_roc} 
-\end{figure}
+%\begin{figure}[t]
+%%tbp] %  figure placement: here, top, bottom, or page
+% \centering \includegraphics[scale=0.4]{figs/ROC_comparison_leafs} \caption{ROC curve for Out-of-sample ICD-9 code predictions.}
+%\label{fig:clinical_roc} 
+%\end{figure}
