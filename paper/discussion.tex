@@ -1,8 +1,14 @@
-We have described a mixed membership model with hierarchical supervision. We have demonstrated this model in the context of document modeling with hierarchical multi-label supervision. Such a model is appropriate in domains where there are hierarchical constraints among the labels such as is the case in an IS-A hierarchy.
+%Despite the proliferation of LDA related models in recent years, one could argue that the true killer app for LDA has yet to be discovered.  LDA makes sense for information retrieval (IR) because  the learned latent topic vectors serve as good low-dimensional document representations, and, a posteriori similarity between such vectors can be used to compute the similarity of documents.  Unfortunately, computational considerations render this approach to IR impractical in most settings.
+
+The SLDA model family, of which HSLDA is a member, can be understood in two different ways.  One way is to see it as a family of topic models that improve on the topic modeling performance of LDA via the inclusion of observed supervision.  Another way to see the family is as a set of models that can predict labels for bag-of-words data.  A large diversity of problems can be expressed as label prediction problems for bag-of-words data.  A surprisingly large amount of that kind of data possess structured labels, either hierarchically constrained or otherwise.  That HSLDA directly addresses this kind of data is a large part of the motivation for this work.   That it outperforms more straightforward approaches should be of interest to practitioners.
+
+Extensions to this work include unbounded topic cardinality variants and relaxations to different kinds of label structure.  Unbounded topic cardinality variants pose interesting inference challenges.  Utilizing different kinds of label structure is possible within this framework, but requires relaxing some of the simplifications we made in this paper for expositional purposes. 
+
+%We have described a mixed membership model with hierarchical supervision. We have demonstrated this model in the context of document modeling with hierarchical multi-label supervision. Such a model is appropriate in domains where there are hierarchical constraints among the labels such as is the case in an IS-A hierarchy.
 
 ...
 
-\begin{itemize}
-\item what about the nonparametric version of this?
-\item discuss the broader goal, from the beginning of search engine time, to combine categorization and free text.  this, to our knowledge, is the first principled approach to doing so
-\end{itemize}
+%\begin{itemize}
+%\item what about the nonparametric version of this?
+%\item discuss the broader goal, from the beginning of search engine time, to combine categorization and free text.  this, to our knowledge, is the first principled approach to doing so
+%\end{itemize}
