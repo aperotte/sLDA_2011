@@ -1,16 +1,22 @@
-While there has been much work in multi-label classification of text and
-text modeling in general, we focus here on topic modeling approaches.
-Latent Dirichlet allocation (LDA) is a generative probabilistic model which
-represents documents as a mixed-membership bag of word. Each document is
-represented as a collection of words, generated from a set of topic assignments
-(one for each word), where each topic assignment is drawn from a distribution
-over topics~\citep{Blei2003}. sLDA is latent Dirichlet allocation (LDA)
-\cite{Blei2003} augmented with per-document labeling, often taking the form of
-a single numerical or categorical label. Examples of labels include ratings
-associated with online reviews, grades for essays, and the number of times a
-webpage is linked. This approach has been shown to outperform both LASSO
+In this work we extend supervised latent Dirichlet allocation (sLDA) \cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision.  sLDA is latent Dirichlet allocation (LDA) \cite{Blei2003} augmented with per document ``supervision'';  often taking the form of a single numerical or categorical label. More generally this supervision is just extra per-document data;  for instance its quality or relevance (e.g.~online review scores), marks given to written work (e.g.~essay grades), or the number of times a web page is linked.  These labels are usually generatively modeled as a conditional draw from some distribution that depends on each document-specific topic mixture.  It has been demonstrated that the signal provided by such supervision can result in better, task-specific document models and can also lead to good label prediction for out-of-sample data \cite{BleiMcAuliffe2008}.  It also has been demonstrated that sLDA has been shown to outperform both LASSO
 (L1 regularized least squares regression) and LDA followed by least
-squares regression~\cite{BleiMcAuliffe2008}.
+squares regression~\cite{BleiMcAuliffe2008}.  sLDA can be applied to data of the type we consider in this paper; however, doing so requires ignoring the hierarchical dependencies amongst the labels.  In Section~\ref{sec:experiments} we constrast HSLDA with sLDA applied in this way.  
+
+%While there has been much work in multi-label classification of text and
+%text modeling in general, we focus here on topic modeling approaches.
+%Latent Dirichlet allocation (LDA) is a generative probabilistic model which
+%represents documents as a mixed-membership bag of word. Each document is
+%represented as a collection of words, generated from a set of topic assignments
+%(one for each word), where each topic assignment is drawn from a distribution
+%over topics~\citep{Blei2003}. sLDA is latent Dirichlet allocation (LDA)
+%\cite{Blei2003} augmented with per-document labeling, often taking the form of
+%a single numerical or categorical label. Examples of labels include ratings
+%associated with online reviews, grades for essays, and the number of times a
+%webpage is linked. This approach has been shown to outperform both LASSO
+%(L1 regularized least squares regression) and LDA followed by least
+%squares regression~\cite{BleiMcAuliffe2008}.
+
+
 
 %Latent dirichlet allocation (LDA) is a generative
 %probabilistic model of corpora that represents documents as a mixed
@@ -29,13 +35,13 @@ squares regression~\cite{BleiMcAuliffe2008}.
 %squares regression \citep{BleiMcAuliffe2008}.
 
 Other models that incorporate LDA and supervision include
-LabeledLDA\citep{Ramage2009}, DiscLDA\citep{DiscLDA}, and other models applied to 
-computer vision and document networks\citep{wangbleifeifei08,RelationalLDA}. 
-These models, however, do not implement contraints on the label space.
+LabeledLDA\citep{Ramage2009} and DiscLDA\citep{DiscLDA}.  Various applications of these models to 
+computer vision and document networks have been explored \citep{wangbleifeifei08,RelationalLDA} . 
+None of these models, however, leverage dependency structure in the label space.
 
-In other work, researchers have classified documents into a hierarchy with naive Bayes classifiers
+In other work, researchers have classified documents into a hierarchy (a closely related task) with naive Bayes classifiers
 and support vector machines. Most of this work has been demonstrated on relatively
-small datasets, small label spaces and has focused on single label classification without
+small datasets, small label spaces, and has focused on single label classification without
 a model of documents such as LDA\citep{mccallum99building,Dumais2000HCW,Kollerilprints291,Chakrabarti1998SFS}.
 
 %One set of models that are particularly relevant to HSLDA are Chang
