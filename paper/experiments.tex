@@ -223,97 +223,25 @@ following inference.  However, as intended, they both highlight model performanc
 under more or less stringent requirements for predicting positive labels.
 
 Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
-relative to the three comparison models. In figure \ref{fig:1b}.
+relative to the three comparison models as a function of the prior mean
+on regression coefficient. Figure \ref{fig:1a} demo.
 
 \begin{figure}%[htbp]
 \begin{center}
 %\subfloat[][\label{fig:1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
+\subfigure[][]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
 %\subfloat[][\label{fig:1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-\subfigure[][]{\label{fig:1d}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+\subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
 \caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records 
-(\subref{1a} and \subref{fig:1b}). Out-of-sample Amazon product category predictions from 
-product free-text descriptions (\subref{1c} and \subref{fig:1d}). In all figures, solid is 
+(\subref{fig:1b}). Out-of-sample Amazon product category predictions from 
+product free-text descriptions (\subref{fig:1b}). In both figures, solid is 
 HSLDA, dashed are independent regressors + sLDA (hierarchical 
 constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
-tree-conditional regressions. \subref{} and \subref{} show predictive performance as a function of the 
-auxiliary variable threshold and \subref{fig:1b} and \subref{fig:1d} show predictive perfmance as a function of the
-prior mean on regression coefficients.}
+tree-conditional regressions.}
 \label{fig:main_results}
 \end{center}
 \end{figure}
 
-%\begin{figure}[t]
-%\centering
-%\parbox{0.9\columnwidth}{
-% \vspace*{-\subfigtopskip}
-% \subfigure[]{
-%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
-%       \textsf{TEMPLATE Id: 12.01\\
-%         FILE No: ahj\_137\_02\_0424\\
-%         SENTENCE No: S-98\\
-%         RELATION: prediction\\
-%         ANALYSIS TYPE: independent\\
-%         FINDING(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0155626\\
-%         \mbox{~~~~~~}LEX: new acute myocardial infarction\\
-%         PARAMETER(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0520887\\
-%         \mbox{~~~~~~}LEX: ST-segment depression
-%       }}}
-% }\goodgap
-% \subfigure[]{
-%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
-%       \textsf{TEMPLATE Id: 12.02\\
-%         FILE No: ahj\_137\_02\_0424\\
-%         SENTENCE No: S-98\\
-%         RELATION: prediction\\
-%         ANALYSIS TYPE: independent\\
-%         FINDING(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0155626\\
-%         \mbox{~~~~~~}LEX: new acute myocardial infarction\\
-%         PARAMETER(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0002962\\
-%         \mbox{~~~~~~}LEX: prior angina%
-%       }}}
-% }\\     \vspace*{-\subfigtopskip}
-% \subfigure[]{
-%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
-%       \textsf{TEMPLATE Id: 12.03\\
-%         FILE No: ahj\_137\_02\_0424\\
-%         SENTENCE No: S-98\\
-%         RELATION: prediction\\
-%         ANALYSIS TYPE: independent\\
-%         FINDING(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0011065\\
-%         \mbox{~~~~~~}LEX: death\\
-%         PARAMETER(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0520887\\
-%         \mbox{~~~~~~}LEX: ST-segment depression%
-%       }}}
-% }\goodgap
-% \subfigure[]{
-%   \fbox{\parbox{0.35\columnwidth}{\scriptsize
-%       \textsf{TEMPLATE Id: 12.04\\
-%         FILE No: ahj\_137\_02\_0424\\
-%         SENTENCE No: S-98\\
-%         RELATION: prediction\\
-%         ANALYSIS TYPE: independent\\
-%         FINDING(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0011065\\
-%         \mbox{~~~~~~}LEX: death\\
-%         PARAMETER(S):\\
-%         \mbox{~~~}ITEM: \\
-%         \mbox{~~~~~~}CUI: C0002962\\
-%         \mbox{~~~~~~}LEX: prior angina%
-%       }}}
-% }}
-%\caption{A Content Item after atomization.}\label{fig:org-afteratom}
-%\end{figure}
+\begin{figure}[t]
+%tbp] %  figure placement: here, top, bottom, or page
+ \centering \includegraphics[scale=0.4]{figs/ROC_comparison_leafs} \caption{ROC Curve for clinical data}
