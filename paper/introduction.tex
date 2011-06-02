@@ -17,11 +17,11 @@ this paper are applicable in other domains as well, namely, any unstructured
 representations of data that have been hierarchically classified (e.g.,~image
 catalogs with bag-of-feature image representations).
 
-There are several challenges entailed in incorporating a hierarchy of labels.
-Given a large set of potential labels (often thousands), each instance has only
-a small number of labels associated to it. There are no negative labeling
-present in the data naturally, and the absence of a label cannot always be
-interpreted as a negative labeling. 
+There are several challenges entailed in incorporating a hierarchy of labels
+into the model. Given a large set of potential labels (often thousands), each
+instance has only a small number of labels associated to it. There are no
+naturally occurring negative labeling in the data, and the absence of a label
+cannot always be interpreted as a negative labeling. 
 
 %The task of multi-label classification, selecting the k-best labels for a given
 %instance, has been a topic of research for several years. One simplistic way to
@@ -32,16 +32,21 @@ interpreted as a negative labeling.
 
 Our work operates within the framework of topic modeling. Our approach learns
 topic models of the underlying data and labeling strategies in a joint model,
-while leveraging the hierarchical structure of the labels. In particular, we
-extend supervised latent Dirichlet allocation (sLDA)~\cite{BleiMcAuliffe2008}
-to take advantage of hierarchical supervision. We hypothesize that hierarchical
-label information provides more information about labeling than considering
-unstructured labels.
+while leveraging the hierarchical structure of the labels. For the sake of
+simplicity, we focus on ISA hierarchies, but the model can be
+applied to other hierarchies. We extend supervised latent Dirichlet
+allocation (sLDA)~\cite{BleiMcAuliffe2008} to take advantage of hierarchical
+supervision. We propose an efficient way to incorporate hierarchical
+information into the model. We hypothesize that the context of labels within
+the hierarchy provides valuable information about labeling. 
 
 We demonstrate our model on large, real-world datasets in the clinical and web
 retail domains. We observe that hierarchical information is valuable when
 incorporated into the learning and improves our primary goal of multi-label
-classification. %in two ways
+classification. Our results show that a joint, hierarchical model outperforms a
+classification with unstructured labels as well as a disjoint model, where the
+topic modeling and the hierarchical classification are carried out
+independently of each other. 
 
 The remainder of this paper is as follows. Section~\ref{sec:model}
 introduces hierarchically supervised LDA (HSLDA), while
