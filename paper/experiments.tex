@@ -99,37 +99,74 @@ consists of the most frequent 30,000 words omitting stopwords.
 
 \subsection{Comparison Models}
 
-We applied HSLDA, along with three other closely related models, to
-the clinical data and the retail product data. Specifically, we evaluate
-models including sLDA with independent regressors (hierarchical constraints
-on labels ignored), HSLDA fit by performing LDA followed by tree-conditional
-regressions, and HSLDA fit with fixed random regression parameters. These
-models were chosen to highlight several aspects of the model including performance in the absence 
+We evaluated HSLDA along with three other closely related models against 
+these two datasets. The comparison models included sLDA with independent 
+regressors (hierarchical constraints on labels ignored), HSLDA fit by 
+performing LDA followed by tree-conditional regressions, and HSLDA fit 
+with fixed random regression parameters. These models were chosen to 
+highlight several aspects of the model including performance in the absence 
 of hierarchical constraints, the effect of the combined inference procedure, and regression
 performance attributable solely to the hierarchical constraints.
 
+sLDA with independent regressors is the most salient comparison model
+for our work. The distinguishing factor between HSLDA and sLDA is the
+addition structure imposed on the label space, a distinction that we
+hypothesize will result in a difference in predictive performance. 
+Aside from this, all other features of sLDA are preserved between the two models.
+
+There are two components to HSLDA, LDA and a hierarchically constrained response.
+The second comparison model is HSLDA fit by performing LDA first followed by
+performing inference over the hierarchically constrained label space. In this
+comparison model, the separate inference processes do not allow the responses
+to influence the low dimensional structure inferred by LDA. Combined inference
+has been shown to improve performance in sLDA \citep{BleiMcAuliffe2008}. This
+comparison model examines not the structuring of the label space, but the benefit
+of combined inference over both the documents and the label space.
+
+The last comparison model is HSLDA with fixed and randomly selected regression
+parameters. There is a baseline benefit that the structure in the label space 
+provides for the prediction of labels. This comparison model is intended to
+quantify the contribution of the structure alone.
+
 We evaluated model performance for all three models with a range of
-values for $\mu$ ($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\} )$,
-the mean prior parameter for regression parameters.
+values for $\mu$, the mean prior parameter for regression parameters 
+($\mu\in\left\{ -3,-2.8,-2.6,\ldots,1\right\}$). The number of topics for all
+models was set to 50, the parameters for the prior distributions
+$\alpha$, $\alpha^prime$, and $\gamma$ were a shape parameter of 1
+and a scale parameters of 1000.
 
-\subsection{Evaluation}
 
-%\begin{itemize}
-%\item Talk about hierarchy and no hierarchy
-%\item Make explicit calculation of sensitivity and 1-specificity
-%\end{itemize}
+\subsection{Evaluation and Results}
 
-The two main methods of evaluation
-for the model are prediction and topic quality. To evaluate predictive
-performance for all comparison models equivalently, each model was
-evaluated with two methods. The first evaluation method augments the
-observed labels in the held out set with their ancestors and considers
-all other non-existant labels to be negative. The second method ignores
-the ancestors of the observed labels in the held out set and considers
-all other non-existant labels to be negative. This uniform treatment
-of ancestors allows for a fair comparison of the models.
+%Outline:
+%1. Model evaluation goal, metrics
+%2. Gold standard(s), properties
+%3. Method for prediction w/ details
+%4. Discussion of results
+%5. Connection of results with contribution and generality etc
 
-The two measures for predictive performance used here include the
-true positive rate and the false positive rate evaluated based on
-$p\left(y_{l,\hat{d}}\mid w_{1:N,d}\right)$ for each label in each
-model.
+We evaluated our model, HSLDA, against the comparison models with a focus
+on predictive performance. Predictive performance was measured with
+standard metrics of performance - sensitiviy (true positive rate) and 
+1-specificity (false positive rate). We evaluate on the two aforementioned
+datasets to demonstrate that model performance generalizes over two very disparate
+domains.
+
+To evaluate the performance of these models, we establish a gold standard for comparison.
+In our evaluation of each dataset, a held out set of 1000 documents and labels were
+reserved for evaluation and predictive performance was evaluated against the observed
+labeling. Specifically, ancestors of observed nodes were ignored, observed nodes 
+were considered positive and unobserved nodes were considered to be negative. The gold
+standard defined in this way will likely lead to a slight overestimation of the number of
+false positives. It is known that ICD-9 codes lack sensitivity and their use as a
+gold standard could lead to correctly positive predictions being labeled as false positives.
+However, given that the label space is often large (as in our examples) these potentially
+erroneous false positives should not skew results significantly.
+
+Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ where $\hat{d}$ represents the test document. For efficiency,
+the expectation of this probability distribution was estimated in the following way. Expectations
+of $\mathbf{\bar{z}}_d$ and $\boldsymbol{\eta}_l$ were estimated with samples from the posterior.
+Using these expectations, we performed Gibbs sampling over the hierarchy to acquire predictive
+samples for the documents in the test set.
+
+
