@@ -1,5 +1,5 @@
 
-We experimented with HSLDA for prediction in two domains: predicting medical
+We applied HSLDA to data from two domains: predicting medical
 diagnosis codes from hospital discharge summaries and predicting product
 categories from Amazon.com product descriptions.
 
@@ -16,16 +16,14 @@ categories from Amazon.com product descriptions.
 
 \subsubsection{Discharge Summaries and ICD-9 Codes}
 
-Discharge summaries are authored by clinicians to summarize the course of a
-hospitalized patient. The summaries typically contain a record of the patient
-complains, findings and diagnoses, along with treatment and hospital course.
-For each admission trained medical coders review the information in the
+Discharge summaries are authored by clinicians to summarize patient hospitalization course. 
+The summaries typically contain a record of patient
+complaints, findings and diagnoses, along with treatment and hospital course.
+For each hospitalization, trained medical coders review the information in the
 discharge summary and assign a series of diagnoses codes. Coding follows the
 ICD-9-CM controlled terminology, an international diagnostic classification for
 epidemiological, health management, and clinical
-purposes.\footnote{http://www.cdc.gov/nchs/icd/icd9cm.htm} As such, the ICD-9
-codes constitute a labeling of a patient's diagnoses based on a discharge
-summary. The ICD-9 codes are organized in a rooted-tree structure, with each
+purposes.\footnote{http://www.cdc.gov/nchs/icd/icd9cm.htm}  The ICD-9 codes are organized in a rooted-tree structure, with each
 edge representing an is-a relationship between parent and child, such that the
 parent diagnosis subsumes the child diagnosis. For example, the code for
 {}``Pneumonia due to adenovirus'' is a child of the code for {}``Viral
@@ -36,19 +34,22 @@ assignments~\cite{Birmetal2005}, and sometimes make
 mistakes~\cite{FarzandipourEtAl10}. 
 
 The task of automatic ICD-9 coding has been investigated in the clinical
-domain. Much of the work was triggered by the 2007 medical NLP community
-challenge~\cite{Challenge07}. The data in the challenge, however, differs from 
-ours in its scope. The datasets were smaller (1,000 training and 1,000 testing
-documents) and focused on radiology reports with a restricted number of ICD-9
-codes (45 of them, compared to 7K+ in our dataset). Methods ranged from manual
+domain.  Methods range from manual
 rules to online learning~\cite{Crammer2007,Goldstein2007,Farkas2008}.
 Other work had leveraged larger datasets and experimented with K-nearest
 neighbor, Naive Bayes, support vector machines, Bayesian Ridge Regression, as
 well as simple keyword mappings, all with promising
 results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Ruch2008,Lita2008}.
 
+%Much of the work was triggered by the 2007 medical NLP community
+%challenge~\cite{Challenge07}.
+%The data in the challenge, however, differs from 
+%ours in its scope. The datasets were smaller (1,000 training and 1,000 testing
+%documents) and focused on radiology reports with a restricted number of ICD-9
+%codes (45 of them, compared to 7K+ in our dataset). 
+
 Our dataset was gathered from the clinical data warehouse of
-NewYork-Presbyterian Hospital. It consists of 6,000 discharge summaries and
+a large metropolitan hospital. It consists of 6,000 discharge summaries and
 their associated ICD-9 codes (7,298 distinct codes overall), representing all
 the discharges from the hospital in 2009. Summaries have 8.39 associated ICD-9
 codes on average (std dev=5.01) and contain an average of 536.57 terms after
@@ -56,10 +57,9 @@ preprocessing (std dev=300.29). We split our dataset into 5,000 discharge
 summaries for training and 1,000 for testing.
 
 The text of the discharge summaries was tokenized with
-NLTK.\footnote{http://www.nltk.org} Vocabulary was determined as the top 10,000
-tokens with highest document frequency (exclusive of names,
-places and other identifying numbers). Each discharge summary is thus
-represented as counts over the 10,000-word vocabulary. The study was approved
+NLTK.\footnote{http://www.nltk.org} A fixed vocabulary was formed by taking
+the top 10,000 tokens with highest document frequency (exclusive of names,
+places and other identifying numbers). The study was approved
 by the Institutional Review Board and follows HIPAA (Health
 Insurance Portability and Accountability Act) privacy guidelines.
 
@@ -72,8 +72,8 @@ Insurance Portability and Accountability Act) privacy guidelines.
 \subsubsection{Product Descriptions and Categorizations}
 
 Amazon.com, an online retail store, organizes its catalog of 
-products in a hierarchy and provides product descriptions
-for most products in their catolog.  Products can be discovered by users
+products in a mulitply-rooted hierarchy and provides textual product descriptions
+for most products.  Products can be discovered by users
 through query-based searching or through product category exploration. Top-level
 product categories are displayed on the front page of the website and lower
 level categories can be discovered by choosing one of the top-level categories.
@@ -85,11 +85,11 @@ Product descriptions were obtained separately from the
 Amazon.com website directly. We limited our dataset to the collection of DVDs
 in the product catalog.
 
-We were able to deduce the structure of the
-hierarchy for the Amazon.com products because all ancestors in the
-hierarchy were included with each category label. For example, {}``DVD / Genres
-/ Science Fiction \& Fantasy / Classic Sci-Fi'' is a single product category 
-for the DVD, {}``The Time Machine.''
+%We were able to deduce the structure of the
+%hierarchy for the Amazon.com products because all ancestors in the
+%hierarchy were included with each category label. For example, {}``DVD / Genres
+%/ Science Fiction \& Fantasy / Classic Sci-Fi'' is a single product category 
+%for the DVD, {}``The Time Machine.''
 
 Our dataset contains 15,130 product descriptions for training and 1,000
 for testing. The product descriptions are shorter than the discharge summaries
@@ -101,18 +101,16 @@ consists of the most frequent 30,000 words omitting stopwords.
 
 We evaluated HSLDA along with three other closely related models against 
 these two datasets. The comparison models included sLDA with independent 
-regressors (hierarchical constraints on labels ignored), HSLDA fit by 
-performing LDA followed by tree-conditional regressions, and HSLDA fit 
-with fixed random regression parameters. These models were chosen to 
-highlight several aspects of the model including performance in the absence 
-of hierarchical constraints, the effect of the combined inference procedure, and regression
+regressors (hierarchical constraints on labels ignored), HSLDA fit by first
+performing LDA then fitting tree-conditional regressions. These models were chosen to 
+highlight several aspects of HSLDA including performance in the absence 
+of hierarchical constraints, the effect of the combined inference, and regression
 performance attributable solely to the hierarchical constraints.
 
 sLDA with independent regressors is the most salient comparison model
 for our work. The distinguishing factor between HSLDA and sLDA is the
 addition structure imposed on the label space, a distinction that we
-hypothesize will result in a difference in predictive performance. 
-Aside from this, all other features of sLDA are preserved between the two models.
+hypothesized would result in a difference in predictive performance. 
 
 There are two components to HSLDA, LDA and a hierarchically constrained response.
 The second comparison model is HSLDA fit by performing LDA first followed by
@@ -123,10 +121,10 @@ has been shown to improve performance in sLDA \citep{BleiMcAuliffe2008}. This
 comparison model examines not the structuring of the label space, but the benefit
 of combined inference over both the documents and the label space.
 
-The last comparison model is HSLDA with fixed and randomly selected regression
-parameters. There is a baseline benefit that the structure in the label space 
-provides for the prediction of labels. This comparison model is intended to
-quantify the contribution of the structure alone.
+%The last comparison model is HSLDA with fixed and randomly selected regression
+%parameters. There is a baseline benefit that the structure in the label space 
+%provides for the prediction of labels. This comparison model is intended to
+%quantify the contribution of the structure alone.
 
 For all of these models, particular attention was payed to the settings of the
 prior parameters for the regression coefficients. These parameters implement an
@@ -161,8 +159,9 @@ domains.
 To evaluate the performance of these models, we established a gold standard for comparison.
 For each dataset, a held out set of 1000 documents and labels were
 reserved for evaluation and predictive performance was evaluated against a standard derived
-from the observed labeling. Specifically, ancestors of observed nodes were ignored, observed nodes 
-were considered positive and unobserved nodes were considered to be negative. This method of 
+from the observed labeling. To make the comparison as fair as possible, 
+ancestors of observed nodes were ignored, observed nodes 
+were considered positive and descendents of observed nodes were considered to be negative. This method of 
 defining positive and negative labels was chosen to be as fair as possible to all models
 being compared.  In particular, since the sLDA model does not enforce the hierarchical
 constraints, the models can be compared on a more equal footing by considering only on the observed labels
@@ -224,7 +223,16 @@ under more or less stringent requirements for predicting positive labels.
 
 Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
 relative to the three comparison models as a function of the prior mean
-on regression coefficient. Figure \ref{fig:1a} demo.
+on regression coefficients as a receiver operating characteristic (ROC) curve. 
+For low values of the auxiliary variable
+threshold, the models predict labels in a more sensitive and less specific
+manner, creating the points in the upper right corner of the ROC curve. As
+the auxiliary variable threshold is increased, the models predict in a less
+sensitive and more specific manner, creating the points in the lower left
+hand corner of the ROC curve. For all values of the prior mean in both datasets
+HSLDA outperforms sLDA with independent regressors. In the case of HSLDA with
+separately trained regression, HSLDA outperforms in the clinical dataset but
+performs equally well across the board with the retail product dataset.
 
 \begin{figure}%[htbp]
 \begin{center}
