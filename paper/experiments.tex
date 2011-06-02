@@ -1,4 +1,3 @@
-
 We applied HSLDA to data from two domains: predicting medical
 diagnosis codes from hospital discharge summaries and predicting product
 categories from Amazon.com product descriptions.
@@ -16,8 +15,8 @@ categories from Amazon.com product descriptions.
 
 \subsubsection{Discharge Summaries and ICD-9 Codes}
 
-Discharge summaries are authored by clinicians to summarize patient hospitalization course. 
-The summaries typically contain a record of patient
+Discharge summaries are authored by clinicians to summarize patient
+hospitalization course. The summaries typically contain a record of patient
 complaints, findings and diagnoses, along with treatment and hospital course.
 For each hospitalization, trained medical coders review the information in the
 discharge summary and assign a series of diagnoses codes. Coding follows the
@@ -71,9 +70,9 @@ Insurance Portability and Accountability Act) privacy guidelines.
 
 \subsubsection{Product Descriptions and Categorizations}
 
-Amazon.com, an online retail store, organizes its catalog of 
-products in a mulitply-rooted hierarchy and provides textual product descriptions
-for most products.  Products can be discovered by users
+Amazon.com, an online retail store, organizes its catalog of products in a
+mulitply-rooted hierarchy and provides textual product descriptions 
+for most products. Products can be discovered by users
 through free-text search and product category exploration. Top-level
 product categories are displayed on the front page of the website and lower
 level categories can be discovered by choosing one of the top-level categories.
@@ -99,27 +98,28 @@ consists of the most frequent 30,000 words omitting stopwords.
 
 \subsection{Comparison Models}
 
-We evaluated HSLDA along with three other closely related models against 
+We evaluated HSLDA along with three closely related models against 
 these two datasets. The comparison models included sLDA with independent 
 regressors (hierarchical constraints on labels ignored), HSLDA fit by first
-performing LDA then fitting tree-conditional regressions. These models were chosen to 
-highlight several aspects of HSLDA including performance in the absence 
-of hierarchical constraints, the effect of the combined inference, and regression
-performance attributable solely to the hierarchical constraints.
+performing LDA then fitting tree-conditional regressions. These models were
+chosen to  highlight several aspects of HSLDA including performance in the
+absence  of hierarchical constraints, the effect of the combined inference, and
+regression performance attributable solely to the hierarchical constraints.
 
 sLDA with independent regressors is the most salient comparison model
 for our work. The distinguishing factor between HSLDA and sLDA is the
 addition structure imposed on the label space, a distinction that we
 hypothesized would result in a difference in predictive performance. 
 
-There are two components to HSLDA, LDA and a hierarchically constrained response.
-The second comparison model is HSLDA fit by performing LDA first followed by
-performing inference over the hierarchically constrained label space. In this
-comparison model, the separate inference processes do not allow the responses
-to influence the low dimensional structure inferred by LDA. Combined inference
-has been shown to improve performance in sLDA \citep{BleiMcAuliffe2008}. This
-comparison model examines not the structuring of the label space, but the benefit
-of combined inference over both the documents and the label space.
+There are two components to HSLDA, LDA and a hierarchically constrained
+response. The second comparison model is HSLDA fit by performing LDA first
+followed by performing inference over the hierarchically constrained label
+space. In this comparison model, the separate inference processes do not allow
+the responses to influence the low dimensional structure inferred by LDA.
+Combined inference has been shown to improve performance in sLDA
+\citep{BleiMcAuliffe2008}. This comparison model examines not the structuring
+of the label space, but the benefit of combined inference over both the
+documents and the label space. 
 
 %The last comparison model is HSLDA with fixed and randomly selected regression
 %parameters. There is a baseline benefit that the structure in the label space 
