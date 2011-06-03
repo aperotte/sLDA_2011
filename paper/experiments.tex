@@ -237,20 +237,20 @@ predictive performance as a function of the auxiliary variable threshold,
 a single model was fit for each model type and prediction was evaluated
 based on predictive samples drawn subject to different auxiliary variable
 thresholds. These methods are significantly different since the prior mean
-is varied prior to inference and the auxiliary variable threshold is varied
+is varied prior to inference, and the auxiliary variable threshold is varied
 following inference.
 %However, as intended, they both highlight model performance 
 %under more or less stringent requirements for predicting positive labels.
 
 Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
-relative to the three comparison models as a function of the prior mean
+relative to the two comparison models as a function of the prior mean
 on regression coefficients as a receiver operating characteristic (ROC) curve. 
 For low values of the auxiliary variable threshold, the models predict labels
 in a more sensitive and less specific manner, creating the points in the upper
 right corner of the ROC curve. As the auxiliary variable threshold is
 increased, the models predict in a less sensitive and more specific manner,
 creating the points in the lower left hand corner of the ROC curve. For all
-values of the prior mean in both datasets HSLDA outperforms sLDA with
+values of the prior mean in both datasets, HSLDA outperforms sLDA with
 independent regressors. In the case of HSLDA with separately trained
 regression, HSLDA outperforms in the clinical dataset but performs equally well
 across the board with the retail product dataset. 
