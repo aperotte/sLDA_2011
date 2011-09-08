@@ -1,0 +1,48 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[SNA(2004)]{SNAP}
+Stanford network analysis platform.
+\newblock \texttt{http://snap.stanford.edu/}, 2004.
+
+\bibitem[Blei and McAuliffe(2008)]{BleiMcAuliffe2008}
+D.~Blei and J.~McAuliffe.
+\newblock Supervised topic models.
+\newblock \emph{Advances in Neural Information Processing}, 20:\penalty0
+  121--128, 2008.
+
+\bibitem[Gelman et~al.(2004)Gelman, Carlin, Stern, and Rubin]{gelmanbda04}
+A.~Gelman, J.~B. Carlin, H.~S. Stern, and D.~B. Rubin.
+\newblock \emph{Bayesian Data Analysis}.
+\newblock Chapman and Hall/CRC, 2nd ed. edition, 2004.
+
+\bibitem[Griffiths and Steyvers(2004)]{Griffiths04}
+T.~L. Griffiths and M.~Steyvers.
+\newblock Finding scientific topics.
+\newblock \emph{PNAS}, 101\penalty0 (suppl. 1):\penalty0 5228--5235, 2004.
+
+\bibitem[Lacoste-Julien et~al.()Lacoste-Julien, Sha, and Jordan]{DiscLDA}
+S.~Lacoste-Julien, F.~Sha, and M.~I. Jordan.
+\newblock {D}isc{LDA}: Discriminative learning for dimensionality reduction and
+  classification.
+\newblock In \emph{Neural Information Processing Systems}, pages 897--904.
+
+\bibitem[Ramage et~al.(2009)Ramage, Hall, Nallapati, and Manning]{Ramage2009}
+D.~Ramage, D.~Hall, R.~Nallapati, and C.~D. Manning.
+\newblock Labeled {LDA}: a supervised topic model for credit attribution in
+  multi-labeled corpora.
+\newblock In \emph{Proceedings of the 2009 Conference on Empirical Methods in
+  Natural Language Processing}, pages 248--256, 2009.
+
+\bibitem[Wallach et~al.(2009)Wallach, Mimno, and McCallum]{WallachMiMc2009}
+Hanna Wallach, David Mimno, and Andrew McCallum.
+\newblock Rethinking {LDA}: Why priors matter.
+\newblock In Y.~Bengio, D.~Schuurmans, J.~Lafferty, C.~K.~I. Williams, and
+  A.~Culotta, editors, \emph{Advances in Neural Information Processing Systems
+  22}, pages 1973--1981. 2009.
+
+\end{thebibliography}

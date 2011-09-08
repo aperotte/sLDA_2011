@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{nips10submit_e,times}
+%\documentstyle[nips07submit_09,times]{article}
+\usepackage[square,numbers]{natbib}
+\usepackage{amsmath, epsfig}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{easybmat}
+\usepackage{footmisc}
+\usepackage{lscape}
+\usepackage{subfigure}
+%\usepackage{float}
+\renewcommand\algorithmiccomment[1]{// \textit{#1}}
+%
+\newcommand{\ignore}[1]{}
+\newcommand{\comment}[1]{}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Hierarchically Supervised Latent Dirichlet Allocation}
+%Supervised Topic Modeling in Clinical Text}
+
+\author{
+Adler Perotte\hspace{1cm} Nicholas Bartlett \hspace{1cm} No\'emie Elhadad \hspace{1cm} Frank Wood\\
+Columbia University, New York, NY 10027, USA \\
+\texttt{\{ajp9009@dbmi,bartlett@stat,noemie@dbmi,fwood@stat\}.columbia.edu}
+%\texttt{pfau@neurotheory.columbia.edu} 
+%\texttt{\{bartlett,fwood\}@stat.columbia.edu} 
+}
+
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+\newcommand{\X}{\mathcal{X}}
+
+
+%\nipsfinalcopy
+
+\begin{document}
+
+\maketitle
+
+%% \begin{abstract}
+%% \input{abstract}
+%% \end{abstract}
+
+
+
+
+%% \section{Abstract}
+%% \label{sec:abstract}
+\input{abstract}
+
+
+%\section{Background}
+
+
+
+
+%% \section{Model}
+%% \label{sec:model}
+%% \input{model}
+
+%% \section{Inference}
+%% \label{sec:inference}
+%% \input{inference}
+
+%% \section{Related Work}
+
+%% \label{sec:related_work} 
+%% \input{related_work}
+
+%% \section{Experiments}
+
+%% \label{sec:experiments}
+%% \input{experiments}
+
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\subfigure[][\label{1a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors}}
+%\subfigure[][\label{1b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs}}
+%\subfigure[][\label{1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
+%\subfigure[][\label{1d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+%\caption{Out-of-sample ICD-9 code prediction from patient free-text discharge records.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{1a} includes ancestor prediction performance,  \subref{1b} results are for given (leaf) labels alone.  Bottom row: \subref{1c} are the sensitivity curves from \subref{1b} aligned on threshold value,  \subref{1d} are the 1-specificity curves from \subref{1b} aligned on threshold value.}
+%\label{fig:icd9}
+%\end{center}
+%\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\subfigure[][\label{2a}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_ancestors_amazon}}
+%\subfigure[][\label{2b}]{\includegraphics[width=.49\textwidth]{figs/ROC_comparison_leafs_amazon}}
+%\subfigure[][\label{2c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs_amazon}}
+%\subfigure[][\label{2d}]{\includegraphics[width=.49\textwidth]{figs/one_m_spec_comparison_leafs}}
+%\caption{Out-of-sample Amazon product code predictions from product free-text descriptions.  In all figures solid is HSLDA, dashed are independent regressors + sLDA (hierarchical constraints on labels ignored), dotted is HSLDA fit by running LDA first then running tree-conditional regressions, and dot-dashed is HSLDA fit with fixed random regression parameters.  Top row:  \subref{2a} includes ancestor prediction performance,  \subref{2b} results are for given (leaf) labels alone.  Bottom row: \subref{2c} are the sensitivity curves from \subref{2b} aligned on threshold value,  \subref{2d} are the 1-specificity curves from \subref{2b} aligned on threshold value.}
+%\label{fig:icd9}
+%\end{center}
+%\end{figure}
+
+%We ran the Gibbs sampler for two days on 500 documents with 20 topics to learn the sLDA model which we then followed by a prediction of ICD-9 codes for 100 documents. The prediction resulted in 38 documents with at least 1 ICD-9 code assignment while some had over 200 assignments.
+
+
+%\begin{figure}[h]%tbp] %  figure placement: here, top, bottom, or page
+%   \centering
+%   \includegraphics[width=4in]{number_of_codes_histogram} 
+%   \caption{distribution of ICD-9 code assignments over all of the 100 documents predicted}
+%   \label{fig:example}
+%\end{figure}
+
+
+%The accuracy of the prediction was tested against the actual ICD-9 codes in the EHR record for each discharge summary.  Different statistical measures were applied to asses the predictions.
+
+
+%\begin{figure}[h]%tbp] %  figure placement: here, top, bottom, or page
+%   \centering
+%   \includegraphics[width=4in]{signal_detection} 
+%   \caption{sensitivity, specificity, precision, recall and F-measure.}
+%   \label{fig:example}
+%\end{figure}
+
+
+%Although the sensitivty is not as high as we would have hoped, it is important to note that the sLDA was run on a very limited sample of documents (500) due to time constraints.  Additionally, the “gold standard” data used are actual hospital results which are very noisy given the incompleteness and introduction of human error.
+
+
+
+%% \section{Discussion}
+%% \label{sec:discussion}
+%% \input{discussion}
+%We have proposed a new method for prediction of ICD-9 codes given a medical discharge summary note.  Our method explicitly takes advantage of the ICD-9 hierarchical IS-A relationships as well as the word distributions in each document.  We used Gibbs sampling for a supervised latent dirichlet allocation model to learn a distribution of words over twenty topics and their appropriate ICD-9 codes (response variable). The model was then tested on 100 discharge summaries for which the ICD-9 diagnoses were known.  The amount of ICD-9 codes produced for some discharge summaries was quite high because of the way the model worked with the IS-A hierarchy, highlighting the completeness of ICD-9 coding when using this sLDA model.  Overall, the model had extremely good specificity while the sensitivity was lower than anticipated.  Given our limited set of documents, and very noisy gold standard it would not be accurate to discount the use of sLDA in medical document classification and automatic coding.
+%In future work, we plan to significantly expand the set of documents used to train the model (up to 15,000), as well as run several different iterations to learn the optimal topic number.  
+
+
+%A more automated approach for coding patient visits with the ICD-9 hierarchy has great promise to  reduce health care costs and increase completeness of medical coded data.  We hope that this implementation of supervised LDA will serve as preliminary work for a much larger study with more documents in the future.
+
+
+\begin{small} \bibliographystyle{plainnat} \bibliographystyle{plainnat}
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+
+\end{small} 
+
+\end{document}
+

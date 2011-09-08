@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Illegal, another \bibstyle command---line 10 of file main.aux
+ : \bibstyle
+ :          {plainnat}
+I'm skipping whatever remains of this command
+Illegal, another \bibstyle command---line 11 of file main.aux
+ : \bibstyle
+ :          {plainnat}
+I'm skipping whatever remains of this command
+Database file #1: refs.bib
+You're missing a field name---line 331 of file refs.bib
+ :   
+ :   %series = {EMNLP '09},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in SNAP
+Warning--empty year in DiscLDA
+Warning--empty year in DiscLDA
+Warning--empty publisher in WallachMiMc2009
+You've used 7 entries,
+            2773 wiz_defined-function locations,
+            678 strings with 6748 characters,
+and the built_in function-call counts, 3696 in all, are:
+= -- 329
+> -- 197
+< -- 5
++ -- 66
+- -- 59
+* -- 293
+:= -- 524
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 39
+chr.to.int$ -- 7
+cite$ -- 19
+duplicate$ -- 178
+empty$ -- 316
+format.name$ -- 69
+if$ -- 808
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 7
+newline$ -- 42
+num.names$ -- 26
+pop$ -- 98
+preamble$ -- 1
+purify$ -- 32
+quote$ -- 0
+skip$ -- 143
+stack$ -- 0
+substring$ -- 167
+swap$ -- 38
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 72
+warning$ -- 4
+while$ -- 30
+width$ -- 0
+write$ -- 94
+(There were 3 error messages)

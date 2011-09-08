@@ -1,0 +1,78 @@
+In this work we extend supervised latent Dirichlet allocation (sLDA)
+\cite{BleiMcAuliffe2008} to take advantage of hierarchical supervision. sLDA
+is latent Dirichlet allocation (LDA) \cite{Blei2003} augmented with per
+document ``supervision,'' often taking the form of a single numerical or
+categorical label. It has been demonstrated that the signal provided by such
+supervision can result in better, task-specific document models and can also
+lead to good label prediction for out-of-sample data \cite{BleiMcAuliffe2008}.
+It also has been demonstrated that sLDA has been shown to outperform both LASSO
+(L1 regularized least squares regression) and LDA followed by least squares
+regression~\cite{BleiMcAuliffe2008}. sLDA can be applied to data of the type
+we consider in this paper; however, doing so requires ignoring the hierarchical
+dependencies amongst the labels. In Section~\ref{sec:experiments} we constrast
+HSLDA with sLDA applied in this way. 
+
+%While there has been much work in multi-label classification of text and
+%text modeling in general, we focus here on topic modeling approaches.
+%Latent Dirichlet allocation (LDA) is a generative probabilistic model which
+%represents documents as a mixed-membership bag of word. Each document is
+%represented as a collection of words, generated from a set of topic assignments
+%(one for each word), where each topic assignment is drawn from a distribution
+%over topics~\citep{Blei2003}. sLDA is latent Dirichlet allocation (LDA)
+%\cite{Blei2003} augmented with per-document labeling, often taking the form of
+%a single numerical or categorical label. Examples of labels include ratings
+%associated with online reviews, grades for essays, and the number of times a
+%webpage is linked. This approach has been shown to outperform both LASSO
+%(L1 regularized least squares regression) and LDA followed by least
+%squares regression~\cite{BleiMcAuliffe2008}.
+
+%Latent dirichlet allocation (LDA) is a generative
+%probabilistic model of corpora that represents documents as a mixed
+%membership bag-of-words. Also known as topic models, these models
+%infer the latent structure, or topics, of documents in a corpus. Each
+%document is represented as a collection of words, generated from a
+%set of topic assignments (one for each word), where each topic assignment
+%is drawn from a distribution over topics \citep{Blei2003}.
+
+%Supervised latent Dirichlet allocation (sLDA) builds on LDA by incorporating
+%supervision in the form of an observed exponential family response 
+%variable per document. As a result, sLDA
+%infers topics such that the model predicts the response variable while
+%improing word likelihood.  This approach has been shown to outperform both LASSO
+%(L1 regularized least squares regression) and LDA followed by least
+%squares regression \citep{BleiMcAuliffe2008}.
+
+Other models that incorporate LDA and supervision include
+LabeledLDA\citep{Ramage2009} and DiscLDA\citep{DiscLDA}.  Various applications of these models to 
+computer vision and document networks have been explored
+\citep{wangbleifeifei08,RelationalLDA} .
+None of these models, however, leverage dependency structure in the label space.
+
+In other work, researchers have classified documents into a hierarchy (a closely related task) with naive Bayes classifiers
+and support vector machines. Most of this work has been demonstrated on relatively
+small datasets, small label spaces, and has focused on single label classification without
+a model of documents such as LDA~\citep{mccallum99building,Dumais2000HCW,Kollerilprints291,Chakrabarti1998SFS}.
+
+%One set of models that are particularly relevant to HSLDA are Chang
+%and Blei's hierarchical models for document networks (Relational Topic
+%Models). In that family of models, they encountered a similar scenario
+%where the lack of a link did not truly indicate absence. In hierarchically
+%labeled data, negative labels are uncommon and the lack of a label
+%in the hierarchy is not equivalent to a negative label. Therefore,
+%as in the work of Chang and Blei, we employ regularization to account
+%for the lack of negative labels. This will be discussed further in
+
+% Noemie: check out what I wrote here, because I am not really sure this is
+% correct. 
+%There have been several models that incorporate both latent models of text and
+%some form of
+%supervision~\citep{Ramage2009,DiscLDA,wangbleifeifei08,RelationalLDA}. One set 
+%of models that are particularly relevant to HSLDA are Chang and Blei's
+%hierarchical models for document networks (Relational Topic Models). In that
+%family of models, they encountered a similar scenario where an unselected label 
+%does not always indicate absence. In hierarchical labels, this phenomenon is
+%even more pervasive -- there are no explicit negative labels, but it is also
+%unclear how to treat the parents of selected labels. Like in the work of Chang
+%and Blei, we employ regularization to account for the lack of negative
+%labeling. In our experiments, we look at the impact of assigning positive and
+%negative instances to the ancestors of selected labels.

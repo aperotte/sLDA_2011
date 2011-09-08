@@ -1,0 +1,28 @@
+We introduce hierarchically supervised latent Dirichlet allocation (HSLDA), a
+model for hierarchically and multiply labeled bag-of-word data.  Examples of
+such data include web pages and their placement in directories, product
+descriptions and associated categories from product hierarchies, and free-text
+clinical records and their assigned diagnosis codes. Out-of-sample label
+prediction is the primary goal of this work, but improved lower-dimensional
+representations of the bag-of-word data are also of interest.
+%We define a model that uses probit regressors on a conditionally dependent
+%label hierarchy tied to latent Dirichlet allocation (LDA). 
+We demonstrate HSLDA on large-scale data from clinical document labeling and
+retail product categorization tasks. We show that leveraging the structure from
+hierarchical labels improves out-of-sample label prediction substantially when
+compared to models that do not. %Furthermore, we show evidence
+%that the resulting HSLDA topics are more descriptive of the underlying data
+%than sLDA topics, which ignore the label hierarchy.
+
+%Topic models are unsupervised models well suited to data exploration and information retrieval.  Supervised topic models use side-information, labels and the like, to improve the learned representations.
+
+%The benefits of supervision in topic modeling 
+%Current medical record keeping technology relies heavily upon human
+%capacity to effectively summarize and infer information from free-text
+%physician notes. We propose a novel method to suggest diagnostic code
+%assignment for patient visits, based upon narrative medical notes.
+%We applied a supervised latent Dirichlet allocation model to a corpora
+%of free-text medical notes from NewYork - Presbyterian Hospital to
+%infer a set of specific ICD-9 codes for each patient note. Evaluation
+%of the predictions were conducted by comparison to a gold-standard
+%set of ICD-9s assigned to a set of patient notes. 
