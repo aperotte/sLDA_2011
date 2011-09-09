@@ -16,12 +16,11 @@ Our work operates within the framework of topic modeling. Our approach learns
 topic models of the underlying data and labeling strategies in a joint model,
 while leveraging the hierarchical structure of the labels. For the sake of
 simplicity, we focus on is-a hierarchies, but the model can be
-applied to other structured label spaces. We extend supervised latent Dirichlet
+applied to other structured label spaces. Our work extends supervised latent Dirichlet
 allocation (sLDA)~\cite{BleiMcAuliffe2008} to take advantage of hierarchical
-supervision. We propose an efficient way to incorporate hierarchical
-information into the model. We hypothesize that the context of labels within
-the hierarchy provides valuable information about labeling. Other models that incorporate LDA and supervision include
-LabeledLDA\citep{Ramage2009} and DiscLDA\citep{DiscLDA}. None of these models, however, leverage dependency structure in the label space.
+supervision and proposes an efficient way to incorporate such information into the model. 
+We hypothesize that the context of labels within
+the hierarchy provides valuable information about labeling. Other models, such as LabeledLDA\citep{Ramage2009}, incorporate LDA and supervision; However, none of these models leverage dependency structure in the label space.
 
 We demonstrate our model on large, real-world datasets in the clinical and web
 retail domains. We observe that hierarchical information is valuable when
@@ -30,7 +29,6 @@ classification. Our results show that a joint, hierarchical model outperforms a
 classification with unstructured labels as well as a disjoint model, where the
 topic model and the hierarchical classification are inferred
 independently of each other. 
-
 
 HSLDA is a model for hierarchically, multiply-labeled, bag-of-word data.  We
 will refer to individual groups of bag-of-word data as documents.  Let $w_{n,d}
@@ -44,14 +42,7 @@ also in the set of labels.
  We will for exposition purposes assume that this label set has hard ``is-a''
  parent-child constraints (explained later), although this assumption can be
  relaxed at the cost of more computationally complex inference.  Such a label hierarchy forms a multiply rooted tree.  Without loss of generality we will consider a tree with a single root $r\in\mathcal{L}$.  Each document has a variable $y_{l,d} \in \{-1,1\}$ for every label which indicates whether the label is applied to document $d$ or not.   In most cases $y_{i,d}$ will be unobserved, in some cases we will be able to fix its value because of  constraints on the label hierarchy, and in the relatively minor remainder its value will be observed.  In the applications we consider, only positive label applications are observed.  
- 
-\begin{figure}[t]
-%tbp] %  figure placement: here, top, bottom, or page
- \centering \includegraphics[scale=0.25]{Graphical_Model-final} \caption{HSLDA graphical model}
 
-
-\label{fig:graphical_model} 
-\end{figure}
 
 %In HSLDA, the bag-of-word document data is modeled using the LDA
 %mixed-membership mixture model with global topic estimation.
@@ -67,6 +58,15 @@ $\mathcal{N}_{K}(\cdot)$ is the $K$-dimensional Normal distribution,
 $\mathbf{I}_{K}$ is the $K$ dimensional identity matrix,  $\mathbf{1}_d$ is the
 $d$-dimensional vector of all ones, and $\mathbb{I}(\cdot)$ is an indicator
 function that takes the value $1$ if its argument is true and $0$ otherwise. 
+
+\begin{figure}[t]
+%tbp] %  figure placement: here, top, bottom, or page
+ \centering \includegraphics[scale=0.25]{Graphical_Model-final} \caption{HSLDA graphical model}
+
+
+\label{fig:graphical_model} 
+\end{figure}
+
 
 Posterior inference in HSLDA was performed using Gibbs sampling and Markov chain Monte Carlo.  Note that, like in collapsed Gibbs samplers for LDA \cite{Griffiths04}, we have analytically marginalized out the parameters $\boldsymbol{\phi}_{1:K}$
 and $\boldsymbol{\theta}_{1:D}$. HSLDA also employs a hierarchical Dirichlet prior over topic assignments (i.e.,~$\boldsymbol\beta$ is estimated from data rather than assumed to be symmetric).  This has been shown to improve the quality and stability of inferred topics \citep{WallachMiMc2009}. The hyperparameters $\alpha$, $\alpha^{\prime}$, and $\gamma$ are

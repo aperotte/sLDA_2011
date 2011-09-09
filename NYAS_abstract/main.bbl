@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -24,12 +24,6 @@ A.~Gelman, J.~B. Carlin, H.~S. Stern, and D.~B. Rubin.
 T.~L. Griffiths and M.~Steyvers.
 \newblock Finding scientific topics.
 \newblock \emph{PNAS}, 101\penalty0 (suppl. 1):\penalty0 5228--5235, 2004.
-
-\bibitem[Lacoste-Julien et~al.()Lacoste-Julien, Sha, and Jordan]{DiscLDA}
-S.~Lacoste-Julien, F.~Sha, and M.~I. Jordan.
-\newblock {D}isc{LDA}: Discriminative learning for dimensionality reduction and
-  classification.
-\newblock In \emph{Neural Information Processing Systems}, pages 897--904.
 
 \bibitem[Ramage et~al.(2009)Ramage, Hall, Nallapati, and Manning]{Ramage2009}
 D.~Ramage, D.~Hall, R.~Nallapati, and C.~D. Manning.
