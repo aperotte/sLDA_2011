@@ -20,7 +20,7 @@ applied to other structured label spaces. Our work extends supervised latent Dir
 allocation (sLDA)~\cite{BleiMcAuliffe2008} to take advantage of hierarchical
 supervision and proposes an efficient way to incorporate such information into the model. 
 We hypothesize that the context of labels within
-the hierarchy provides valuable information about labeling. Other models, such as LabeledLDA\citep{Ramage2009}, incorporate LDA and supervision; However, none of these models leverage dependency structure in the label space.
+the hierarchy provides valuable information about labeling. Other models, such as LabeledLDA~\citep{Ramage2009}, incorporate LDA and supervision; however, none of these models leverage dependency structure in the label space.
 
 We demonstrate our model on large, real-world datasets in the clinical and web
 retail domains. We observe that hierarchical information is valuable when
@@ -36,11 +36,11 @@ will refer to individual groups of bag-of-word data as documents.  Let $w_{n,d}
 = \{w_{1,d},\ldots,w_{1,N_d}\}$ be the  set of $N_d$ observations in document
 $d$.  Let there be $D$ such documents and let the size of the vocabulary be
 $V=|\Sigma|$.  Let the set of labels be $\mathcal{L}=\left\{
-  l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $. Each label labels
+  l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $. Each label
 $l \in \mathcal{L}$, except root, has a parent $\mathrm{pa}(l) \in \mathcal{L}$
 also in the set of labels. 
  We will for exposition purposes assume that this label set has hard ``is-a''
- parent-child constraints (explained later), although this assumption can be
+ parent-child constraints, although this assumption can be
  relaxed at the cost of more computationally complex inference.  Such a label hierarchy forms a multiply rooted tree.  Without loss of generality we will consider a tree with a single root $r\in\mathcal{L}$.  Each document has a variable $y_{l,d} \in \{-1,1\}$ for every label which indicates whether the label is applied to document $d$ or not.   In most cases $y_{i,d}$ will be unobserved, in some cases we will be able to fix its value because of  constraints on the label hierarchy, and in the relatively minor remainder its value will be observed.  In the applications we consider, only positive label applications are observed.  
 
 
@@ -52,12 +52,13 @@ hierarchy of probit regressors\cite{gelmanbda04}. The HSLDA graphical model is g
 Figure~\ref{fig:graphical_model}. In the model, $K$ is the number of LDA
 ``topics'' (distributions over the elements of $\Sigma$), $\boldsymbol\phi_k$
 is a distribution over ``words,'' $\boldsymbol\theta_d$ is a document-specific
-distribution over topics, $\boldsymbol\beta$ is a global distribution over
-topics, Dir$_{K}(\cdot)$ is a $K$-dimensional Dirichlet distribution,
-$\mathcal{N}_{K}(\cdot)$ is the $K$-dimensional Normal distribution,
-$\mathbf{I}_{K}$ is the $K$ dimensional identity matrix,  $\mathbf{1}_d$ is the
-$d$-dimensional vector of all ones, and $\mathbb{I}(\cdot)$ is an indicator
-function that takes the value $1$ if its argument is true and $0$ otherwise. 
+distribution over topics, and $\boldsymbol\beta$ is a global distribution over
+topics.
+%% , Dir$_{K}(\cdot)$ is a $K$-dimensional Dirichlet distribution,
+%% $\mathcal{N}_{K}(\cdot)$ is the $K$-dimensional Normal distribution,
+%% $\mathbf{I}_{K}$ is the $K$ dimensional identity matrix,  $\mathbf{1}_d$ is the
+%% $d$-dimensional vector of all ones, and $\mathbb{I}(\cdot)$ is an indicator
+%% function that takes the value $1$ if its argument is true and $0$ otherwise. 
 
 \begin{figure}[t]
 %tbp] %  figure placement: here, top, bottom, or page

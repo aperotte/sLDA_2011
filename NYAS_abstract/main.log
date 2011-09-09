@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.6.11)  9 SEP 2011 17:55
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.6.11)  9 SEP 2011 19:45
 entering extended mode
  %&-line parsing enabled.
 **main
@@ -399,15 +399,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<figs/clin_pred_varying_mu.pdf, id=21, 587.19376pt x 442.65375pt>
+<figs/clin_pred_varying_mu.pdf, id=20, 587.19376pt x 442.65375pt>
 File: figs/clin_pred_varying_mu.pdf Graphic file (type pdf)
 
 <use figs/clin_pred_varying_mu.pdf>
-<figs/amazon_pred_varying_mu.pdf, id=22, 587.19376pt x 442.65375pt>
+<figs/amazon_pred_varying_mu.pdf, id=21, 587.19376pt x 442.65375pt>
 File: figs/amazon_pred_varying_mu.pdf Graphic file (type pdf)
 
 <use figs/amazon_pred_varying_mu.pdf>
-<figs/ROC_comparison_leafs.pdf, id=23, 578.16pt x 433.62pt>
+<figs/ROC_comparison_leafs.pdf, id=22, 578.16pt x 433.62pt>
 File: figs/ROC_comparison_leafs.pdf Graphic file (type pdf)
 
 <use figs/ROC_comparison_leafs.pdf>) (./main.bbl
@@ -418,7 +418,7 @@ azon_pred_varying_mu.pdf> <./figs/ROC_comparison_leafs.pdf>] (./main.aux) )
 Here is how much of TeX's memory you used:
  3024 strings out of 495061
  38536 string characters out of 1182621
- 99046 words of memory out of 3000000
+ 98046 words of memory out of 3000000
  6128 multiletter control sequences out of 15000+50000
  20423 words of font info for 50 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -433,14 +433,13 @@ hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf
 -texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fon
 ts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/shar
-e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/font
-s/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on main.pdf (2 pages, 229098 bytes).
+/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></us
+r/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texliv
+e/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on main.pdf (2 pages, 224919 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
+ 147 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
