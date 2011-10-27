@@ -11,12 +11,12 @@ will refer to individual groups of bag-of-word data as documents.  Let $w_{n,d}
 = \{w_{1,d},\ldots,w_{1,N_d}\}$ be the  set of $N_d$ observations in document
 $d$.  Let there be $D$ such documents and let the size of the vocabulary be
 $V=|\Sigma|$.  Let the set of labels be $\mathcal{L}=\left\{
-  l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $. Each label labels
-$l \in \mathcal{L}$, except root, has a parent $\mathrm{pa}(l) \in \mathcal{L}$
+  l_{1},l_{2},\ldots,l_{\left|\mathcal{L}\right|}\right\} $. Each label
+$l \in \mathcal{L}$, except the root, has a parent $\mathrm{pa}(l) \in \mathcal{L}$
 also in the set of labels. 
  We will for exposition purposes assume that this label set has hard ``is-a''
  parent-child constraints (explained later), although this assumption can be
- relaxed at the cost of more computationally complex inference.  Such a label hierarchy forms a multiply rooted tree.  Without loss of generality we will consider a tree with a single root $r\in\mathcal{L}$.  Each document has a variable $y_{l,d} \in \{-1,1\}$ for every label which indicates whether the label is applied to document $d$ or not.   In most cases $y_{i,d}$ will be unobserved, in some cases we will be able to fix its value because of  constraints on the label hierarchy, and in the relatively minor remainder its value will be observed.  In the applications we consider, only positive label applications are observed.  
+ relaxed at the cost of more computationally complex inference.  Such a label hierarchy forms a multiply rooted tree.  Without loss of generality we will consider a tree with a single root $r\in\mathcal{L}$.  Each document has a variable $y_{l,d} \in \{-1,1\}$ for every label which indicates whether the label is applied to document $d$ or not.   In most cases $y_{i,d}$ will be unobserved, in some cases we will be able to fix its value because of  constraints on the label hierarchy, and in the relatively minor remainder its value will be observed.  In the applications we consider, only positive labels are observed. 
  
 The constraints imposed by an is-a label hierarchy are that if the $l$th label is applied to document $d$, i.e.,~$y_{l,d} = 1$, then all labels in the label hierarchy up to the root are also applied to document $d$, i.e.,~$y_{\mathrm{pa}(l),d} = 1, y_{\mathrm{pa}(\mathrm{pa}(l)),d} = 1, \ldots, y_{r,d}=1.$  Conversely, if a label $l'$ is marked as not applying to a document then no descendant of that label may be applied to the same.   We assume that at least one label is applied to every document.  This is illustrated in Figure~\ref{fig:graphical_model} where the root label is always applied but only some of the descendant labelings are observed as having been applied (diagonal hashing indicates that potentially some of the plated variables are observed).
 %To reiterate, these is-a label hierarchy constraints can be relaxed.

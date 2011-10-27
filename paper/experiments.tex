@@ -47,8 +47,8 @@ results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Lita2008}.%Ruch2008 o
 %documents) and focused on radiology reports with a restricted number of ICD-9
 %codes (45 of them, compared to 7K+ in our dataset). 
 
-Our dataset was gathered from the clinical data warehouse of
-a large metropolitan hospital. It consists of 6,000 discharge summaries and
+Our dataset was gathered from the NewYork-Presbyterian Hospital clinical data warehouse. 
+It consists of 6,000 discharge summaries and
 their associated ICD-9 codes (7,298 distinct codes overall), representing all
 the discharges from the hospital in 2009. All included discharge summaries had associated ICD-9 Codes.
 Summaries have 8.39 associated ICD-9
@@ -93,15 +93,15 @@ in the product catalog.
 
 Our dataset contains 15,130 product descriptions for training and 1,000
 for testing. The product descriptions are shorter than the discharge summaries
-(91.89 terms on average, std dev=53.08). Overall, there are 2,691 unique codes.
-Products are assigned on average 9.01 codes (std dev=4.91). The vocabulary
+(91.89 terms on average, std dev=53.08). Overall, there are 2,691 unique categories.
+Products are assigned on average 9.01 categories (std dev=4.91). The vocabulary
 consists of the most frequent 30,000 words omitting stopwords. 
 
 \subsection{Comparison Models}
 
 We evaluated HSLDA along with two closely related models against
 the two datasets. The comparison models included sLDA with independent
-regressors (hierarchical constraints on labels ignored), HSLDA fit by first
+regressors (hierarchical constraints on labels ignored) and HSLDA fit by first
 performing LDA then fitting tree-conditional regressions. These models were
 chosen to  highlight several aspects of HSLDA including performance in the
 absence  of hierarchical constraints, the effect of the combined inference, and
@@ -175,7 +175,8 @@ The gold standard for comparison was derived from the testing set in each
 dataset. To make the comparison as fair as possible among models, ancestors of
 observed nodes in the label hierarchy were ignored, observed nodes were
 considered positive and descendents of observed nodes were considered to be
-negative. In particular, since the sLDA model does not enforce the hierarchical
+negative. Note that this is different from our treatment of the observations during inference.
+Since the sLDA model does not enforce the hierarchical
 constraints, we establish a more equal footing by
 considering only the observed labels as being positive, despite the fact
 that, following the hierarchical constraints, ancestors must also be positive.
@@ -183,7 +184,7 @@ Such a gold standard will likely inflate the number of false positives because
 the labels applied to any particular document are usually not as complete as
 they could be.  ICD-9 codes, for instance, lack sensitivity and their use as a
 gold standard could lead to correctly positive predictions being labeled as
-false positives~\citep{Birmetal2005}. 
+false positives~\citep{Birmetal2005}.
 However, given that the label space is often large (as in our examples) it is a
 moderate assumption that erroneous false positives should not skew results
 significantly. 

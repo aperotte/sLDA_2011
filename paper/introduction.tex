@@ -1,5 +1,5 @@
 There exist many sources of unstructured data that have been partially or
-completely categorized by human editors.  In this paper, we focus on
+completely categorized by human editors.  In this paper we focus on
 unstructured text data that has been, at least in part, manually
 categorized.  Examples include but are not limited to webpages and curated
 hierarchical directories of the same \citep{DMOZ}, product descriptions and
@@ -13,7 +13,7 @@ inaccurate, compute improved similarities between documents for information
 retrieval purposes, and more. The models and techniques that we develop in
 this paper are applicable to other data as well, namely, any unstructured
 representations of data that have been hierarchically classified (e.g.,~image
-catalogs with bag-of-feature image representations).
+catalogs with bag-of-feature representations).
 
 There are several challenges entailed in incorporating a hierarchy of labels
 into the model. Among them, given a large set of potential labels (often thousands), each
@@ -24,7 +24,7 @@ cannot always be interpreted as a negative labeling.
 Our work operates within the framework of topic modeling. Our approach learns
 topic models of the underlying data and labeling strategies in a joint model,
 while leveraging the hierarchical structure of the labels. For the sake of
-simplicity, we focus on is-a hierarchies, but the model can be
+simplicity, we focus on ``is-a'' hierarchies, but the model can be
 applied to other structured label spaces. We extend supervised latent Dirichlet
 allocation (sLDA)~\cite{BleiMcAuliffe2008} to take advantage of hierarchical
 supervision. We propose an efficient way to incorporate hierarchical
