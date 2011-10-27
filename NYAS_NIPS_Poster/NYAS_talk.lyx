@@ -1,0 +1,1148 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usetheme{Warsaw}
+% or ...
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\end_preamble
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This file is a solution template for:
+\end_layout
+
+\begin_layout Itemize
+Talk at a conference/colloquium.
+ 
+\end_layout
+
+\begin_layout Itemize
+Talk length is about 20min.
+ 
+\end_layout
+
+\begin_layout Itemize
+Style is ornate.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+In principle, this file can be redistributed and/or modified under the terms
+ of the GNU Public License, version 2.
+ However, this file is supposed to be a template to be modified for your
+ own needs.
+ For this reason, if you use this file as a template and not specifically
+ distribute it as part of a another package/program, the author grants the
+ extra permission to freely copy and modify this file as you see fit and
+ even to delete this copyright notice.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Hierarchically Supervised Latent Dirichlet Allocation
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+HSLDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+A.
+\begin_inset space ~
+\end_inset
+
+Perotte
+\begin_inset Flex InstituteMark
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+ N.
+\begin_inset space ~
+\end_inset
+
+Bartlett
+\begin_inset Flex InstituteMark
+status collapsed
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+ N.
+\begin_inset space ~
+\end_inset
+
+Elhadad
+\begin_inset Flex InstituteMark
+status collapsed
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+ F.
+\begin_inset space ~
+\end_inset
+
+Wood
+\begin_inset Flex InstituteMark
+status collapsed
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+Give the names in the same order as the appear in the paper.
+ 
+\end_layout
+
+\begin_layout Itemize
+Use the 
+\begin_inset Quotes eld
+\end_inset
+
+Institute mark
+\begin_inset Quotes erd
+\end_inset
+
+ inset (
+\family sans
+Insert\SpecialChar \menuseparator
+Custom Insets\SpecialChar \menuseparator
+InstituteMark
+\family default
+) only if the authors have different affiliations.
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Institute
+\begin_inset Flex InstituteMark
+status collapsed
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+Department of Biomedical Informatics
+\begin_inset Newline newline
+\end_inset
+
+Columbia University
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex InstituteMark
+status collapsed
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+Department of Statistics
+\begin_inset Newline newline
+\end_inset
+
+Columbia University
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+Use the 
+\begin_inset Quotes eld
+\end_inset
+
+Institute mark
+\begin_inset Quotes erd
+\end_inset
+
+ inset (
+\family sans
+Insert\SpecialChar \menuseparator
+Custom Insets\SpecialChar \menuseparator
+InstituteMark
+\family default
+) only if there are several affiliations.
+\end_layout
+
+\begin_layout Itemize
+Keep it simple, no one is interested in your street address.
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+Universities of Somewhere and Elsewhere
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+optional, but mostly needed
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+NYAS Annual Machine Learning Symposium, 2011
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+Either use conference name or its abbreviation.
+ 
+\end_layout
+
+\begin_layout Itemize
+Not really informative to the audience, more for people (including yourself)
+ who are reading the slides online
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+NYAS 2011
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+If you have a file called "institution-logo-filename.xxx", where xxx is a
+ graphic format that can be processed by latex or pdflatex, resp., then you
+ can add a logo by uncommenting the following:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pgfdeclareimage[height=0.5cm]{institution-logo}{crown.png}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+logo{
+\backslash
+pgfuseimage{institution-logo}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The following causes the table of contents to be shown at the beginning
+ of every subsection.
+ Delete this, if you do not want it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSubsection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+frametitle{Outline}   
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+If you wish to uncover everything in a step-wise fashion, uncomment the
+ following command:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+beamerdefaultoverlayspecification{<+->}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout BeginFrame
+Introduction
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+HSLDA: Hierarchically Supervised Latent Dirichlet Allocation
+\end_layout
+
+\begin_deeper
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Model of documents and labels
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Structure in label space
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Large, real-world datasets
+\end_layout
+
+\begin_layout Section
+Data
+\end_layout
+
+\begin_layout BeginFrame
+Amazon.com Data
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Amazon_crop.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Text: Product Descriptions: 
+\begin_inset Formula $\sim$
+\end_inset
+
+90 words/document
+\end_layout
+
+\begin_deeper
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Labels: Product Categories: 
+\begin_inset Formula $\sim$
+\end_inset
+
+9 categories/document
+\end_layout
+
+\begin_layout BeginFrame
+Clinical Data
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ICD9_crop.png
+	scale 17
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Text: Discharge summaries: 
+\begin_inset Formula $\sim$
+\end_inset
+
+500 words/document
+\end_layout
+
+\begin_deeper
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Labels: ICD9 codes: 
+\begin_inset Formula $\sim$
+\end_inset
+
+8 codes/document
+\end_layout
+
+\begin_layout Section
+Model and Inference
+\end_layout
+
+\begin_layout BeginFrame
+Model
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Graphical_Model-final.pdf
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Documents have latent structure
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Points in low-dimensional space
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Latent dimensions
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Distribution over words
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Regression parameters
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Relationship between the latent space and the label space
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Inference
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Graphical_Model-final.pdf
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Collapsed Gibbs sampler
+\end_layout
+
+\begin_deeper
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Probit regression
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Auxiliary variables allow for Gibbs sampling
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Experiments
+\end_layout
+
+\begin_layout BeginFrame
+Experiments
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Comparison models
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+sLDA with independent regressors
+\end_layout
+
+\begin_layout Itemize
+HSLDA fit by first performing LDA then fitting tree-conditional regressions
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Task: Prediction of out of sample labels
+\end_layout
+
+\begin_layout BeginFrame
+Example Topics
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{tiny} 
+\backslash
+begin{tabular}{|c|c||c|c|} 
+\backslash
+hline 
+\backslash
+multicolumn{2}{|c||}{
+\backslash
+textbf{Clinical Topics}} & 
+\backslash
+multicolumn{2}{|c|}{
+\backslash
+textbf{Product Topics}} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline MASS & WOUND & SERIES & BASEBALL 
+\backslash
+
+\backslash
+ 
+\backslash
+hline CANCER & FOOT & EPISODES & TEAM 
+\backslash
+
+\backslash
+ 
+\backslash
+hline RIGHT & CELLULITIS & SHOW & GAME 
+\backslash
+
+\backslash
+ 
+\backslash
+hline BREAST & ULCER & SEASON & PLAYERS 
+\backslash
+
+\backslash
+ 
+\backslash
+hline CHEMOTHERAPY & LEFT & EPISODE & BASKETBALL 
+\backslash
+
+\backslash
+ 
+\backslash
+hline METASTATIC & ERYTHEMA & FIRST & SPORT 
+\backslash
+
+\backslash
+ 
+\backslash
+hline LEFT & PAIN & TELEVISION & SPORTS 
+\backslash
+
+\backslash
+ 
+\backslash
+hline LYMPH & SWELLING & SET & NEW 
+\backslash
+
+\backslash
+ 
+\backslash
+hline TUMOR & SKIN & TIME & PLAYER 
+\backslash
+
+\backslash
+ 
+\backslash
+hline BIOPSY & RIGHT & TWO & SEASON 
+\backslash
+
+\backslash
+ 
+\backslash
+hline CARCINOMA & ABSCESS & SECOND & LEAGUE 
+\backslash
+
+\backslash
+ 
+\backslash
+hline LUNG & LEG & ONE & FOOTBALL 
+\backslash
+
+\backslash
+ 
+\backslash
+hline CHEMO & OSTEOMYELITIS & CHARACTERS & STARS 
+\backslash
+
+\backslash
+ 
+\backslash
+hline ADENOCARCINOMA & TOE & DISC & FANS 
+\backslash
+
+\backslash
+ 
+\backslash
+hline NODE & DRAINAGE & GUEST & FIELD 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+end{tiny}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Prediction
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ROC_comparison_leafs.pdf
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Summary
+\end_layout
+
+\begin_layout BeginFrame
+Summary
+\end_layout
+
+\begin_layout Itemize
+
+\color none
+HSLDA is a new topic model based on sLDA with hierarchical supervision.
+\end_layout
+
+\begin_layout Itemize
+
+\color none
+We derive an efficient Gibbs sampler for HSLDA.
+\end_layout
+
+\begin_layout Itemize
+
+\color none
+Label prediction can be improved with HSLDA if there exists significant
+ structure in the label space.
+\end_layout
+
+\begin_layout BeginFrame
+\start_of_appendix
+Thank you!
+\end_layout
+
+\begin_layout Itemize
+George Hripcsak, MD, MS
+\end_layout
+
+\begin_layout Itemize
+New York Academy of Sciences
+\end_layout
+
+\begin_layout Itemize
+National Library of Medicine
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

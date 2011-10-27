@@ -64,7 +64,7 @@ and $\boldsymbol{\theta}_{1:D}$  in the following expressions.   Let $\mathbf{a}
 %depend on $z_{n,d}$ and absorbing all other terms into a normalizing
 %constant as in \citep{Griffiths04} we find 
 \begin{eqnarray}
-\lefteqn{p\left(z_{n,d}=k\mid\mathbf{z}_d\backslash z_{n,d},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\propto}\nonumber \\
+\lefteqn{p\left(z_{n,d}=k\mid\mathbf{z}\backslash z_{n,d},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\propto}\nonumber \\
  & \hspace{2cm}\left(c_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\boldsymbol\beta_{k}\right)\frac{c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(c_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)}\prod_{l\in\mathcal{L}_{d}}\exp\left\{ -\frac{\left(\bar{\mathbf{z}}_{d}^{T}\boldsymbol\eta_{l}-a_{l,d}\right)^{2}}{2}\right\} \label{eq:z-likelihood}\end{eqnarray}
  where $c_{v,d}^{k,-\left(n,d\right)}$ is the number
 of words of type $v$ in document $d$ assigned to topic $k$ omitting
@@ -100,7 +100,13 @@ It also is a standard probit regression result that the conditional posterior
 distribution of $a_{l,d}$ is a truncated normal
 distribution~\cite{Albert_Chib_1993}. 
 \begin{equation}
-p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right).\label{eqn:a_l_d}\end{equation}
+p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto
+\begin{cases}
+\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right)\mathbb{I}(a_{l,d}<0) , & y_{\mathrm{pa}(l),d}=-1\\
+\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right) , & y_{\mathrm{pa}(l),d}=1\end{cases}\end{equation}
+
+%\begin{equation}
+%p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right).\label{eqn:a_l_d}\end{equation}
 % This conditional distribution can be sampled using an inverse CDF
 %method. %However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
 %be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov

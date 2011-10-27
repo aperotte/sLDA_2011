@@ -1,0 +1,4 @@
+pdflatex HSLDA_poster
+bibtex HSLDA_poster
+pdflatex HSLDA_poster
+pdflatex HSLDA_poster

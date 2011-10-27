@@ -50,7 +50,8 @@ results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Lita2008}.%Ruch2008 o
 Our dataset was gathered from the clinical data warehouse of
 a large metropolitan hospital. It consists of 6,000 discharge summaries and
 their associated ICD-9 codes (7,298 distinct codes overall), representing all
-the discharges from the hospital in 2009. Summaries have 8.39 associated ICD-9
+the discharges from the hospital in 2009. All included discharge summaries had associated ICD-9 Codes.
+Summaries have 8.39 associated ICD-9
 codes on average (std dev=5.01) and contain an average of 536.57 terms after
 preprocessing (std dev=300.29). We split our dataset into 5,000 discharge
 summaries for training and 1,000 for testing.
@@ -108,7 +109,7 @@ regression performance attributable solely to the hierarchical constraints.
 
 sLDA with independent regressors is the most salient comparison model
 for our work. The distinguishing factor between HSLDA and sLDA is the
-addition structure imposed on the label space, a distinction that we
+additional structure imposed on the label space, a distinction that we
 hypothesized would result in a difference in predictive performance. 
 
 There are two components to HSLDA, LDA and a hierarchically constrained
@@ -143,20 +144,18 @@ scale parameters of 1000.
 \begin{figure}[h]
 \begin{center}
 %\subfloat[][\label{fig:1a}]{\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
+\subfigure[][Clinical data performance.]{\label{fig:1a}\includegraphics[width=.49\textwidth]{figs/clin_pred_varying_mu}}
 %\subfloat[][\label{fig:1c}]{\includegraphics[width=.49\textwidth]{figs/sens_comparison_leafs}}
-\subfigure[][]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
-\subfigure[][]{\label{fig:clinical_roc}\includegraphics[scale=0.4]{figs/ROC_comparison_leafs}}
-\caption{ROC curves for out-of-sample ICD-9 code prediction from patient free-text discharge records 
-(\subref{fig:1a},\subref{fig:clinical_roc}). ROC curve for out-of-sample Amazon product category predictions from 
-product free-text descriptions \subref{fig:1b}. Figures \subref{fig:1a} and \subref{fig:1b} are a function 
-of the prior means of the regression parameters. Figure \subref{fig:clinical_roc} is a function of auxiliary variable threshold. In all figures, solid is 
-HSLDA, dashed are independent regressors + sLDA (hierarchical 
+\subfigure[][Retail product performance.]{\label{fig:1b}\includegraphics[width=.49\textwidth]{figs/amazon_pred_varying_mu}}
+%\subfigure[][]{\label{fig:clinical_roc}\includegraphics[scale=0.4]{figs/ROC_comparison_leafs}}
+\caption{ROC curves for out-of-sample label prediction varying $\mu$, the prior mean of the regression parameters. 
+In both figures, solid is HSLDA, dashed are independent regressors + sLDA (hierarchical 
 constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running 
 tree-conditional regressions.}
-\label{fig:main_results}
+%\label{fig:main_results}
 \end{center}
 \end{figure}
+
 
 \subsection{Evaluation and Results}
 
@@ -169,7 +168,7 @@ tree-conditional regressions.}
 
 We evaluated our model, HSLDA, against the comparison models with a focus on
 predictive performance on held-out data. Prediction performance was measured
-with standard metrics -- sensitiviy (true positive rate) and 1-specificity
+with standard metrics -- sensitivity (true positive rate) and 1-specificity
 (false positive rate). 
 
 The gold standard for comparison was derived from the testing set in each
@@ -177,15 +176,14 @@ dataset. To make the comparison as fair as possible among models, ancestors of
 observed nodes in the label hierarchy were ignored, observed nodes were
 considered positive and descendents of observed nodes were considered to be
 negative. In particular, since the sLDA model does not enforce the hierarchical
-constraints, its performance was found to be so poor on joint prediction that
-it was not included. The models can be compared on a more equal footing by
-considering only on the observed labels as being positive, despite the fact
+constraints, we establish a more equal footing by
+considering only the observed labels as being positive, despite the fact
 that, following the hierarchical constraints, ancestors must also be positive.
 Such a gold standard will likely inflate the number of false positives because
 the labels applied to any particular document are usually not as complete as
 they could be.  ICD-9 codes, for instance, lack sensitivity and their use as a
 gold standard could lead to correctly positive predictions being labeled as
-false positives\citep{Birmetal2005}. 
+false positives~\citep{Birmetal2005}. 
 However, given that the label space is often large (as in our examples) it is a
 moderate assumption that erroneous false positives should not skew results
 significantly. 
@@ -193,32 +191,12 @@ significantly.
 Predictive performance in HSLDA is evaluated by $p\left(y_{l,\hat{d}}\mid w_{1:N_{\hat{d}},\hat{d}}, w_{1:N_d,1:D},  y_{l\in\mathcal{L},1:D}\right)$ 
 for each test document, $\hat{d}$. For efficiency, the expectation of this
 probability distribution was estimated in the following way. Expectations 
-of $\mathbf{\bar{z}}_d$ and $\boldsymbol{\eta}_l$ were estimated with samples
+of $\mathbf{\bar{z}}_{\hat{d}}$ and $\boldsymbol{\eta}_l$ were estimated with samples
 from the posterior. Using these expectations, we performed Gibbs sampling over
 the hierarchy to acquire predictive samples for the documents in the test set.
 The true positive rate was calculated as the average expected labeling for
 gold standard positive labels. The false positive rate was calculated 
 as the average expected labeling for gold standard negative labels.
-
-Figure~\ref{fig:1a} shows the results for the clinical data. For instance, 
-a prior mean for the regression of $\mu=-1.6$ yields the following performance:
-the full HSLDA model had a 
-true positive rate of 0.57 and a false positive rate of 0.13, the sLDA model
-had a true positive rate of 0.42 and a false positive rate of 0.07, and the
-HSLDA model where LDA and the regressions were fit separately had a true
-positive rate of 0.39 and a false positive rate of 0.08.
-
-These results indicate that the full HSLDA model predicts more of the the
-correct labels at a cost of an increase in the number of false positives
-relative to the comparison models.
-
-Figure~\ref{fig:1b} shows the results for the retail product data. For
-instance, a prior mean for the regression of $\mu=-2.2$ yields the following
-performance: the full HSLDA model had a true positive rate of 0.85 
-and a false positive rate of 0.30, the sLDA model had a true positive
-rate of 0.78 and a false positive rate of 0.14, and the HSLDA model where
-LDA and the regressions were fit separately had a true positive rate of 0.77
-and a false positive rate of 0.16. These results follow a similar pattern to the clinical data.
 
 As sensitivity and specificity can always be traded off, we examined
 sensitivity for a range of values for two different parameters -- the prior
@@ -242,18 +220,43 @@ following inference.
 %However, as intended, they both highlight model performance 
 %under more or less stringent requirements for predicting positive labels.
 
-Figure \ref{fig:main_results} shows the predictive performance of HSLDA 
-relative to the two comparison models as a function of the prior mean
-on regression coefficients as a receiver operating characteristic (ROC) curve. 
+\begin{figure}[t]
+%tbp] %  figure placement: here, top, bottom, or page
+\centering \includegraphics[scale=0.4]{figs/ROC_comparison_leafs} \caption{ROC curve for out-of-sample ICD-9 code prediction varying auxiliary variable threshold. $\mu = -1.0$ for all three models in this figure.}
+\label{fig:results_auxiliary_var} 
+\end{figure}
+
+
+Figure~\ref{fig:1a} demonstrates the performance of the model on the clinical data as an ROC curve varying $\mu$.  For instance, 
+a hyperparameter setting of $\mu=-1.6$ yields the following performance:
+the full HSLDA model had a 
+true positive rate of 0.57 and a false positive rate of 0.13, the sLDA model
+had a true positive rate of 0.42 and a false positive rate of 0.07, and the
+HSLDA model where LDA and the regressions were fit separately had a true
+positive rate of 0.39 and a false positive rate of 0.08. These points are highlighted in Figure~\ref{fig:1a}.
+
+These results indicate that the full HSLDA model predicts more of the the
+correct labels at a cost of an increase in the number of false positives
+relative to the comparison models.
+
+Figure~\ref{fig:1b} demonstrates the performance of the model on the retail product data as an ROC curve also varying $\mu$. For
+instance, a hyperparameter setting of $\mu=-2.2$ yields the following
+performance: the full HSLDA model had a true positive rate of 0.85 
+and a false positive rate of 0.30, the sLDA model had a true positive
+rate of 0.78 and a false positive rate of 0.14, and the HSLDA model where
+LDA and the regressions were fit separately had a true positive rate of 0.77
+and a false positive rate of 0.16. These results follow a similar pattern to the clinical data. These points are highlighted in Figure~\ref{fig:1b}.
+
+
+Figure \ref{fig:results_auxiliary_var} shows the predictive performance of HSLDA 
+relative to the two comparison models on the clinical dataset as a function of the auxiliary variable threshold. 
 For low values of the auxiliary variable threshold, the models predict labels
 in a more sensitive and less specific manner, creating the points in the upper
 right corner of the ROC curve. As the auxiliary variable threshold is
 increased, the models predict in a less sensitive and more specific manner,
-creating the points in the lower left hand corner of the ROC curve. For all
-values of the prior mean in both datasets, HSLDA outperforms sLDA with
-independent regressors. In the case of HSLDA with separately trained
-regression, HSLDA outperforms in the clinical dataset but performs equally well
-across the board with the retail product dataset. 
+creating the points in the lower left hand corner of the ROC curve. HSLDA with full joint inference outperforms sLDA with
+independent regressors as well as HSLDA with separately trained
+regression. 
 
 %\begin{figure}[t]
 %%tbp] %  figure placement: here, top, bottom, or page

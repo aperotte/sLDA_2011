@@ -1,0 +1,4 @@
+pdflatex amia2011poster
+bibtex amia2011poster
+pdflatex amia2011poster
+pdflatex amia2011poster
