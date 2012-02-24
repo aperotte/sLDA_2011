@@ -1,0 +1,31 @@
+\begin{theindex}
+
+  \item basis, 9
+    \subitem ordered, 9
+
+  \indexspace
+
+  \item linear combination, 8
+    \subitem nontrivial, 8
+    \subitem trivial, 8
+  \item linearly independent, 9
+    \subitem maximal, 9
+
+  \indexspace
+
+  \item matrix
+    \subitem scalar multiple of, 9
+    \subitem scalar multiplication, 9
+
+  \indexspace
+
+  \item spanning set, 8
+    \subitem minimal, 9
+  \item subspace, 7
+
+  \indexspace
+
+  \item vector space
+    \subitem subspace of, 7
+
+\end{theindex}

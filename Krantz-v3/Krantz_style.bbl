@@ -1,0 +1,177 @@
+\begin{thebibliography}{10}
+
+\bibitem{DMOZ}
+{D}{M}{O}{Z} open directory project.
+\newblock \texttt{http://www.dmoz.org/}, 2002.
+
+\bibitem{SNAP}
+Stanford network analysis platform.
+\newblock \texttt{http://snap.stanford.edu/}, 2004.
+
+\bibitem{Challenge07}
+The computational medicine center's 2007 medical natural language processing
+  challenge.
+\newblock http://www.computationalmedicine.org/challenge/previous, 2007.
+
+\bibitem{AMAZON}
+Amazon, {I}nc.
+\newblock \texttt{http://www.amazon.com/}, 2011.
+
+\bibitem{Albert_Chib_1993}
+J.~Albert and S.~Chib.
+\newblock Bayesian analysis of binary and polychotomous response data.
+\newblock {\em Journal of the American Statistical Association}, 88(422):669,
+  1993.
+
+\bibitem{Birmetal2005}
+E.~Birman-Deych, A.~D. Waterman, Y.~Yan, D.~S. Nilasena, M.~J. Radford, and
+  B.~F. Gage.
+\newblock Accuracy of {I}{C}{D}-9-{C}{M} codes for identifying cardiovascular
+  and stroke risk factors.
+\newblock {\em Medical Care}, 43(5):480--5, 2005.
+
+\bibitem{BleiMcAuliffe2008}
+D.~Blei and J.~McAuliffe.
+\newblock Supervised topic models.
+\newblock {\em Advances in Neural Information Processing}, 20:121--128, 2008.
+
+\bibitem{Blei2003}
+D.~Blei, A.Y. Ng, and M.I. Jordan.
+\newblock Latent {D}irichlet allocation.
+\newblock {\em J. Mach. Learn. Res.}, 3:993--1022, March 2003.
+
+\bibitem{Blumenthal2009}
+D.~Blumenthal.
+\newblock Stimulating the adoption of health information technology.
+\newblock {\em The New England Journal of Medicine}, 360(15):1477--1479, 2009.
+
+\bibitem{Chakrabarti1998SFS}
+S.~Chakrabarti, B.~Dom, R.~Agrawal, and P.~Raghavan.
+\newblock Scalable feature selection, classification and signature generation
+  for organizing large text databases into hierarchical topic taxonomies.
+\newblock {\em The VLDB Journal}, 7:163--178, August 1998.
+
+\bibitem{RelationalLDA}
+J.~Chang and D.~M. Blei.
+\newblock Hierarchical relational models for document networks.
+\newblock {\em Annals of Applied Statistics}, 4:124--150, 2010.
+
+\bibitem{Crammer2007}
+K.~Crammer, M.~Dredze, K.~Ganchev, P.P. Talukdar, and S.~Carroll.
+\newblock Automatic code assignment to medical text.
+\newblock {\em Proceedings of the Workshop on BioNLP 2007: Biological,
+  Translational, and Clinical Language Processing}, pages 129--136, 2007.
+
+\bibitem{Dumais2000HCW}
+S.~Dumais and H.~Chen.
+\newblock Hierarchical classification of web content.
+\newblock In {\em Proceedings of the 23rd annual international ACM SIGIR
+  conference on Research and development in information retrieval}, SIGIR '00,
+  pages 256--263, New York, NY, USA, 2000. ACM.
+
+\bibitem{Farkas2008}
+R.~Farkas and G.~Szarvas.
+\newblock Automatic construction of rule-based {I}{C}{D}-9-{C}{M} coding
+  systems.
+\newblock {\em BMC bioinformatics}, 9(Suppl 3):S10, 2008.
+
+\bibitem{FarzandipourEtAl10}
+M.~Farzandipour, A.~Sheikhtaheri, and F.~Sadoughi.
+\newblock Effective factors on accuracy of principal diagnosis coding based on
+  international classification of diseases, the 10th revision.
+\newblock {\em International Journal of Information Management}, 30:78--84,
+  2010.
+
+\bibitem{gelmanbda04}
+A.~Gelman, J.~B. Carlin, H.~S. Stern, and D.~B. Rubin.
+\newblock {\em Bayesian Data Analysis}.
+\newblock Chapman and Hall/CRC, 2nd ed. edition, 2004.
+
+\bibitem{Goldstein2007}
+I.~Goldstein, A.~Arzumtsyan, and {\"O}.~Uzuner.
+\newblock Three approaches to automatic assignment of {ICD-9-CM} codes to
+  radiology reports.
+\newblock {\em AMIA Annual Symposium Proceedings}, 2007:279, 2007.
+
+\bibitem{Griffiths04}
+T.~L. Griffiths and M.~Steyvers.
+\newblock Finding scientific topics.
+\newblock {\em PNAS}, 101(suppl. 1):5228--5235, 2004.
+
+\bibitem{Kollerilprints291}
+D.~Koller and M.~Sahami.
+\newblock Hierarchically classifying documents using very few words.
+\newblock Technical Report 1997-75, Stanford InfoLab, February 1997.
+\newblock Previous number = SIDL-WP-1997-0059.
+
+\bibitem{DiscLDA}
+S.~Lacoste-Julien, F.~Sha, and M.~I. Jordan.
+\newblock {D}isc{LDA}: Discriminative learning for dimensionality reduction and
+  classification.
+\newblock In {\em Neural Information Processing Systems}, pages 897--904.
+
+\bibitem{LarkeyCroft95}
+L.~Larkey and B.~Croft.
+\newblock Automatic assignment of {ICD9} codes to discharge summaries.
+\newblock Technical report, University of Massachussets, 1995.
+
+\bibitem{Lita2008}
+L.~V. Lita, S.~Yu, S.~Niculescu, and J.~Bi.
+\newblock Large scale diagnostic code classification for medical patient
+  records.
+\newblock In {\em Proceedings of the 3rd International Joint Conference on
+  Natural Language Processing (IJCNLP'08)}, 2008.
+
+\bibitem{mccallum99building}
+A.~McCallum, K.~Nigam, J.~Rennie, and K.~Seymore.
+\newblock Building domain-specific search engines with machine learning
+  techniques.
+\newblock In {\em Proc. {AAAI}-99 Spring Symposium on Intelligent Agents in
+  Cyberspace}, 1999.
+
+\bibitem{PakhomovEtAl06}
+S.~Pakhomov, J.~Buntrock, and C.~Chute.
+\newblock Automating the assignment of diagnosis codes to patient encounters
+  using example-based and machine learning techniques.
+\newblock {\em Journal of the American Medical Informatics Association
+  (JAMIA)}, 13(5):516--525, 2006.
+
+\bibitem{Perotte-2012-NIPS}
+A.~Perotte, N.~Bartlett~No{\i}emie Elhadad, and F.~Wood.
+\newblock Hierarchically supervised latent {D}irichlet allocation.
+\newblock In {\em Advances in Neural Information Processing Systems}, to
+  appear, 2012.
+
+\bibitem{Ramage2009}
+D.~Ramage, D.~Hall, R.~Nallapati, and C.~D. Manning.
+\newblock Labeled {LDA}: a supervised topic model for credit attribution in
+  multi-labeled corpora.
+\newblock In {\em Proceedings of the 2009 Conference on Empirical Methods in
+  Natural Language Processing}, pages 248--256, 2009.
+
+\bibitem{RibeiroNeto2001}
+B.~Ribeiro-Neto, A.~Laender, and L.~De Lima.
+\newblock An experimental study in automatically categorizing medical
+  documents.
+\newblock {\em Journal of the American society for Information science and
+  Technology}, 52(5):391--401, 2001.
+
+\bibitem{TehJorBea2006}
+Y.~W. Teh, M.~I. Jordan, M.~J. Beal, and D.~M. Blei.
+\newblock Hierarchical {D}irichlet processes.
+\newblock {\em Journal of the American Statistical Association},
+  101(476):1566--1581, 2006.
+
+\bibitem{WallachMiMc2009}
+H.~Wallach, D.~Mimno, and A.~McCallum.
+\newblock Rethinking {LDA}: Why priors matter.
+\newblock In Y.~Bengio, D.~Schuurmans, J.~Lafferty, C.~K.~I. Williams, and
+  A.~Culotta, editors, {\em Advances in Neural Information Processing Systems
+  22}, pages 1973--1981. 2009.
+
+\bibitem{wangbleifeifei08}
+C.~Wang, D.~Blei, and L.~Fei-Fei.
+\newblock Simultaneous image classification and annotation.
+\newblock In {\em CVPR}, pages 1903--1910, 2009.
+
+\end{thebibliography}

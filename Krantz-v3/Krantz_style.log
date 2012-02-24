@@ -1,0 +1,1243 @@
+This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.12.28)  24 FEB 2012 18:27
+entering extended mode
+\write18 enabled.
+ %&-line parsing enabled.
+**Krantz_style.tex
+(./Krantz_style.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, german-x-2008-06-18, ngerman-x-2008-06-18, ancientgreek, ibycus, ar
+abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
+h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
+greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, la
+tin, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, polish, portuguese, r
+omanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, turki
+sh, ukenglish, ukrainian, uppersorbian, welsh, loaded.
+(./krantz.cls
+Document Class: krantz 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\trimheight=\dimen102
+\trimwidth=\dimen103
+\normaltextheight=\dimen104
+\tempa=\dimen105
+\tempdimen=\dimen106
+\htrim=\dimen107
+\vtrimtop=\dimen108
+\vtrimbot=\dimen109
+\ul@box=\box26
+\ur@box=\box27
+\ll@box=\box28
+\lr@box=\box29
+\@cipboxa=\box30
+\@cipboxb=\box31
+\@ciprulewidth=\dimen110
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\@chaptoc=\write3
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\c@numauthors=\count88
+\section@toc@skip=\skip43
+\SectionTOCWidth=\skip44
+\subsection@toc@skip=\skip45
+\SubSectionTOCWidth=\skip46
+\subsubsection@toc@skip=\skip47
+\SubSubSectionTOCWidth=\skip48
+\paragraph@toc@skip=\skip49
+\ParagraphTOCWidth=\skip50
+\subparagraph@toc@skip=\skip51
+\@AUonebox=\box32
+\@AUtwobox=\box33
+\@AUthreebox=\box34
+\@AUfourbox=\box35
+\@AUaffonebox=\box36
+\@AUafftwobox=\box37
+\@AUaffthreebox=\box38
+\@AUafffourbox=\box39
+\@finalAUboxfromone=\box40
+\@finalAUboxfromtwo=\box41
+\@finalAUboxfromthree=\box42
+\@finalAUboxfromfour=\box43
+\c@chaptocdepth=\count89
+\bibindent=\dimen111
+\tempbox=\box44
+\nomenwidth=\dimen112
+\@tablebox=\box45
+\@tabletitlebox=\box46
+\@tablewidth=\dimen113
+\@tabletitlewidth=\dimen114
+\max@tablewidth=\dimen115
+\tempbox=\box47
+\tempdimen=\dimen116
+\tempbox=\box48
+\notewidth=\dimen117
+\wherebox=\box49
+\wherewidth=\dimen118
+\listtextleftmargin=\skip52
+\listtextleftmarginii=\skip53
+\listtextleftmarginiii=\skip54
+\listtextrightmargin=\skip55
+\listlabelleftskip=\skip56
+\listlabelleftskipii=\skip57
+\listlabelleftskipiii=\skip58
+\abovelistskipi=\skip59
+\belowlistskipi=\skip60
+\abovelistskipii=\skip61
+\belowlistskipii=\skip62
+\abovelistskipiii=\skip63
+\belowlistskipiii=\skip64
+\labelsepi=\skip65
+\labelsepii=\skip66
+\labelsepiii=\skip67
+\itemsepi=\skip68
+\itemsepii=\skip69
+\itemsepiii=\skip70
+\enumdimwd=\dimen119
+\enumdim=\dimen120
+\concolwidth=\dimen121
+\stempbox=\box50
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+))
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip71
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen122
+))
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen123
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count90
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count91
+\leftroot@=\count92
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count93
+\DOTSCASE@=\count94
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+\big@size=\dimen124
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count95
+\c@MaxMatrixCols=\count96
+\dotsspace@=\muskip10
+\c@parentequation=\count97
+\dspbrk@lvl=\count98
+\tag@help=\toks16
+\row@=\count99
+\column@=\count100
+\maxfields@=\count101
+\andhelp@=\toks17
+\eqnshift@=\dimen125
+\alignsep@=\dimen126
+\tagshift@=\dimen127
+\tagwidth@=\dimen128
+\totwidth@=\dimen129
+\lineht@=\dimen130
+\@envbody=\toks18
+\multlinegap=\skip72
+\multlinetaggap=\skip73
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks20
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2008/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2008/09/08 v0.04l Graphics/color for pdfTeX
+\Gread@gobject=\count102
+))
+\Gin@req@height=\dimen131
+\Gin@req@width=\dimen132
+)
+(./subfigure.sty
+Package: subfigure 1995/03/06 v2.0 subfigure package
+
+Package: subfigure 1995/03/06 v2.0
+\c@subfigure=\count103
+\c@lofdepth=\count104
+\c@subtable=\count105
+\c@lotdepth=\count106
+) (/usr/local/texlive/2008/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2006/05/18 v1.6g multicolumn formatting (FMi)
+\c@tracingmulticols=\count107
+\mult@box=\box53
+\multicol@leftmargin=\dimen133
+\c@unbalance=\count108
+\c@collectmore=\count109
+\doublecol@number=\count110
+\multicoltolerance=\count111
+\multicolpretolerance=\count112
+\full@width=\dimen134
+\page@free=\dimen135
+\premulticols=\dimen136
+\postmulticols=\dimen137
+\multicolsep=\skip74
+\multicolbaselineskip=\skip75
+\partial@page=\box54
+\last@line=\box55
+\mult@rightbox=\box56
+\mult@grightbox=\box57
+\mult@gfirstbox=\box58
+\mult@firstbox=\box59
+\@tempa=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\c@columnbadness=\count113
+\c@finalcolumnbadness=\count114
+\last@try=\dimen138
+\multicolovershoot=\dimen139
+\multicolundershoot=\dimen140
+\mult@nat@firstbox=\box77
+\colbreak@box=\box78
+)
+\@input{Chapters/chapter1/preamble.aux}
+\openout2 = `Chapters/chapter1/preamble.aux'.
+
+(./Chapters/chapter1/preamble.tex
+\c@theorem=\count115
+\c@exercise=\count116
+\c@example=\count117
+\c@definition=\count118
+)
+\c@proof=\count119
+\@indexfile=\write4
+\openout4 = `Krantz_style.idx'.
+
+
+Writing index file Krantz_style.idx
+(./Krantz_style.aux (./frontmatter/Foreword.aux) (./frontmatter/preface.aux)
+(./frontmatter/contributor.aux) (./Chapters/symbollist.aux)
+(./Chapters/chapter1/ch1.aux
+
+LaTeX Warning: Label `sec:model' multiply defined.
+
+
+LaTeX Warning: Label `sec:inference' multiply defined.
+
+))
+\openout1 = `Krantz_style.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
+ (/usr/local/texlive/2008/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
+
+(/usr/local/texlive/2008/texmf-dist/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count120
+\scratchdimen=\dimen141
+\scratchbox=\box79
+\nofMPsegments=\count121
+\nofMParguments=\count122
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count123
+\MPscratchDim=\dimen142
+\MPnumerator=\count124
+\everyMPtoPDFconversion=\toks22
+)
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/sl' in size <24> not available
+(Font)              size <24.88> substituted on input line 28.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sl' in size <24> not available
+(Font)              size <24.88> substituted on input line 28.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+
+
+{/usr/local/texlive/2008/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2
+
+]
+\openout2 = `frontmatter/Foreword.aux'.
+
+ (./frontmatter/Foreword.tex
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1
+[]
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/sl' in size <18> not available
+(Font)              size <17.28> substituted on input line 1.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sl' in size <18> not available
+(Font)              size <17.28> substituted on input line 1.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+
+])
+\openout2 = `frontmatter/preface.aux'.
+
+ (./frontmatter/preface.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[2
+
+
+
+]
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[3
+
+]) [4]
+\openout2 = `frontmatter/contributor.aux'.
+
+ (./frontmatter/contributor.tex
+Underfull \vbox (badness 10000) detected at line 2
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 2
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[5
+
+
+
+
+] [6] [7]) [8]
+Underfull \vbox (badness 10000) detected at line 35
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 35
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 35
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 35
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 35
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 35
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 35
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 35
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 35
+[]
+ []
+
+(./Krantz_style.lof
+LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 2.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+))
+\tf@lof=\write5
+\openout5 = `Krantz_style.lof'.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[9
+
+
+
+] [10
+
+]
+Underfull \vbox (badness 10000) detected at line 36
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 36
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 36
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 36
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 36
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 36
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 36
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 36
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 36
+[]
+ []
+
+(./Krantz_style.lot)
+\tf@lot=\write6
+\openout6 = `Krantz_style.lot'.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[11
+
+] [12
+
+]
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 37
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 37
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 37
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 37
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 37
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 37
+[]
+ []
+
+(./Krantz_style.toc)
+\tf@toc=\write7
+\openout7 = `Krantz_style.toc'.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[13
+
+] [14
+
+]
+\openout2 = `Chapters/symbollist.aux'.
+
+ (./Chapters/symbollist.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+\OT1/cmr/m/n/10 gram-ming, in-te-ger lin-ear
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+\OT1/cmr/m/n/10 gram-ming, branch and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+[]\OT1/cmr/m/n/10 maintenance schedul-ing.
+ []
+
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+]
+Underfull \vbox (badness 10000) detected at line 44
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 44
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 44
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 44
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 44
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 44
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 44
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 44
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[2]
+\openout2 = `Chapters/chapter1/ch1.aux'.
+
+ (./Chapters/chapter1/ch1.tex
+Underfull \vbox (badness 10000) detected at line 5
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 5
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 5
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 5
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 5
+[]
+ []
+
+Chapter 1.
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <24> not available
+(Font)              size <24.88> substituted on input line 5.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <24> not available
+(Font)              size <24.88> substituted on input line 5.
+
+(./1.toc
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+LaTeX Font Info:    Calculating math sizes for size <9.5> on input line 1.
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+
+LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+
+LaTeX Font Warning: Font shape `U/msa/m/n' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+
+LaTeX Font Warning: Font shape `U/msb/m/n' in size <9.5> not available
+(Font)              size <9> substituted on input line 1.
+
+)
+\openout3 = `1.toc'.
+
+ (./Chapters/chapter1/related_work.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[3
+
+
+
+] [4]) (./Chapters/chapter1/introduction.tex [5])
+(./Chapters/chapter1/model.tex [6]
+<Chapters/chapter1/Graphical_Model-final.pdf, id=89, 819.06pt x 457.71pt>
+File: Chapters/chapter1/Graphical_Model-final.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/Graphical_Model-final.pdf>
+Underfull \hbox (badness 1178) in paragraph at lines 30--30
+[]\OT1/cmr/m/n/10 Hierarchically su-per-vised la-tent Dirich-let al-lo-ca-tion 
+(HSLDA) graph-i-cal
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 72
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 72
+[]
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 75.
+
+Underfull \hbox (badness 10000) detected at line 78
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 78
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 83
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 83
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 84
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 84
+[]
+ []
+
+
+Overfull \hbox (1.0pt too wide) in paragraph at lines 111--111
+| [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <./Chapters/chapter1/Graphical_Model-final.pdf>] [8
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!]) (./Chapters/chapter1/inference.tex [9]
+Overfull \hbox (2.72964pt too wide) in alignment at lines 67--69
+ [][][] []
+ []
+
+[10]) (./Chapters/chapter1/experiments.tex [11]
+
+LaTeX Warning: Reference `ADLER' on page 12 undefined on input line 50.
+
+[12]
+
+LaTeX Warning: Reference `ADLER' on page 13 undefined on input line 110.
+
+[13]
+Overfull \hbox (28.08348pt too wide) in paragraph at lines 177--177
+[]|\OT1/cmr/m/n/8 (a) 
+ []
+
+
+<Chapters/chapter1/figs/clin_pred_varying_mu.pdf, id=138, 578.16pt x 433.62pt>
+File: Chapters/chapter1/figs/clin_pred_varying_mu.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/figs/clin_pred_varying_mu.pdf>
+Overfull \hbox (28.55571pt too wide) in paragraph at lines 179--179
+[]|\OT1/cmr/m/n/8 (b) 
+ []
+
+
+<Chapters/chapter1/figs/amazon_pred_varying_mu.pdf, id=139, 578.16pt x 433.62pt
+>
+File: Chapters/chapter1/figs/amazon_pred_varying_mu.pdf Graphic file (type pdf)
+
+ <use Chapters/chapter1/figs/amazon_pred_varying_mu.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14] [15 <./Chapters/chapter1/figs/clin_pred_varying_mu.pdf> <./Chapters/chapte
+r1/figs/amazon_pred_varying_mu.pdf>]
+<Chapters/chapter1/figs/ROC_comparison_leafs.pdf, id=173, 578.16pt x 433.62pt>
+File: Chapters/chapter1/figs/ROC_comparison_leafs.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/figs/ROC_comparison_leafs.pdf> [16 <./Chapters/chapter1/
+figs/ROC_comparison_leafs.pdf>]) (./Chapters/chapter1/discussion.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17])
+(./Chapters/chapter1/probit.tex
+<Chapters/chapter1/probit_no_aux_vars.pdf, id=190, 340.27126pt x 224.84pt>
+File: Chapters/chapter1/probit_no_aux_vars.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/probit_no_aux_vars.pdf>
+Overfull \hbox (3.77042pt too wide) in paragraph at lines 4--5
+ [] 
+ []
+
+<Chapters/chapter1/cdf.pdf, id=191, 446.66875pt x 161.60374pt>
+File: Chapters/chapter1/cdf.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/cdf.pdf>
+Overfull \hbox (110.16765pt too wide) in paragraph at lines 13--14
+ [] 
+ []
+
+<Chapters/chapter1/probit.pdf, id=192, 340.27126pt x 296.10625pt>
+File: Chapters/chapter1/probit.pdf Graphic file (type pdf)
+
+<use Chapters/chapter1/probit.pdf>
+Overfull \hbox (3.77042pt too wide) in paragraph at lines 21--22
+ [] 
+ []
+
+[18] [19 <./Chapters/chapter1/probit_no_aux_vars.pdf> <./Chapters/chapter1/cdf.
+pdf>] [20 <./Chapters/chapter1/probit.pdf>] [21])) [22] (./Krantz_style.bbl
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--15
+[]\OT1/cmr/m/n/10 The com-pu-ta-tional medicine cen-ter's 2007 med-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--15
+\OT1/cmr/m/n/10 i-cal nat-u-ral lan-guage pro-cess-ing chal-lenge.
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[23
+
+
+
+] [24]) [25] (./Krantz_style.ind [26
+
+
+]
+Underfull \hbox (badness 10000) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[27
+
+
+]) (./Krantz_style.aux (./frontmatter/Foreword.aux)
+(./frontmatter/preface.aux) (./frontmatter/contributor.aux)
+(./Chapters/symbollist.aux) (./Chapters/chapter1/ch1.aux))
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.88pt have occurred.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2669 strings out of 493876
+ 34675 string characters out of 1150567
+ 99597 words of memory out of 3000000
+ 5834 multiletter control sequences out of 10000+50000
+ 17597 words of font info for 65 fonts, out of 3000000 for 5000
+ 714 hyphenation exceptions out of 8191
+ 30i,18n,24p,1634b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx10.pfb></usr/l
+ocal/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx12.pfb></usr/local/texl
+ive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx7.pfb></usr/local/texlive/2008/t
+exmf-dist/fonts/type1/bluesky/cm/cmbxsl10.pfb></usr/local/texlive/2008/texmf-di
+st/fonts/type1/bluesky/cm/cmex10.pfb></usr/local/texlive/2008/texmf-dist/fonts/
+type1/bluesky/cm/cmmi10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/blu
+esky/cm/cmmi12.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/c
+mmi5.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi7.pfb><
+/usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi9.pfb></usr/local
+/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmib10.pfb></usr/local/texlive
+/2008/texmf-dist/fonts/type1/bluesky/ams/cmmib7.pfb></usr/local/texlive/2008/te
+xmf-dist/fonts/type1/bluesky/cm/cmr10.pfb></usr/local/texlive/2008/texmf-dist/f
+onts/type1/bluesky/cm/cmr17.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1
+/bluesky/cm/cmr5.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm
+/cmr6.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr7.pfb><
+/usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr8.pfb></usr/local/
+texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr9.pfb></usr/local/texlive/200
+8/texmf-dist/fonts/type1/bluesky/cm/cmsl12.pfb></usr/local/texlive/2008/texmf-d
+ist/fonts/type1/bluesky/cm/cmsy10.pfb></usr/local/texlive/2008/texmf-dist/fonts
+/type1/bluesky/cm/cmsy5.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/blu
+esky/cm/cmsy7.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cm
+ti10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb>
+</usr/local/texlive/2008/texmf-dist/fonts/type1/public/cmex/fmex7.pfb></usr/loc
+al/texlive/2008/texmf-dist/fonts/type1/bluesky/ams/msbm10.pfb></usr/local/texli
+ve/2008/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb>
+Output written on Krantz_style.pdf (44 pages, 602279 bytes).
+PDF statistics:
+ 519 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+

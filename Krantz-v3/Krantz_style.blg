@@ -1,0 +1,62 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.7)
+The top-level auxiliary file: Krantz_style.aux
+A level-1 auxiliary file: frontmatter/Foreword.aux
+A level-1 auxiliary file: frontmatter/preface.aux
+A level-1 auxiliary file: frontmatter/contributor.aux
+A level-1 auxiliary file: Chapters/symbollist.aux
+A level-1 auxiliary file: Chapters/chapter1/ch1.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+You're missing a field name---line 347 of file biblio.bib
+ :   
+ :   %series = {EMNLP '09},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in DMOZ
+Warning--to sort, need author or key in AMAZON
+Warning--to sort, need author or key in SNAP
+Warning--to sort, need author or key in Challenge07
+Warning--empty year in DiscLDA
+Warning--empty publisher in WallachMiMc2009
+You've used 30 entries,
+            2118 wiz_defined-function locations,
+            746 strings with 10173 characters,
+and the built_in function-call counts, 10372 in all, are:
+= -- 1008
+> -- 493
+< -- 7
++ -- 195
+- -- 163
+* -- 727
+:= -- 1667
+add.period$ -- 89
+call.type$ -- 30
+change.case$ -- 170
+chr.to.int$ -- 0
+cite$ -- 36
+duplicate$ -- 393
+empty$ -- 834
+format.name$ -- 163
+if$ -- 2215
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 25
+newline$ -- 150
+num.names$ -- 54
+pop$ -- 188
+preamble$ -- 1
+purify$ -- 139
+quote$ -- 0
+skip$ -- 291
+stack$ -- 0
+substring$ -- 639
+swap$ -- 93
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 118
+warning$ -- 6
+while$ -- 88
+width$ -- 32
+write$ -- 321
+(There was 1 error message)

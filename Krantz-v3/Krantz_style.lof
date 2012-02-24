@@ -1,0 +1,9 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Hierarchically supervised latent Dirichlet allocation (HSLDA) graphical model.}}{7}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces ROC curves for HSLDA out-of-sample label prediction varying $\mu $, the prior mean of the regression parameters. In both figures, solid is HSLDA, dashed are independent regressors + SLDA (hierarchical constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running tree-conditional regressions.}}{15}
+\contentsline {subfigure}{\string \numberline {1.2(a)}{\ignorespaces }}{15}
+\contentsline {subfigure}{\string \numberline {1.2(b)}{\ignorespaces }}{15}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces ROC curve for out-of-sample ICD-9 code prediction varying auxiliary variable threshold. $\mu = -1.0$ for all three models in this figure.}}{16}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Probit model, no auxiliary variables}}{19}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces CDF of $N(0,1)$}}{19}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Probit model}}{20}

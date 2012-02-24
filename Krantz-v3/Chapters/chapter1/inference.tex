@@ -1,0 +1,168 @@
+
+\label{sec:inference}
+Our inference goal  is to obtain a representation of the posterior distribution
+of the latent variables in the model.  The posterior distribution we seek does not have a simple analytic form from which exact samples can be drawn.
+This is usually the case for posterior distributions of non-trivial
+probabilistic models and suggests a approximating the posterior distribution by sampling.
+
+In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo.  A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  
+
+The HSLDA sampler, like the collapsed Gibbs samplers for LDA \cite{Griffiths04}, is itself a collapsed Gibbs sampler in which all of the latent variables that can be analytically marginalized are.  Among others, the parameters $\boldsymbol{\phi}_{1:K}$
+and $\boldsymbol{\theta}_{1:D}$ are analytically marginalized prior to deriving the following conditional distributions for sampling.  
+  It will often be the
+case that the set of labels $\mathcal{L}$ is not fully observed for
+every document. We will define $\mathcal{L}_{d}$ to be the subset
+of labels which have been observed for document $d$. In an is-a hierarchical regression  it is straightforward
+to marginalize the variables $a_{l^{\prime},d}$ and $y_{l^{\prime},d}$
+for $l^{\prime}\in\mathcal{L}\backslash\mathcal{L}_{d}$ simply by ignoring them. 
+%We can also integrate out the parameters $\boldsymbol{\phi}_{1:K}$
+%and $\boldsymbol{\theta}_{1:D}$ as in \cite{Griffiths04}.
+ The remaining latent variables (those that are not collapsed out) are $\mathbf{z}=\{z_{1:N_{d},d}\}_{d=1,\ldots,D},\boldsymbol\eta=\{\boldsymbol\eta_{l}\}_{l\in\mathcal{L}},\mathbf{a}=\{a_{l^{\prime},d}\}_{l^{\prime}\in\mathcal{L}_{d},d=1,\ldots,D},\boldsymbol\beta,\alpha,\alpha^{\prime}$
+and $\gamma$.
+
+
+%We will appeal to one of the common methods
+%for approximating posterior distributions in the face of intractable
+%normalization factors: Markov chain Monte Carlo (MCMC) sampling. 
+%Since
+% the conditional distributions
+%for all variables are relatively simple (enumeration and, in the case of the profit regression coefficients, conjugate) we will use Gibbs sampling. %In particular, we will derive a collapsed Gibbs sampler.
+%Given an observation of a set of observed labels and a document, the posterior distribution for the latent variables is
+%\begin{equation}
+%p\left(\theta,z_{1:N},\phi_{1:K},\boldsymbol\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\boldsymbol\beta,\alpha,\alpha',\gamma\mid w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)\label{eq:Posterior}\end{equation}
+%\[
+%=\frac{p\left(\theta,z_{1:N},\phi_{1:K},\boldsymbol\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\boldsymbol\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}{\int_{\theta,\phi,a,\boldsymbol\eta,\alpha,\alpha',\boldsymbol\beta,\gamma}\sum_{z}p\left(\theta,z_{1:N},\phi_{1:K},\boldsymbol\eta_{i_{l,c}\in\mathcal{I}},a_{i_{l,c}\in\mathcal{I}},\boldsymbol\beta,\alpha,\alpha',\gamma,w_{1:N},y_{i_{l,c}\in\mathcal{I}};\sigma,\lambda\right)}\]
+%
+%
+
+\subsection{Gibbs Sampler}
+ Let $\mathbf{a}$ be the set of all auxiliary variables, $\mathbf{w}$  the set of all words, $\boldsymbol\eta$  the set of all regression coefficients, and  $\mathbf{z}\backslash z_{n,d}$  the set $\mathbf{z}$ with element $z_{n,d}$ removed.  %The conditional posterior distribution of the latent topic indicators is
+ We use the notation $\mathbf{z}_{-(n,d)}$ to
+denote $\mathbf{z}_d\backslash z_{n,d}$. %, marginalizing
+%$\theta_{1:D}$ and $\phi_{1:K}$. For details regarding collapsing
+%in LDA models see \cite{Griffiths04}. 
+
+
+
+%\subsection{Sampling latent topic indicators}
+%$p(z_{n,d}\mid\mathbf{z}_{-(n,d)},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma)$}
+
+First we consider the conditional distribution of $z_{n,d}$ (the assignment variable
+for each word $n=1,\ldots,N_{d}$ in documents $d=1,\ldots,D$). 
+%The
+%conditional distribution does not include $\theta_{1:D}$ and $\phi_{1:K}$
+%because they have been integrated out as in the collapsed Gibbs sampler
+%\cite{Griffiths04}. 
+%The conditional distribution of $z_{n,d}$ is
+%proportional to the joint distribution of its markov blanket. \begin{equation}
+%p\left(z_{d,n}\mid\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\propto p\left(z_{d,n},\mathbf{z_{-\left(d,n\right)}},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\end{equation}
+Following the factorization of the model (refer again to Figure~\ref{fig:graphical_model}), we can write
+\begin{eqnarray*}
+\lefteqn{p\left(z_{n,d}\mid\mathbf{z}_d\backslash z_{n,d},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)}\\
+&\propto&\prod_{l\in\mathcal{L}_{d}}p\left(a_{l,d}\mid\mathbf{z},\boldsymbol\eta_{l}\right)p\left(z_{n,d}\ |\ \mathbf{z}_d\backslash z_{n,d},\mathbf{a},\mathbf{w},\alpha,\boldsymbol\beta,\gamma\right).\end{eqnarray*}
+ The product is only over the subset of labels $\mathcal{L}_{d}$
+which have been observed for document $d$. By isolating terms that
+depend on $z_{n,d}$ and absorbing all other terms into a normalizing
+constant as in \cite{Griffiths04} we find 
+\begin{eqnarray}
+\lefteqn{p\left(z_{n,d}=k\mid\mathbf{z}\backslash z_{n,d},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)\propto} \label{eq:z-likelihood} \\
+ & \hspace{2cm}\left(c_{\left(\cdot\right),d}^{k,-\left(n,d\right)}+\alpha\boldsymbol\beta_{k}\right)\frac{c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}+\gamma}{\left(c_{\left(\cdot\right),\left(\cdot\right)}^{k,-\left(n,d\right)}+V\gamma\right)}\prod_{l\in\mathcal{L}_{d}}\exp\left\{ -\frac{\left(\bar{\mathbf{z}}_{d}^{T}\boldsymbol\eta_{l}-a_{l,d}\right)^{2}}{2}\right\}\nonumber\end{eqnarray}
+ where $c_{v,d}^{k,-\left(n,d\right)}$ is the number
+of words of type $v$ in document $d$ assigned to topic $k$ omitting
+the $n$th word of document $d$. The subscript $(\cdot)$'s
+indicate to sum over the range of the replaced variable, i.e.~$ {c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}} = \sum_d {c_{w_{n,d},d}^{k,-\left(n,d\right)}}$.  Here $\mathcal{L}_{d}$ is the set of labels which are observed for document $d$.  We sample from \eqref{eq:z-likelihood}  by enumeration and implicit normalization.
+%
+%Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z}_{-\left(d,n\right)},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)$
+%can be sampled through enumeration. 
+
+The conditional posterior distribution of the regression coefficients is given by 
+\begin{equation}
+p(\boldsymbol\eta_{l}\mid\mathbf{z},\mathbf{a},\sigma) = \mathcal{N}(\hat{\boldsymbol\mu}_{l},\hat{\mathbf{\Sigma}})\label{eqn:regression_param_conditional}
+\end{equation}
+$\boldsymbol\eta_{l}$ for $l\in\mathcal{L}$. Given that $\boldsymbol\eta_{l}$
+and $a_{l,d}$ are distributed normally, the posterior distribution
+of $\boldsymbol\eta_{l}$ is normally distributed with mean $\hat{\boldsymbol\mu}_{l}$
+and covariance $\hat{\mathbf{\Sigma}}.$% such that % (probably not the right place for this) We evaluated the model over various values of $\sigma$ where $\sigma=\left\{ 0.01,0.1,0.25,1,2\right\} $.
+where
+\begin{equation*}
+\hat{\boldsymbol\mu}_{l}  =  \hat{\mathbf{\Sigma}}\left(\mathbf{1}\frac{\mu}{\sigma}+\bar{\mathbf{Z}}^{T}\mathbf{a}_{l}\right) \qquad \hat{\mathbf{\Sigma}}^{-1}  =  \mathbf{I}\sigma^{-1}+\bar{\mathbf{Z}}^{T}\bar{\mathbf{Z}}
+.\end{equation*}
+Here $\bar{\mathbf{Z}}$ is a $D\times K$ matrix
+such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{\mathbf{z}}_{d}$, and $\mathbf{a}_{l}=[a_{l,1},a_{l,2},\ldots,a_{l,D}]^{T}$.  The simplicity of this conditional distribution follows from the choice of probit regression  \cite{Albert_Chib_1993}; the specific form of the update is a standard result from Bayesian normal  linear regression \cite{gelmanbda04}. 
+%p\left(\boldsymbol\eta_{i_{l,c}}\mid\mathbf{z}_{1:D},\mathbf{a};\sigma\right)=\mathcal{N}\left(\boldsymbol\eta_{i_{l,c}}\mid\hat{\mu}_{i},\hat{\Sigma}_{i}\right)\end{equation}
+%\[
+%\[
+%\subsection{$p\left(a_{l,d}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)$}
+%and \textmd{$p\left(y_{m,i}\mid\mathbf{a}\right)$}}
+%The auxiliary variables $a_{l,d}$ must be sampled for documents $d=1,\ldots,D$
+%and $l\in\mathcal{L}_{d}$. The conditional posterior distribution
+%of 
+It also is a standard probit regression result that the conditional posterior
+distribution of $a_{l,d}$ is a truncated normal
+distribution~\cite{Albert_Chib_1993}. 
+\begin{eqnarray*}
+\lefteqn{p\left(a_{l,d}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)}\\&\propto&
+\begin{cases}
+\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right)\mathbb{I}(a_{l,d}<0) , & y_{\mathrm{pa}(l),d}=-1\\
+\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right) , & y_{\mathrm{pa}(l),d}=1\end{cases}\label{eqn:a_l_d}\end{eqnarray*}
+
+%\begin{equation}
+%p\left(a_{l,d,}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\propto\frac{1}{\sqrt{2\pi}}\exp\left\{ -\frac{1}{2}\left(a_{l,d}-\boldsymbol\eta_{l}^{T}\mathbf{\bar{z}}_{d}\right)\right\} \mathbb{I}\left(a_{l,d}y_{l,d}>0\right).\label{eqn:a_l_d}\end{equation}
+% This conditional distribution can be sampled using an inverse CDF
+%method. %However, if $y_{d,i_{l,c}}$ is unobserved then $a_{d,i_{l,c}}$must
+%be sampled jointly with $y_{d,i_{l,c}}$ to ensure that the Markov
+%chain is ergodic. Suppose that $a_{d,i_{l,c}}$ is sampled to have
+%a negative value and $y_{d,i_{l,c}}$ is apporopriately sampled at
+%-1. Although there exist valid states where $a_{d,i_{l,c}}>0$ and
+%$y_{d,i_{l,c}}=1$, they will never be reached by such a Markov chain
+%since $p\left(a_{d,i_{l,c}}<0\mid y_{d,i_{l,c}}=-1\right)=1$ and
+%$p\left(y_{d,i_{l,c}}=-1\mid a_{d,i_{l,c}}<0\right)=1$. Therefore,
+%to ensure ergodicity, $a_{d,i_{l,c}}$and $y_{d,i_{l,c}}$ must be
+%sampled from the joint distribution as shown in Equation \ref{eq:Probit-Joint}.
+%\begin{equation}
+%p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\boldsymbol\eta}\right)\propto p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)p\left(a_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)\end{equation}
+%\begin{equation}
+%p\left(y_{i_{l,c}}\mid\mathbf{a},\mathbf{y}_{-\left(l,c\right)}\right)=\delta\left(sign\left(a_{d,i_{l,c}}\right)=y_{i_{l,c}}\right)p\left(y_{i_{l,c}}\mid y_{parents_{l,c}}\right)\prod_{i_{\hat{l},\hat{c}}\in children_{l,c}}p\left(y_{i_{\hat{l},\hat{c}}}\mid y_{i_{l,c}}\right)\end{equation}
+%\begin{equation}
+%p\left(y_{i_{l,c}}=-1\mid y_{parent{}_{l,c}}\right)=\begin{cases}
+%1, & y_{parent_{l,c}}=-1\\
+%0.5, & y_{parent_{l,c}}=1\end{cases}\end{equation}
+%\[
+%p\left(a_{d,i_{l,c}},y_{d,i_{l,c}}\mid\mathbf{z},\mathbf{Y}_{-\left(d,i_{l,c}\right)},\mathbf{\boldsymbol\eta}\right)\]
+%\begin{equation}
+%=\begin{cases}
+%\mathcal{N}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\boldsymbol\eta_{i_{l,c}},1\right)p\left(y_{d,i_{l,c}}\mid a_{d,i_{l,c}}\right), & y_{parent_{l,c}}=1,\forall y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}},y_{i_{\hat{l},\hat{c}}}=-1\\
+%trunc\mathcal{N}^{-}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\boldsymbol\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=-1\right), & y_{parent_{l,c}}=-1\\
+%trunc\mathcal{N}^{+}\left(a_{d,i_{l,c}}\mid\bar{z}^{T}\boldsymbol\eta_{i_{l,c}},1\right)\delta\left(y_{d,i_{l,c}}=1\right), & \exists y_{i_{\hat{l},\hat{c}}}\in y_{children_{l,c}}\setminus y_{i_{\hat{l},\hat{c}}}=1\\
+%0 & otherwise\end{cases}\end{equation}
+%where $\mathbf{Y}_{-\left(d,i_{l,c}\right)}$ denotes all of the response
+%variables excluding the response variable being sampled.
+%
+%
+%
+%\subsection{$p\left(\boldsymbol\beta\mid\mathbf{z},\alpha^{\prime},\alpha\right)$}
+
+%Note that care must be taken to initialize the Gibbs sampler in a valid state.
+
+HSLDA employs a hierarchical Dirichlet prior over topic assignments (i.e.,~$\boldsymbol\beta$ is estimated from data rather than fixed a priori).  This has been shown to improve the quality and stability of inferred topics \cite{WallachMiMc2009}. 
+%This prior
+%shares many features with the hierarchical Dirichlet process and inference
+%over this distribution proceeds in a very similar fashion.
+%
+Sampling $\boldsymbol\beta$, the vector of global topic proportions,   can be done using the ``direct assignment''
+method of \cite{TehJorBea2006} \begin{equation}
+\boldsymbol\beta\mid\mathbf{z},\alpha^{\prime},\alpha\sim{\rm Dir}\left(m_{\left(\cdot\right),1}+\alpha^{\prime},m_{\left(\cdot\right),2}+\alpha^{\prime},\ldots,m_{\left(\cdot\right),K}+\alpha^{\prime}.\right)\end{equation}
+Here $m_{d,k}$ are auxiliary variables that are required to sample the posterior distribution of $\boldsymbol\beta$.  Their conditional posterior distribution is sampled according to
+ \begin{equation}
+p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\boldsymbol\beta\right)=\frac{\Gamma\left(\alpha\boldsymbol\beta_{k}\right)}{\Gamma\left(\alpha\boldsymbol\beta_{k}+c^k_{(\cdot),d}\right)}s\left(c^k_{(\cdot),d},m\right)\left(\alpha\boldsymbol\beta_{k}\right)^{m}\end{equation}
+where $s\left(n,m\right)$ represents stirling numbers of the first
+kind.
+
+
+%\subsection{$p\left(\alpha\right)$, $p\left(\alpha'\right)$, $p\left(\gamma\right)$}
+
+The hyperparameters $\alpha$, $\alpha^{\prime}$, and $\gamma$ are
+%given broad ${\rm Gamma}(1,1000)$ prior distributions and 
+sampled
+using Metropolis-Hastings. 
+
