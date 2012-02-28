@@ -18,45 +18,45 @@ Warning--to sort, need author or key in SNAP
 Warning--to sort, need author or key in Challenge07
 Warning--empty year in DiscLDA
 Warning--empty publisher in WallachMiMc2009
-You've used 30 entries,
+You've used 29 entries,
             2118 wiz_defined-function locations,
-            746 strings with 10173 characters,
-and the built_in function-call counts, 10372 in all, are:
-= -- 1008
-> -- 493
+            738 strings with 10025 characters,
+and the built_in function-call counts, 10067 in all, are:
+= -- 977
+> -- 486
 < -- 7
-+ -- 195
-- -- 163
-* -- 727
-:= -- 1667
-add.period$ -- 89
-call.type$ -- 30
-change.case$ -- 170
++ -- 192
+- -- 161
+* -- 704
+:= -- 1617
+add.period$ -- 86
+call.type$ -- 29
+change.case$ -- 166
 chr.to.int$ -- 0
-cite$ -- 36
-duplicate$ -- 393
-empty$ -- 834
-format.name$ -- 163
-if$ -- 2215
+cite$ -- 35
+duplicate$ -- 382
+empty$ -- 805
+format.name$ -- 161
+if$ -- 2150
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 25
-newline$ -- 150
-num.names$ -- 54
-pop$ -- 188
+int.to.str$ -- 29
+missing$ -- 24
+newline$ -- 145
+num.names$ -- 52
+pop$ -- 186
 preamble$ -- 1
-purify$ -- 139
+purify$ -- 136
 quote$ -- 0
-skip$ -- 291
+skip$ -- 284
 stack$ -- 0
-substring$ -- 639
-swap$ -- 93
+substring$ -- 607
+swap$ -- 92
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 118
+type$ -- 114
 warning$ -- 6
-while$ -- 88
-width$ -- 32
-write$ -- 321
+while$ -- 85
+width$ -- 31
+write$ -- 310
 (There was 1 error message)
