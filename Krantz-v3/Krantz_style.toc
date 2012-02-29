@@ -12,10 +12,10 @@
 \contentsline {section}{\numberline {1.4}Example Applications}{11}
 \contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{12}
 \contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{13}
-\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{14}
+\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{15}
 \contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{15}
-\contentsline {section}{\numberline {1.5}Discussion}{18}
-\contentsline {section}{\numberline {1.6}Appendix}{18}
-\contentsline {subsection}{\numberline {1.6.1}Probit Regression}{18}
-\contentsline {chapter}{Bibliography}{21}
-\contentsline {chapter}{Index}{25}
+\contentsline {section}{\numberline {1.5}Discussion}{19}
+\contentsline {section}{\numberline {1.6}Appendix}{20}
+\contentsline {subsection}{\numberline {1.6.1}Probit Regression}{20}
+\contentsline {chapter}{Bibliography}{23}
+\contentsline {chapter}{Index}{27}

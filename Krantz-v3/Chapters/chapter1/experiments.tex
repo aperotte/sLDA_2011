@@ -47,11 +47,19 @@ purposes.\footnote{http://www.cdc.gov/nchs/icd/icd9cm.htm}  These ICD-9 codes ar
 edge representing an is-a relationship between parent and child, such that the
 parent diagnosis subsumes the child diagnosis. For example, the code for
 {}``Pneumonia due to adenovirus'' is a child of the code for {}``Viral
-pneumonia,'' where the former is a type of the latter.  A representative sub-tree of the ICD-9 code tree is shown in Figure ADLER\ref{ADLER}. It is worth noting that
+pneumonia,'' where the former is a type of the latter.  A representative sub-tree of the ICD-9 code tree is shown in Figure \ref{fig:diagnosis_tree}. It is worth noting that
 the coding can be noisy. Human coders sometimes disagree~\cite{Challenge07},
 tend to be more specific than sensitive in their
 assignments~\cite{Birmetal2005}, and sometimes make
 mistakes~\cite{FarzandipourEtAl10}.
+
+
+\begin{figure}[t]
+%tbp] %  figure placement: here, top, bottom, or page
+\centering \includegraphics[scale=0.4]{Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped} \caption{An illustration of a portion of the ICD9 hierarchy.}
+\label{fig:diagnosis_tree}
+\end{figure}
+
 
 An automated process would ideally produce a more complete and accurate
 diagnosis lists. %Also, this model will reveal information about the
@@ -106,8 +114,16 @@ product categories are displayed on the front page of the website and lower
 level categories can be discovered by choosing one of the top-level categories.
 Products can exist in multiple locations in the hierarchy.
 
+
+\begin{figure}[t]
+%tbp] %  figure placement: here, top, bottom, or page
+\centering \includegraphics[scale=0.4]{Chapters/chapter1/figures/hi_quality_product_tree_cropped} \caption{An illustration of a portion of the Amazon product hierarchy.}
+\label{fig:product_tree}
+\end{figure}
+
+
 Amazon.com is one such retailer.  Their product categorization data is available as part of the 
- Stanford Network Analysis Platform (SNAP) dataset~\cite{SNAP}.    A representative sub-tree of the amazon.com DVD produce categorization tree is shown in Figure ADLER\ref{ADLER}.  
+ Stanford Network Analysis Platform (SNAP) dataset~\cite{SNAP}.    A representative sub-tree of the amazon.com DVD produce categorization tree is shown in Figure \ref{fig:product_tree}.  
 Product descriptions were obtained separately from the
 Amazon.com website directly. Once such description is
 \begin{quote}
@@ -274,14 +290,45 @@ correct labels at a cost of an increase in the number of false positives
 relative to the comparison models.
 
 
-Example topics (as word lists) learned for the discharge data are given below.  These word lists are computed by ADLER
+Example topics (as word lists) learned for the discharge data are given below.  These word lists are computed by sorting
+terms in decreasing order based on their probability under a given topic.
 
 \begin{extract}
-ADLER
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Topic 1} & \textbf{Topic 2} \\ \hline
+MASS & WOUND \\
+\hline
+CANCER & FOOT \\
+\hline
+RIGHT & CELLULITIS \\
+\hline
+BREAST & ULCER \\
+\hline
+CHEMOTHERAPY & LEFT \\
+\hline
+METASTATIC & ERYTHEMA \\
+\hline
+LEFT & PAIN \\
+\hline
+LYMPH & SWELLING \\
+\hline
+TUMOR & SKIN \\
+\hline
+BIOPSY & RIGHT \\
+\hline
+CARCINOMA & ABSCESS \\
+\hline
+LUNG & LEG \\
+\hline
+CHEMO & OSTEOMYELITIS \\
+\hline
+ADENOCARCINOMA & TOE \\
+\hline
+NODE & DRAINAGE \\
+\hline
+\end{tabular}
 \end{extract}
-
-ADLER could you write a sentence about how these are cleaner than the SLDA or LDA topics?
-
 
 Figure~\ref{fig:1b} demonstrates the performance of the model on the retail product data as an ROC curve also varying $\mu$. For
 instance, a hyperparameter setting of $\mu=-2.2$ yields the following
@@ -291,10 +338,44 @@ rate of 0.78 and a false positive rate of 0.14, and the HSLDA model where
 LDA and the regressions were fit separately had a true positive rate of 0.77
 and a false positive rate of 0.16. These results follow a similar pattern to the clinical data. These points are highlighted in Figure~\ref{fig:1b}.
 
-Example topics (as word lists) learned for the amazon.com data are given below.  T
+Example topics (as word lists) learned for the amazon.com data are given below.  These word lists were also computed by sorting
+terms in decreasing order based on their probability under a given topic.
 
 \begin{extract}
-ADLER
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Topic 1} & \textbf{Topic 2} \\ \hline
+SERIES & BASEBALL \\
+\hline
+EPISODES & TEAM \\
+\hline
+SHOW & GAME \\
+\hline
+SEASON & PLAYERS \\
+\hline
+EPISODE & BASKETBALL \\
+\hline
+FIRST & SPORT \\
+\hline
+TELEVISION & SPORTS \\
+\hline
+SET & NEW \\
+\hline
+TIME & PLAYER \\
+\hline
+TWO & SEASON \\
+\hline
+SECOND & LEAGUE \\
+\hline
+ONE & FOOTBALL \\
+\hline
+CHARACTERS & STARS \\
+\hline
+DISC & FANS \\
+\hline
+GUEST & FIELD \\
+\hline
+\end{tabular}
 \end{extract}
 
 Figure \ref{fig:results_auxiliary_var} shows the predictive performance of HSLDA 

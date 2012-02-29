@@ -9,7 +9,7 @@
 \chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{11}
 \chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.4.2}Product Descriptions and Catalogs}{13}
 \chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.4.3}Comparison Models}{14}
-\chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.4.4}Evaluation and Results}{14}
-\chapcontentsline{chapsection}{\raggedright \makebox[21pt][l]{1.5}Discussion}{17}
-\chapcontentsline{chapsection}{\raggedright \makebox[21pt][l]{1.6}Appendix}{18}
-\chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.6.1}Probit Regression}{18}
+\chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.4.4}Evaluation and Results}{15}
+\chapcontentsline{chapsection}{\raggedright \makebox[21pt][l]{1.5}Discussion}{19}
+\chapcontentsline{chapsection}{\raggedright \makebox[21pt][l]{1.6}Appendix}{20}
+\chapcontentsline{chapsubsection}{\raggedright \makebox[30pt][l]{1.6.1}Probit Regression}{20}
