@@ -5,7 +5,9 @@ of the latent variables in the model.  The posterior distribution we seek does n
 This is usually the case for posterior distributions of non-trivial
 probabilistic models and suggests a approximating the posterior distribution by sampling.
 
-In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo.  A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  
+In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo. 
+
+XXX  A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  XXX
 
 The HSLDA sampler, like the collapsed Gibbs samplers for LDA \cite{Griffiths04}, is itself a collapsed Gibbs sampler in which all of the latent variables that can be analytically marginalized are.  Among others, the parameters $\boldsymbol{\phi}_{1:K}$
 and $\boldsymbol{\theta}_{1:D}$ are analytically marginalized prior to deriving the following conditional distributions for sampling.  

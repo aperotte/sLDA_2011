@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.11.16)  29 FEB 2012 11:59
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.11.16)  1 MAR 2012 07:11
 entering extended mode
  %&-line parsing enabled.
 **Krantz_style.tex
@@ -912,8 +912,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 
 
-] [4]) (./Chapters/chapter1/introduction.tex [5])
-(./Chapters/chapter1/model.tex
+]
+Underfull \vbox (badness 3271) has occurred while \output is active []
+
+ [4])
+(./Chapters/chapter1/introduction.tex [5]) (./Chapters/chapter1/model.tex
 <Chapters/chapter1/Graphical_Model-final.pdf, id=77, 819.06pt x 457.71pt>
 File: Chapters/chapter1/Graphical_Model-final.pdf Graphic file (type pdf)
 
@@ -977,12 +980,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
-Non-PDF special ignored!]) (./Chapters/chapter1/inference.tex
+Non-PDF special ignored!]) (./Chapters/chapter1/inference.tex [9]
 
-LaTeX Warning: Reference `sec:mcmc' on page 9 undefined on input line 8.
+LaTeX Warning: Reference `sec:mcmc' on page 10 undefined on input line 10.
 
-[9]
-Overfull \hbox (2.72964pt too wide) in alignment at lines 67--69
+
+Overfull \hbox (2.72964pt too wide) in alignment at lines 69--71
  [][][] []
  []
 
@@ -1159,7 +1162,7 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts
 ic/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 /symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/ncntrsbk/uncr8a.p
 fb>
-Output written on Krantz_style.pdf (42 pages, 602335 bytes).
+Output written on Krantz_style.pdf (42 pages, 602715 bytes).
 PDF statistics:
  318 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
