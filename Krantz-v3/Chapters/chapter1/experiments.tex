@@ -82,7 +82,7 @@ results~\cite{LarkeyCroft95,RibeiroNeto2001,PakhomovEtAl06,Lita2008}.%Ruch2008 o
 
 The specific dataset we report results for in this chapter was gathered from the NewYork-Presbyterian Hospital clinical data warehouse. 
 It consists of 6,000 discharge summaries and
-their associated ICD-9 codes (7,298 distinct codes overall), representing all
+their associated ICD-9 codes (7,298 distinct codes overall), representing a portion of
 the discharges from the hospital in 2009. All included discharge summaries had associated ICD-9 Codes.
 Summaries have 8.39 associated ICD-9
 codes on average (std dev=5.01) and contain an average of 536.57 terms after
@@ -123,7 +123,7 @@ Products can exist in multiple locations in the hierarchy.
 
 
 Amazon.com is one such retailer.  Their product categorization data is available as part of the 
- Stanford Network Analysis Platform (SNAP) dataset~\cite{SNAP}.    A representative sub-tree of the amazon.com DVD produce categorization tree is shown in Figure \ref{fig:product_tree}.  
+ Stanford Network Analysis Platform (SNAP) dataset~\cite{SNAP}.    A representative sub-tree of the amazon.com DVD product category tree is shown in Figure \ref{fig:product_tree}.  
 Product descriptions were obtained separately from the
 Amazon.com website directly. Once such description is
 \begin{quote}
@@ -221,7 +221,7 @@ predictive performance on held-out data. Prediction performance was measured
 with standard metrics -- sensitivity (true positive rate) and 1-specificity
 (false positive rate). 
 
-In each case the gold standard for testing was derived from the test data. To make the comparison as antagonistic to HSLDA as possible (relative to the other models), ancestors of
+In each case the gold standard for testing was derived from the test data. To make the comparison as antagonistic to HSLDA as possible (relative to the other models), in evaluation only, ancestors of
 observed nodes in the label hierarchy were ignored, observed nodes were
 considered positive and descendants of observed nodes were assumed to be
 negative. Note that this is different from our treatment of the observations during inference where we marginalize over possible settings of unobserved labels.
@@ -283,7 +283,7 @@ the full HSLDA model had a
 true positive rate of 0.57 and a false positive rate of 0.13, the SLDA model
 had a true positive rate of 0.42 and a false positive rate of 0.07, and the
 HSLDA model where LDA and the regressions were fit separately had a true
-positive rate of 0.39 and a false positive rate of 0.08. These points are highlighted in Figure~\ref{fig:1a}.
+positive rate of 0.39 and a false positive rate of 0.08. These points are highlighted in Figure~\ref{fig:1a}.  Note that the figure is somewhat misleading because for any one value of $\mu$ HSLDA outperforms the comparison models by a relatively large margin. 
 
 These results indicate that the full HSLDA model predicts more of the the
 correct labels at a cost of an increase in the number of false positives
@@ -296,7 +296,7 @@ terms in decreasing order based on their probability under a given topic.
 \begin{extract}
 \begin{tabular}{|c|c|}
 \hline
-\textbf{Topic 1} & \textbf{Topic 2} \\ \hline
+\textbf{Topic 1} & \textbf{Topic 2} \\ \hline \hline
 MASS & WOUND \\
 \hline
 CANCER & FOOT \\
@@ -330,6 +330,8 @@ NODE & DRAINAGE \\
 \end{tabular}
 \end{extract}
 
+These topics closely correspond to common clinical concepts, namely, cancers of the thorax and wounds common to diabetics suffering from poor peripheral circulation.  Evaluations of the subject coherence of these topics relative to baselines are ongoing, but early results suggest positive findings similar to those reported for other supervised LDA models.
+
 Figure~\ref{fig:1b} demonstrates the performance of the model on the retail product data as an ROC curve also varying $\mu$. For
 instance, a hyperparameter setting of $\mu=-2.2$ yields the following
 performance: the full HSLDA model had a true positive rate of 0.85 
@@ -344,7 +346,7 @@ terms in decreasing order based on their probability under a given topic.
 \begin{extract}
 \begin{tabular}{|c|c|}
 \hline
-\textbf{Topic 1} & \textbf{Topic 2} \\ \hline
+\textbf{Topic 1} & \textbf{Topic 2} \\ \hline \hline
 SERIES & BASEBALL \\
 \hline
 EPISODES & TEAM \\

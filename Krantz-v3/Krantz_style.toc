@@ -10,9 +10,9 @@
 \contentsline {section}{\numberline {1.3}Inference}{9}
 \contentsline {subsection}{\numberline {1.3.1}Gibbs Sampler}{10}
 \contentsline {section}{\numberline {1.4}Example Applications}{11}
-\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{12}
+\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{11}
 \contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{13}
-\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{15}
+\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{14}
 \contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{15}
 \contentsline {section}{\numberline {1.5}Discussion}{19}
 \contentsline {section}{\numberline {1.6}Appendix}{20}

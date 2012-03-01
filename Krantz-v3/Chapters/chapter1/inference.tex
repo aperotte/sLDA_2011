@@ -3,12 +3,10 @@
 Our inference goal  is to obtain a representation of the posterior distribution
 of the latent variables in the model.  The posterior distribution we seek does not have a simple analytic form from which exact samples can be drawn.
 This is usually the case for posterior distributions of non-trivial
-probabilistic models and suggests a approximating the posterior distribution by sampling.
+probabilistic models and suggests approximating the posterior distribution by sampling.
 
-In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo. 
-
-XXX  A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  XXX
-
+In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo.  %A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  
+%
 The HSLDA sampler, like the collapsed Gibbs samplers for LDA \cite{Griffiths04}, is itself a collapsed Gibbs sampler in which all of the latent variables that can be analytically marginalized are.  Among others, the parameters $\boldsymbol{\phi}_{1:K}$
 and $\boldsymbol{\theta}_{1:D}$ are analytically marginalized prior to deriving the following conditional distributions for sampling.  
   It will often be the
@@ -72,7 +70,7 @@ constant as in \cite{Griffiths04} we find
  where $c_{v,d}^{k,-\left(n,d\right)}$ is the number
 of words of type $v$ in document $d$ assigned to topic $k$ omitting
 the $n$th word of document $d$. The subscript $(\cdot)$'s
-indicate to sum over the range of the replaced variable, i.e.~$ {c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}} = \sum_d {c_{w_{n,d},d}^{k,-\left(n,d\right)}}$.  Here $\mathcal{L}_{d}$ is the set of labels which are observed for document $d$.  We sample from \eqref{eq:z-likelihood}  by enumeration and implicit normalization.
+indicate to sum over the range of the replaced variable, i.e.~$ {c_{w_{n,d},\left(\cdot\right)}^{k,-\left(n,d\right)}} = \sum_d {c_{w_{n,d},d}^{k,-\left(n,d\right)}}$.  Here $\mathcal{L}_{d}$ is the set of labels which are observed for document $d$.  We sample from \eqref{eq:z-likelihood}  by first enumerating $z_{n,d}$ and then normalizing.
 %
 %Given Equation \ref{eq:z-likelihood}, $p\left(z_{d,n}\mid\mathbf{z}_{-\left(d,n\right)},\mathbf{a},\mathbf{w},\mathbf{\boldsymbol\eta},\alpha,\boldsymbol\beta,\gamma\right)$
 %can be sampled through enumeration. 
