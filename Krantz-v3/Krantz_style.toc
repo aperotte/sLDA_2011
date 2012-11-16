@@ -4,18 +4,22 @@
 \contentsline {chapter}{\numberline {1}Mixed Membership Classification}{3}
 \contentsline {section}{\numberline {1.1}Introduction}{3}
 \contentsline {subsection}{\numberline {1.1.1}Background}{4}
-\contentsline {subsection}{\numberline {1.1.2}Intuition}{5}
-\contentsline {section}{\numberline {1.2}Hierarchical Supervised LDA (HSLDA)}{6}
-\contentsline {subsection}{\numberline {1.2.1}Ancestral sampling for HSLDA}{7}
-\contentsline {section}{\numberline {1.3}Inference}{9}
-\contentsline {subsection}{\numberline {1.3.1}Gibbs Sampler}{10}
-\contentsline {section}{\numberline {1.4}Example Applications}{11}
-\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{11}
-\contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{13}
-\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{14}
-\contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{15}
-\contentsline {section}{\numberline {1.5}Discussion}{19}
-\contentsline {section}{\numberline {1.6}Appendix}{20}
-\contentsline {subsection}{\numberline {1.6.1}Probit Regression}{20}
-\contentsline {chapter}{Bibliography}{23}
-\contentsline {chapter}{Index}{27}
+\contentsline {subsubsection}{\numberline {1.1.1.1}Latent Dirichlet Allocation}{4}
+\contentsline {subsubsection}{\numberline {1.1.1.2}Supervised Latent Dirichlet Allocation}{5}
+\contentsline {section}{\numberline {1.2}Hierarchical Supervised Latent Dirichlet Allocation}{6}
+\contentsline {subsection}{\numberline {1.2.1}Generative Model}{7}
+\contentsline {subsection}{\numberline {1.2.2}Dealing with Label Imbalance}{9}
+\contentsline {subsection}{\numberline {1.2.3}Intuition}{10}
+\contentsline {section}{\numberline {1.3}Inference}{10}
+\contentsline {subsection}{\numberline {1.3.1}Gibbs Sampler}{11}
+\contentsline {section}{\numberline {1.4}Example Applications}{13}
+\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{13}
+\contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{15}
+\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{16}
+\contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{17}
+\contentsline {section}{\numberline {1.5}Related Work}{21}
+\contentsline {section}{\numberline {1.6}Discussion}{21}
+\contentsline {section}{\numberline {1.7}Appendix}{22}
+\contentsline {subsection}{\numberline {1.7.1}Probit Regression}{22}
+\contentsline {chapter}{Bibliography}{25}
+\contentsline {chapter}{Index}{29}

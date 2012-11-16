@@ -1,4 +1,5 @@
-This is BibTeX, Version 0.99c (Web2C 7.5.7)
+This is BibTeX, Version 0.99d (TeX Live 2012)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Krantz_style.aux
 A level-1 auxiliary file: frontmatter/Foreword.aux
 A level-1 auxiliary file: frontmatter/preface.aux
@@ -12,10 +13,10 @@ You're missing a field name---line 347 of file biblio.bib
  :   %series = {EMNLP '09},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in Challenge07
+Warning--to sort, need author or key in SNAP
 Warning--to sort, need author or key in DMOZ
 Warning--to sort, need author or key in AMAZON
-Warning--to sort, need author or key in SNAP
-Warning--to sort, need author or key in Challenge07
 Warning--empty year in DiscLDA
 Warning--empty publisher in WallachMiMc2009
 You've used 29 entries,

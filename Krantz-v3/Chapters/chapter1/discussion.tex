@@ -1,3 +1,24 @@
+% !TEX root =  ../../Krantz_style.tex
+
+\section{Related Work}
+\label{sec:related_work}
+
+
+HSLDA does not, of course, stand alone.  Models for structured labeling of bag of words data can be designed in a number of different ways.
+
+As shown  in Section~\ref{sec:example_applications},  SLDA can be used to solve this kind of problem directly; however, doing so requires ignoring the hierarchical
+dependencies amongst the labels.  Other models that incorporate LDA and supervision and so also could be used to solve this problem include
+LabeledLDA~\cite{Ramage2009} and DiscLDA~\cite{DiscLDA}.  Various applications of these models to 
+computer vision and document networks have been explored~\cite{wangbleifeifei08,RelationalLDA}.
+None of these models, however, leverage dependency structure in the label space.
+
+In other non-LDA-based related work, researchers have classified documents into hierarchies (a closely related task) using naive Bayes classifiers
+and support vector machines. Most of this work has been demonstrated on relatively
+small datasets, small label spaces, and has focused on single label classification without
+a model of documents such as LDA~\cite{mccallum99building,Dumais2000HCW,Kollerilprints291,Chakrabarti1998SFS}.  
+\section{Discussion}
+\label{sec:discussion}
+
 %Despite the proliferation of LDA related models in recent years, one could
 %argue that the true killer app for LDA has yet to be discovered.  LDA makes
 %sense for information retrieval (IR) because  the learned latent topic vectors
@@ -12,7 +33,7 @@ on the topic modeling performance of LDA via the inclusion of observed
 supervision. An alternative, complementary way is to see it as a set of models
 that can predict labels for bag-of-word data. A large diversity of problems
 can be expressed as label prediction problems for bag-of-word data. A
-surprisingly large amount of that kind of data possess structured labels,
+surprisingly large amount data possess structured labels,
 either hierarchically constrained or otherwise.  HSLDA directly addresses
 this kind of data and works well in practice. That it
 outperforms more straightforward approaches should be of interest to
@@ -30,6 +51,36 @@ practitioners.
 %one can, in an engineering sense, get nearly as much gain in label prediction
 %performance by first fitting LDA and then fitting a hierarchical probit
 %regression.  There are applied settings in which this could be advantageous.
+
+There are many kinds of problems that have the same characteristics as this: any data  that consists of free text that has been partially or
+completely categorized by human editors for instance; more fully
+% In this paper we focus on
+any bag-of-words data that has been, at least in part, 
+categorized. 
+ Examples include but are not limited to webpages and curated
+hierarchical directories of the same \cite{DMOZ}, product descriptions and
+catalogs, (e.g.~\cite{AMAZON} as available from \cite{SNAP})
+and patient records %hospital treatment transcripts
+and diagnosis codes assigned to them for bookkeeping and insurance purposes.
+The model we cover in this chapter shows one way to combine 
+these two sources of information into a single model that allows one to
+categorize new text documents automatically, suggest labels that might be
+inaccurate, compute improved similarities between documents for information
+retrieval purposes, and more. %The models and techniques that we develop in
+%this paper are applicable to other data as well, namely, any unstructured
+%representations of data that have been hierarchically classified (e.g.,~image
+%catalogs with bag-of-feature representations).
+
+%There are several challenges entailed in incorporating a hierarchy of labels
+%into the model. Among them, given a large set of potential labels (often thousands), each
+%instance has only a small number of labels associated to it. Furthermore, there are no
+%naturally occurring negative labeling in the data, and the absence of a label
+%cannot always be interpreted as a negative labeling. 
+
+%Our work operates within the framework of topic modeling. Our approach learns
+%topic models of the underlying data and labeling strategies in a joint model,
+%while leveraging the hierarchical structure of the labels. 
+%In this chapter we focus on ``is-a'' hierarchically structured label spaces, but label spaces that are structured differently may be accommodated with relatively minor modifications. 
 
 Extensions to this work include unbounded topic cardinality variants and
 relaxations to different kinds of label structure.  Unbounded topic cardinality

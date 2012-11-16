@@ -1,23 +1,22 @@
 
 \label{sec:inference}
 Our inference goal  is to obtain a representation of the posterior distribution
-of the latent variables in the model.  The posterior distribution we seek does not have a simple analytic form from which exact samples can be drawn.
+of the latent variables in the model.  This posterior distribution can then be used for predictive inference of labels for held-out documents among other things.  Unfortunately the posterior distribution we seek does not have a simple analytic form from which exact samples can be drawn.
 This is usually the case for posterior distributions of non-trivial
 probabilistic models and suggests approximating the posterior distribution by sampling.
 
 In this section we derive the conditional distributions required to sample from the HSLDA posterior distribution using Markov chain Monte Carlo.  %A very brief review of Markov chain Monte Carlo can be found in Section \ref{sec:mcmc} at the end of this chapter.  
 %
-The HSLDA sampler, like the collapsed Gibbs samplers for LDA \cite{Griffiths04}, is itself a collapsed Gibbs sampler in which all of the latent variables that can be analytically marginalized are.  Among others, the parameters $\boldsymbol{\phi}_{1:K}$
-and $\boldsymbol{\theta}_{1:D}$ are analytically marginalized prior to deriving the following conditional distributions for sampling.  
-  It will often be the
-case that the set of labels $\mathcal{L}$ is not fully observed for
-every document. We will define $\mathcal{L}_{d}$ to be the subset
-of labels which have been observed for document $d$. In an is-a hierarchical regression  it is straightforward
-to marginalize the variables $a_{l^{\prime},d}$ and $y_{l^{\prime},d}$
-for $l^{\prime}\in\mathcal{L}\backslash\mathcal{L}_{d}$ simply by ignoring them. 
+The HSLDA sampler, like the collapsed Gibbs samplers for LDA \cite{Griffiths04}, is itself a collapsed Gibbs sampler in which all of the latent variables that can be analytically marginalized are.  Among others, the topic distributions $\boldsymbol{\phi}_{1:K}$
+and document specific topic assignment distributions $\boldsymbol{\theta}_{1:D}$ are analytically marginalized prior to deriving the following conditional distributions for sampling.  
+
+  It will usually be the
+case that values $y_{l,d}$ will not be known for all labels $l \in \mathcal{L}$ in the space of possible labels.  Values for $y_{l,d}$ that are enforced by label constraints and observed labels are set to their constrained values prior to inference and treated as observed.  We will define $\mathcal{L}_{d}$ to be the subset
+of labels which have been observed (or observed via filling in from constraints) for document $d$.   Marginalizing the probit regression auxiliary variables $a_{l^{\prime},d}$ and $y_{l^{\prime},d}$
+for $l^{\prime}\in\mathcal{L}\backslash\mathcal{L}_{d}$ is simple in the is-a hierarchy case because they can simply be ignored. 
 %We can also integrate out the parameters $\boldsymbol{\phi}_{1:K}$
 %and $\boldsymbol{\theta}_{1:D}$ as in \cite{Griffiths04}.
- The remaining latent variables (those that are not collapsed out) are $\mathbf{z}=\{z_{1:N_{d},d}\}_{d=1,\ldots,D},\boldsymbol\eta=\{\boldsymbol\eta_{l}\}_{l\in\mathcal{L}},\mathbf{a}=\{a_{l^{\prime},d}\}_{l^{\prime}\in\mathcal{L}_{d},d=1,\ldots,D},\boldsymbol\beta,\alpha,\alpha^{\prime}$
+ The remaining latent variables (those that are not collapsed out) are the topic indicators $\mathbf{z}=\{z_{1:N_{d},d}\}_{d=1,\ldots,D},$ the probit regression parameters $\boldsymbol\eta=\{\boldsymbol\eta_{l}\}_{l\in\mathcal{L}},$ the auxiliary variables $\mathbf{a}=\{a_{l^{\prime},d}\}_{l^{\prime}\in\mathcal{L}_{d},d=1,\ldots,D},$ the global topic proportions $\boldsymbol\beta$, and the concentration parameters $\alpha,\alpha^{\prime}$
 and $\gamma$.
 
 
@@ -36,7 +35,7 @@ and $\gamma$.
 %
 
 \subsection{Gibbs Sampler}
- Let $\mathbf{a}$ be the set of all auxiliary variables, $\mathbf{w}$  the set of all words, $\boldsymbol\eta$  the set of all regression coefficients, and  $\mathbf{z}\backslash z_{n,d}$  the set $\mathbf{z}$ with element $z_{n,d}$ removed.  %The conditional posterior distribution of the latent topic indicators is
+ Let $\mathbf{a}$ be the set of all probit regression auxiliary variables, $\mathbf{w}$  the set of all words, $\boldsymbol\eta$  the set of all regression coefficients, and  $\mathbf{z}\backslash z_{n,d}$  the set $\mathbf{z}$ with element $z_{n,d}$ removed.  %The conditional posterior distribution of the latent topic indicators is
  %We use the notation $\mathbf{z}_{-(n,d)}$ to
 %denote $\mathbf{z}_d\backslash z_{n,d}$. %, marginalizing
 %$\theta_{1:D}$ and $\phi_{1:K}$. For details regarding collapsing
@@ -99,7 +98,7 @@ such that row $d$ of $\mathbf{\bar{Z}}$ is $\bar{\mathbf{z}}_{d}$, and $\mathbf{
 %of 
 It also is a standard probit regression result that the conditional posterior
 distribution of $a_{l,d}$ is a truncated normal
-distribution~\cite{Albert_Chib_1993}. 
+distribution~\cite{Albert_Chib_1993} (see also Section \ref{sec:probit_review}). 
 \begin{eqnarray*}
 \lefteqn{p\left(a_{l,d}\mid\mathbf{z},\mathbf{Y},\mathbf{\boldsymbol\eta}\right)}\\&\propto&
 \begin{cases}
@@ -152,17 +151,21 @@ HSLDA employs a hierarchical Dirichlet prior over topic assignments (i.e.,~$\bol
 Sampling $\boldsymbol\beta$, the vector of global topic proportions,   can be done using the ``direct assignment''
 method of \cite{TehJorBea2006} \begin{equation}
 \boldsymbol\beta\mid\mathbf{z},\alpha^{\prime},\alpha\sim{\rm Dir}\left(m_{\left(\cdot\right),1}+\alpha^{\prime},m_{\left(\cdot\right),2}+\alpha^{\prime},\ldots,m_{\left(\cdot\right),K}+\alpha^{\prime}.\right)\end{equation}
-Here $m_{d,k}$ are auxiliary variables that are required to sample the posterior distribution of $\boldsymbol\beta$.  Their conditional posterior distribution is sampled according to
+Here $m_{d,k}$ are additional auxiliary variables that are introduced by the direct assignment method to sample the posterior distribution of $\boldsymbol\beta$.  Their conditional posterior distribution is sampled according to
  \begin{equation}
 p\left(m_{d,k}=m\mid\mathbf{z},\mathbf{m}_{-\left(d,k\right)},\boldsymbol\beta\right)=\frac{\Gamma\left(\alpha\boldsymbol\beta_{k}\right)}{\Gamma\left(\alpha\boldsymbol\beta_{k}+c^k_{(\cdot),d}\right)}s\left(c^k_{(\cdot),d},m\right)\left(\alpha\boldsymbol\beta_{k}\right)^{m}\end{equation}
-where $s\left(n,m\right)$ represents stirling numbers of the first
+where $s\left(n,m\right)$ denotes Stirling numbers of the first
 kind.
-
-
 %\subsection{$p\left(\alpha\right)$, $p\left(\alpha'\right)$, $p\left(\gamma\right)$}
-
 The hyperparameters $\alpha$, $\alpha^{\prime}$, and $\gamma$ are
 %given broad ${\rm Gamma}(1,1000)$ prior distributions and 
 sampled
-using Metropolis-Hastings. 
+using Metropolis-Hastings. \newline
 
+ 
+It remains now to show that HSLDA works.  To do so we demonstrate results from modeling real-world datasets in the clinical and web
+retail domains. These results provide evidence that the two views (text and labels) mutually benefit  multi-label
+classification. %In fact, it will be shown that the hierarchical supervised model outperforms a
+That is, modeling the joint  is better than learning 
+topic models and hierarchical classifiers
+independently. 

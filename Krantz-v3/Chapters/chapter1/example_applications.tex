@@ -1,6 +1,8 @@
-Having described HSLDA and given details on how to do inference in it, we turn to demonstrations of using HSLDA to solve problems from  two different domains: predicting medical
-diagnosis codes from hospital discharge summaries and predicting product
-categories from Amazon.com product descriptions.
+% !TEX root =  ../../Krantz_style.tex
+
+%Having described HSLDA and given details on how to do inference in it, we turn to demonstrations of using HSLDA to solve problems from  two different domains: predicting medical
+%diagnosis codes from hospital discharge summaries and predicting product
+%categories from Amazon.com product descriptions.
 
 %In the section we describe the application of HSLDA for prediction
 %in two hierarchically structured domains. Firstly, we describe using
@@ -153,7 +155,7 @@ HSLDA is used here to understand and model the relationship between the product 
 
 We compare HSLDA to two closely related models. The comparison models are SLDA with independent
 regressors (hierarchical constraints on labels ignored,  i.e. the regression is not conditional) and HSLDA fit by first
-performing LDA then fitting tree-conditional regressions (rather than jointly inferring the topics and the regression coefficients). These models were
+performing LDA then fitting probit regressors that respect the conditional label hierarchy (rather than jointly inferring the topics and the regression coefficients). These models were
 chosen because they are the strongest available competitors and because they  highlight several pedagogical aspects of HSLDA including performance in the
 absence  of hierarchical constraints, the effect of the combined inference, and
 regression performance attributable solely to the hierarchical constraints.
@@ -189,7 +191,7 @@ range of values for $\mu$, the mean prior parameter for regression coefficients
 The number of topics for all models was set to $K=50$, the prior distributions of
 $p\left(\alpha\right)$, $p\left(\alpha^{\prime}\right)$, and
 $p\left(\gamma\right)$ were all chosen to be gamma with a shape parameter of 1 and a
-scale parameter of 1000. 
+scale parameter of 1000.   Different values of $K$ corresponding to different numbers of topics were explored, however, the results that we show in the following are not substantially changed in character.  As is usual in mixed-membership models, there is an ideal number of topics that should be used for out-of-sample prediction tasks, however, a full model-selection search varying topic cardinality was not performed for these datasets.
 
 \begin{figure}[h]
 \begin{center}
@@ -287,7 +289,7 @@ positive rate of 0.39 and a false positive rate of 0.08. These points are highli
 
 These results indicate that the full HSLDA model predicts more of the the
 correct labels at a cost of an increase in the number of false positives
-relative to the comparison models.
+relative to the comparison models.  However, as shown in Figure~\ref{fig:1a}  HSLDA outperforms or no worse than the comparison models across across the full range of specificities.  
 
 
 Example topics (as word lists) learned for the discharge data are given below.  These word lists are computed by sorting

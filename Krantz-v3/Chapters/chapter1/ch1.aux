@@ -5,10 +5,71 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Introduction}{3}}
-\newlabel{sec:related_work}{{1.1}{3}}
+\newlabel{sec:introduction}{{1.1}{3}}
 \citation{Blei2003}
-\citation{Perotte-2012-NIPS}
+\citation{BleiMcAuliffe2008}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}Background}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1.1}Latent Dirichlet Allocation}{4}}
+\citation{BleiMcAuliffe2008}
+\citation{BleiMcAuliffe2008}
+\citation{Perotte-2012-NIPS}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1.2}Supervised Latent Dirichlet Allocation}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Hierarchical Supervised Latent Dirichlet Allocation}{6}}
+\newlabel{sec:HSLDA}{{1.2}{6}}
+\newlabel{sec:model}{{1.2}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Hierarchically supervised latent Dirichlet allocation (HSLDA) graphical model.}}{7}}
+\newlabel{fig:graphical_model}{{1.1}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Generative Model}{7}}
+\newlabel{zero_0}{{1.1}{8}}
+\newlabel{zero_1}{{1.2}{8}}
+\newlabel{box:generative_model}{{1.2.1}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Dealing with Label Imbalance}{9}}
+\citation{Griffiths04}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}Intuition}{10}}
+\newlabel{sec:intuition}{{1.2.3}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Inference}{10}}
+\newlabel{sec:inference}{{1.3}{10}}
+\newlabel{sec:inference}{{1.3}{10}}
+\citation{Griffiths04}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.1}Gibbs Sampler}{11}}
+\newlabel{eq:z-likelihood}{{1.3}{11}}
+\newlabel{eqn:regression_param_conditional}{{1.4}{11}}
+\citation{Albert_Chib_1993}
+\citation{gelmanbda04}
+\citation{Albert_Chib_1993}
+\citation{WallachMiMc2009}
+\citation{TehJorBea2006}
+\newlabel{eqn:a_l_d}{{1.5}{12}}
+\citation{Challenge07}
+\citation{Birmetal2005}
+\citation{FarzandipourEtAl10}
+\citation{Crammer2007}
+\citation{Goldstein2007}
+\citation{Farkas2008}
+\citation{LarkeyCroft95}
+\citation{RibeiroNeto2001}
+\citation{PakhomovEtAl06}
+\citation{Lita2008}
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Example Applications}{13}}
+\newlabel{sec:example_applications}{{1.4}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces An illustration of a portion of the ICD9 hierarchy.}}{14}}
+\newlabel{fig:diagnosis_tree}{{1.2}{14}}
+\citation{SNAP}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces An illustration of a portion of the Amazon product hierarchy.}}{15}}
+\newlabel{fig:product_tree}{{1.3}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{15}}
+\citation{BleiMcAuliffe2008}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{16}}
+\citation{Birmetal2005}
+\newlabel{fig:1a}{{1.4(a)}{17}}
+\newlabel{fig:1b}{{1.4(b)}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces ROC curves for HSLDA out-of-sample label prediction varying $\mu $, the prior mean of the regression parameters. In both figures, solid is HSLDA, dashed are independent regressors + SLDA (hierarchical constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running tree-conditional regressions.}}{17}}
+\@writefile{lof}{\contentsline {subfigure}{\string\numberline{1.4(a)}{\ignorespaces Clinical data performance.}}{17}}
+\@writefile{lof}{\contentsline {subfigure}{\string\numberline{1.4(b)}{\ignorespaces Retail product performance.}}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces ROC curve for out-of-sample ICD-9 code prediction varying auxiliary variable threshold. $\mu = -1.0$ for all three models in this figure.}}{19}}
+\newlabel{fig:results_auxiliary_var}{{1.5}{19}}
 \citation{Ramage2009}
 \citation{DiscLDA}
 \citation{wangbleifeifei08}
@@ -20,71 +81,19 @@
 \citation{DMOZ}
 \citation{AMAZON}
 \citation{SNAP}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Intuition}{5}}
-\newlabel{sec:introduction}{{1.1.2}{5}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Hierarchical Supervised LDA (HSLDA)}{6}}
-\newlabel{sec:model}{{1.2}{6}}
-\newlabel{sec:model}{{1.2}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Hierarchically supervised latent Dirichlet allocation (HSLDA) graphical model.}}{7}}
-\newlabel{fig:graphical_model}{{1.1}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Ancestral sampling for HSLDA}{7}}
-\newlabel{zero_0}{{1.1}{8}}
-\newlabel{zero_1}{{1.2}{8}}
-\citation{Griffiths04}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Inference}{9}}
-\newlabel{sec:inference}{{1.3}{9}}
-\newlabel{sec:inference}{{1.3}{9}}
-\citation{Griffiths04}
-\citation{Albert_Chib_1993}
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Related Work}{21}}
+\newlabel{sec:related_work}{{1.5}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.6}Discussion}{21}}
+\newlabel{sec:discussion}{{1.6}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.7}Appendix}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.7.1}Probit Regression}{22}}
+\newlabel{sec:probit_review}{{1.7.1}{22}}
+\newlabel{eqn:probit}{{1.7}{22}}
+\newlabel{eqn:joint}{{1.8}{23}}
+\newlabel{eqn:joint_marginalized}{{1.9}{23}}
 \citation{gelmanbda04}
-\citation{Albert_Chib_1993}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.1}Gibbs Sampler}{10}}
-\newlabel{eq:z-likelihood}{{1.3}{10}}
-\newlabel{eqn:regression_param_conditional}{{1.4}{10}}
-\citation{WallachMiMc2009}
-\citation{TehJorBea2006}
-\newlabel{eqn:a_l_d}{{1.5}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.4}Example Applications}{11}}
-\newlabel{sec:experiments}{{1.4}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Hospital Discharge Summaries and ICD-9 Codes}{11}}
-\citation{Challenge07}
-\citation{Birmetal2005}
-\citation{FarzandipourEtAl10}
-\citation{Crammer2007}
-\citation{Goldstein2007}
-\citation{Farkas2008}
-\citation{LarkeyCroft95}
-\citation{RibeiroNeto2001}
-\citation{PakhomovEtAl06}
-\citation{Lita2008}
-\citation{SNAP}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces An illustration of a portion of the ICD9 hierarchy.}}{13}}
-\newlabel{fig:diagnosis_tree}{{1.2}{13}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Product Descriptions and Catalogs}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces An illustration of a portion of the Amazon product hierarchy.}}{14}}
-\newlabel{fig:product_tree}{{1.3}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Comparison Models}{14}}
-\citation{BleiMcAuliffe2008}
-\citation{Birmetal2005}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}Evaluation and Results}{15}}
-\newlabel{fig:1a}{{1.4(a)}{16}}
-\newlabel{fig:1b}{{1.4(b)}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces ROC curves for HSLDA out-of-sample label prediction varying $\mu $, the prior mean of the regression parameters. In both figures, solid is HSLDA, dashed are independent regressors + SLDA (hierarchical constraints on labels ignored), and dotted is HSLDA fit by running LDA first then running tree-conditional regressions.}}{16}}
-\@writefile{lof}{\contentsline {subfigure}{\string\numberline{1.4(a)}{\ignorespaces Clinical data performance.}}{16}}
-\@writefile{lof}{\contentsline {subfigure}{\string\numberline{1.4(b)}{\ignorespaces Retail product performance.}}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces ROC curve for out-of-sample ICD-9 code prediction varying auxiliary variable threshold. $\mu = -1.0$ for all three models in this figure.}}{17}}
-\newlabel{fig:results_auxiliary_var}{{1.5}{17}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}Discussion}{19}}
-\newlabel{sec:discussion}{{1.5}{19}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.6}Appendix}{20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.6.1}Probit Regression}{20}}
-\newlabel{sec:probit_review}{{1.6.1}{20}}
-\newlabel{eqn:probit}{{1.7}{20}}
-\newlabel{eqn:joint}{{1.8}{20}}
-\citation{gelmanbda04}
-\newlabel{eqn:joint_marginalized}{{1.9}{21}}
 \@setckpt{Chapters/chapter1/ch1}{
-\setcounter{page}{23}
+\setcounter{page}{25}
 \setcounter{equation}{9}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
@@ -94,7 +103,7 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{1}
 \setcounter{chapter}{1}
-\setcounter{section}{6}
+\setcounter{section}{7}
 \setcounter{subsection}{1}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
