@@ -39,7 +39,7 @@ The constraints imposed by an is-a label hierarchy are that if the $l$th label i
 \end{figure}
 
 In HSLDA, the bag-of-word document data is modeled using LDA with
- full, hierarchical topic estimation (i.e. with the global topic estimated too rather than assumed).
+ full, hierarchical topic estimation (i.e. global topic proportions are also estimated).
 %In HSLDA, documents are modeled using the LDA mixed-membership mixture model
 %with global topic estimation. 
 Label responses are modeled using a conditional
@@ -115,7 +115,7 @@ y_{l,d}\mid a_{l,d}=\begin{cases}
 \label{box:generative_model}
 \end{shortbox}
 
-Here $\bar{\mathbf{z}}_d^T = [\bar{z}_{1}, \ldots, \bar{z}_k, \ldots, \bar{z}_K]$ is the empirical topic distribution for document $d$, in which each entry is the percentage of the words in that document that come from topic $k$, $\bar{z}_{k}=N_{d}^{-1}\sum_{n=1}^{N_d}\mathbb{I}(z_{n,d}=k).$  
+Here $\bar{\mathbf{z}}_d^T = [\bar{z}_{1}, \ldots, \bar{z}_k, \ldots, \bar{z}_K]$ is the empirical topic distribution for document $d$, in which each entry is the percentage of the words in that document that come from topic $k$, $\bar{z}_{k}=N_{d}^{-1}\sum_{n=1}^{N_d}\mathbb{I}(z_{n,d}=k).$  As in \cite{BleiMcAuliffe2008}, the response variables are directly dependent on $\bar{\mathbf{z}}_d^T$ because this directly couples the topic assignments used to explain the words and the topic assignments used to explain the responses.
 
 The second half of step 4 is what is referred to as supervision in the supervised LDA literature.  This is where the hierarchical classification of the bag-of-words data takes place and the is-a label constraints are enforced.  For every label $l \in \mathcal{L}$, both the empirical topic distribution for document $d$ and whether or not its parent label was applied (i.e.~$\mathbb{I}(y_{\mathrm{pa}(l),d}=1)$) are used to determine whether or not  label $l$ is to be applied to  document $d$ as well.    \eqref{zero_0} and \eqref{zero_1} comprise a probit regression model in an auxiliary variable formulation (see Section \ref{sec:probit_review}).   Note that in the case that the parent label is applied, i.e.~$y_{\mathrm{pa}(l),d}=1,$ the child label $y_{l,d}$ is applied with probability $P(\bar{\mathbf{z}}^{T}_d\boldsymbol\eta_{l}>0).$  This is a conditional probit regression model for classification where $\boldsymbol\eta_l$ are the class-conditional regression parameters.  The auxiliary variables $a_{l,d}$ make inference tractable but are not fundamental to the model -- only the labels and regression parameters are actually of interest.
 
