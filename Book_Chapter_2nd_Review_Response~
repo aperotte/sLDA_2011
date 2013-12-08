@@ -1,0 +1,29 @@
+1. -- Include an extended abstract with their chapter submission.
+
+- An abstract has been included.
+
+2. -- Change the title to a more descriptive version, e.g., "Mixed Membership Classification for Documents with Structural Auxiliary Information".
+
+- The title has been changed to "Mixed Membership Classification for Documents with Hierarchically Structured Labels"
+
+3. --  Address the original review points number 4, 2nd and 3rd bullets in 5, 7, and  bullets number 4 (about Fig.1.1), 5 (about text on p.8) and 11 (about text on p.19) in `minor items'. Provide a note explaining changes in the manuscript relevant to these points.
+
+- Point number 4: The example that was given to demonstrate the hierarchical structure of the labels covers only a very small portion of the hierarchy of labels.  Because there exist thousands of possible labels, we chose to focus on a small part of the hierarchy for illustration purposes.  In the description of the health related data, we report that there are on average 8.39 codes assigned to each patient.  This is partially because patients are quite complex and have multiple conditions that are being treated for simultaneously.  Even in the case of an accident, if a patient happens to have diabetes and hypertension, these must also be treated and taken into account particularly because they could lead to further complications as a result of the accident.  In brief, there is empirical evidence that patients would belong to multiple profiles (based on the number an diversity of ICD9 codes assigned), therefore we assumed a joint mixed membership/classification model to be appropriate.
+
+- 5.2: A description has been added in section 1.3.1. "This is a conditional probit regression model for classification where \eta_l are the class-conditional regression parameters."
+
+- 5.3: An explanation has been added in the second paragraph of section 1.3.1.
+
+- 7: Changes to clarify the text have been made in response to the specific comments.
+
+- Minor.4: We believe that the graphical model brings together the model description in a way that serves as a reference.  Particularly given the complexity of the model, we would like to include the figure to both clarify the relationship to other topic models and provide a visual aid for those who understand concepts best this way.
+
+- Minor.5: The wording has been changed to be more clear.
+
+- Minor.11: The wording here has also been changed.
+
+Let me know if you have any questions- after this we'll talk about index topics for your chapter.
+
+Thanks,
+
+Kira

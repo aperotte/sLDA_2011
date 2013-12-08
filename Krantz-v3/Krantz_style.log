@@ -1,15 +1,14 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.1)  16 AUG 2013 09:21
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.5)  17 OCT 2013 11:26
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **Krantz_style.tex
 (./Krantz_style.tex
-LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
-aded.
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
 (./krantz.cls
 Document Class: krantz 2005/09/16 v1.4f Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo
+(/usr/share/texmf-texlive/tex/latex/base/bk10.clo
 File: bk10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \trimheight=\dimen102
@@ -100,10 +99,10 @@ File: bk10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \concolwidth=\dimen121
 \stempbox=\box50
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2009/06/22 v3.00
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \@emptytoks=\toks14
 \symAMSa=\mathgroup4
@@ -111,24 +110,24 @@ Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip71
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks15
 \ex@=\dimen122
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen123
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count90
@@ -169,39 +168,31 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks20
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \Gread@gobject=\count102
 ))
 \Gin@req@height=\dimen131
 \Gin@req@width=\dimen132
-)
-(./subfigure.sty
+) (./subfigure.sty
 Package: subfigure 1995/03/06 v2.0 subfigure package
 
 Package: subfigure 1995/03/06 v2.0
@@ -209,11 +200,11 @@ Package: subfigure 1995/03/06 v2.0
 \c@lofdepth=\count104
 \c@subtable=\count105
 \c@lotdepth=\count106
-) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
+) (/usr/share/texmf-texlive/tex/latex/base/makeidx.sty
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
+(/usr/share/texmf-texlive/tex/latex/tools/multicol.sty
+Package: multicol 2008/12/05 v1.6h multicolumn formatting (FMi)
 \c@tracingmulticols=\count107
 \mult@box=\box53
 \multicol@leftmargin=\dimen133
@@ -258,18 +249,17 @@ Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \multicolundershoot=\dimen140
 \mult@nat@firstbox=\box77
 \colbreak@box=\box78
-\multicol@sort@counter=\count115
 )
 \@input{Chapters/chapter1/preamble.aux}
 \openout2 = `Chapters/chapter1/preamble.aux'.
 
 (./Chapters/chapter1/preamble.tex
-\c@theorem=\count116
-\c@exercise=\count117
-\c@example=\count118
-\c@definition=\count119
+\c@theorem=\count115
+\c@exercise=\count116
+\c@example=\count117
+\c@definition=\count118
 )
-\c@proof=\count120
+\c@proof=\count119
 \@indexfile=\write4
 \openout4 = `Krantz_style.idx'.
 
@@ -297,73 +287,25 @@ LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
 
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count121
+\scratchcounter=\count120
 \scratchdimen=\dimen141
 \scratchbox=\box79
-\nofMPsegments=\count122
-\nofMParguments=\count123
+\nofMPsegments=\count121
+\nofMParguments=\count122
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count124
+\MPscratchCnt=\count123
 \MPscratchDim=\dimen142
-\MPnumerator=\count125
-\makeMPintoPDFobject=\count126
+\MPnumerator=\count124
 \everyMPtoPDFconversion=\toks22
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/sl' in size <24> not available
 (Font)              size <24.88> substituted on input line 28.
@@ -619,12 +561,12 @@ Underfull \hbox (badness 10000) detected at line 35
 
 (./Krantz_style.lof
 LaTeX Font Info:    Try loading font information for U+msa on input line 2.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 2.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ))
 \tf@lof=\write5
@@ -971,14 +913,10 @@ Hierarchically Structured Labels  \OT1/cmr/m/n/10 5
  []
 
 [5]) (./Chapters/chapter1/HSLDA.tex [6]
-<Chapters/chapter1/Graphical_Model-final.pdf, id=88, 819.06pt x 457.71pt>
+<Chapters/chapter1/Graphical_Model-final.pdf, id=87, 819.06pt x 457.71pt>
 File: Chapters/chapter1/Graphical_Model-final.pdf Graphic file (type pdf)
 
 <use Chapters/chapter1/Graphical_Model-final.pdf>
-Package pdftex.def Info: Chapters/chapter1/Graphical_Model-final.pdf used on in
-put line 35.
-(pdftex.def)             Requested size: 327.6182pt x 183.08075pt.
-
 Underfull \hbox (badness 1178) in paragraph at lines 35--35
 []\OT1/cmr/m/n/10 Hierarchically su-per-vised la-tent Dirich-let al-lo-ca-tion 
 (HSLDA) graph-i-cal
@@ -1079,49 +1017,44 @@ Hierarchically Structured Labels  \OT1/cmr/m/n/10 13
  []
 
 [13]
-<Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf, id=134, 591.8182pt
+
+pdfTeX warning: pdflatex (file ./Chapters/chapter1/figures/hi_quality_ICD9_tree
+_cropped.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4
+> allowed
+
+<Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf, id=133, 591.8182pt
  x 557.98103pt>
 File: Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf Graphic file (
 type pdf)
 
-<use Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf>
-Package pdftex.def Info: Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped
-.pdf used on input line 61.
-(pdftex.def)             Requested size: 236.72308pt x 223.18845pt.
- [14 <./Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf>]
-<Chapters/chapter1/figures/hi_quality_product_tree_cropped.pdf, id=147, 545.861
+<use Chapters/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf> [14 <./Chapter
+s/chapter1/figures/hi_quality_ICD9_tree_cropped.pdf>]
+
+pdfTeX warning: pdflatex (file ./Chapters/chapter1/figures/hi_quality_product_t
+ree_cropped.pdf): PDF inclusion: found PDF version <1.5>, but at most version <
+1.4> allowed
+
+<Chapters/chapter1/figures/hi_quality_product_tree_cropped.pdf, id=146, 545.861
 11pt x 330.21877pt>
 File: Chapters/chapter1/figures/hi_quality_product_tree_cropped.pdf Graphic fil
 e (type pdf)
 
 <use Chapters/chapter1/figures/hi_quality_product_tree_cropped.pdf>
-Package pdftex.def Info: Chapters/chapter1/figures/hi_quality_product_tree_crop
-ped.pdf used on input line 122.
-(pdftex.def)             Requested size: 218.34058pt x 132.08516pt.
-
 Overfull \hbox (41.54745pt too wide) has occurred while \output is active
  [][][][]  \OT1/cmr/m/it/10 Mixed Membership Classification for Documents with 
 Hierarchically Structured Labels  \OT1/cmr/m/n/10 15
  []
 
 [15 <./Chapters/chapter1/figures/hi_quality_product_tree_cropped.pdf>] [16]
-<Chapters/chapter1/figs/clin_pred_varying_mu.pdf, id=164, 578.16pt x 433.62pt>
+<Chapters/chapter1/figs/clin_pred_varying_mu.pdf, id=163, 578.16pt x 433.62pt>
 File: Chapters/chapter1/figs/clin_pred_varying_mu.pdf Graphic file (type pdf)
 
 <use Chapters/chapter1/figs/clin_pred_varying_mu.pdf>
-Package pdftex.def Info: Chapters/chapter1/figs/clin_pred_varying_mu.pdf used o
-n input line 199.
-(pdftex.def)             Requested size: 161.51855pt x 121.13487pt.
-
-<Chapters/chapter1/figs/amazon_pred_varying_mu.pdf, id=165, 578.16pt x 433.62pt
+<Chapters/chapter1/figs/amazon_pred_varying_mu.pdf, id=164, 578.16pt x 433.62pt
 >
 File: Chapters/chapter1/figs/amazon_pred_varying_mu.pdf Graphic file (type pdf)
 
  <use Chapters/chapter1/figs/amazon_pred_varying_mu.pdf>
-Package pdftex.def Info: Chapters/chapter1/figs/amazon_pred_varying_mu.pdf used
- on input line 201.
-(pdftex.def)             Requested size: 161.51855pt x 121.13487pt.
-
 Overfull \hbox (41.54745pt too wide) has occurred while \output is active
  [][][][]  \OT1/cmr/m/it/10 Mixed Membership Classification for Documents with 
 Hierarchically Structured Labels  \OT1/cmr/m/n/10 17
@@ -1129,14 +1062,10 @@ Hierarchically Structured Labels  \OT1/cmr/m/n/10 17
 
 [17 <./Chapters/chapter1/figs/clin_pred_varying_mu.pdf> <./Chapters/chapter1/fi
 gs/amazon_pred_varying_mu.pdf>]
-<Chapters/chapter1/figs/ROC_comparison_leafs.pdf, id=196, 578.16pt x 433.62pt>
+<Chapters/chapter1/figs/ROC_comparison_leafs.pdf, id=194, 578.16pt x 433.62pt>
 File: Chapters/chapter1/figs/ROC_comparison_leafs.pdf Graphic file (type pdf)
 
-<use Chapters/chapter1/figs/ROC_comparison_leafs.pdf>
-Package pdftex.def Info: Chapters/chapter1/figs/ROC_comparison_leafs.pdf used o
-n input line 277.
-(pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
- [18]
+<use Chapters/chapter1/figs/ROC_comparison_leafs.pdf> [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1258,44 +1187,41 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3249 strings out of 495059
- 44475 string characters out of 3182031
- 112860 words of memory out of 3000000
- 6289 multiletter control sequences out of 15000+200000
+ 2667 strings out of 495061
+ 34369 string characters out of 1182622
+ 99791 words of memory out of 3000000
+ 5739 multiletter control sequences out of 15000+50000
  18415 words of font info for 69 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
- 37i,18n,24p,1929b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxsl10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/
-cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb>
-Output written on Krantz_style.pdf (44 pages, 571416 bytes).
+ 28 hyphenation exceptions out of 8191
+ 30i,18n,24p,1929b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmbxsl10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cmextra/cmex7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsl12.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbo
+ls/msbm7.pfb></usr/share/texmf-texlive/fonts/type1/urw/ncntrsbk/uncr8a.pfb>
+Output written on Krantz_style.pdf (44 pages, 619283 bytes).
 PDF statistics:
- 333 PDF objects out of 1000 (max. 8388607)
- 239 compressed objects within 3 object streams
+ 329 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
